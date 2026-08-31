@@ -1,3 +1,4 @@
+import * as Dialog from "@radix-ui/react-dialog";
 import { NavLink, Outlet } from "react-router-dom";
 
 const navigation = [
@@ -24,9 +25,39 @@ export function AppShell() {
           </div>
         </div>
 
-        <div className="demo-stamp">
-          <span aria-hidden="true">●</span> 概念演示
-        </div>
+        <Dialog.Root>
+          <Dialog.Trigger asChild>
+            <button className="demo-stamp" type="button">
+              <span aria-hidden="true">●</span> 概念演示
+            </button>
+          </Dialog.Trigger>
+          <Dialog.Portal>
+            <Dialog.Overlay className="demo-video-overlay" />
+            <Dialog.Content
+              className="demo-video-dialog"
+              aria-describedby={undefined}
+            >
+              <div className="demo-video-header">
+                <div>
+                  <span className="demo-video-kicker">CONCEPT DEMO</span>
+                  <Dialog.Title>康护园 · 概念演示</Dialog.Title>
+                </div>
+                <Dialog.Close className="demo-video-close" aria-label="关闭概念演示">
+                  ×
+                </Dialog.Close>
+              </div>
+              <div className="demo-video-frame">
+                <iframe
+                  src="https://www.youtube.com/embed/RYUbFY3-7dA?rel=0"
+                  title="康护园概念演示视频"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  referrerPolicy="strict-origin-when-cross-origin"
+                  allowFullScreen
+                />
+              </div>
+            </Dialog.Content>
+          </Dialog.Portal>
+        </Dialog.Root>
 
         <nav aria-label="主要导航" className="primary-nav">
           <p className="nav-eyebrow">工作区</p>
