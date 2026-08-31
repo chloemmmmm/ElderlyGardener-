@@ -1,0 +1,29 @@
+{
+  "profile": "product-admin",
+  "sourceRoots": ["src"],
+  "locale": "zh-CN",
+  "canonicalMap": "UX-CONTRACT.md",
+  "requiredCapabilities": [
+    "Select/Listbox",
+    "Form",
+    "Scrollbar",
+    "Toast",
+    "CRUD"
+  ],
+  "ownership": {
+    "Select/Listbox": "native"
+  },
+  "requiredCommands": ["lint", "typecheck", "unit", "build", "e2e", "premium"],
+  "commands": {
+    "lint": "pnpm lint",
+    "typecheck": "pnpm typecheck",
+    "unit": "pnpm test:run",
+    "build": "pnpm build",
+    "e2e": "pnpm e2e",
+    "premium": "python C:/Users/alw/.codex/plugins/cache/openai-curated-remote/frontend-design-premium/1.4.0/skills/frontend-design-premium/scripts/audit_project.py . --mode strict"
+  },
+  "evidence": {
+    "crudFullFlow": "e2e/therapist-workflow.spec.ts",
+    "failurePaths": "src/services/rehabilitation.test.ts"
+  }
+}
