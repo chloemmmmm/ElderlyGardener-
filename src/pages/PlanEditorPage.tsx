@@ -44,6 +44,10 @@ export function PlanEditorPage() {
       planQuery.data && draft ? diffTrainingPlan(planQuery.data, draft) : [],
     [planQuery.data, draft],
   );
+  const changedExerciseIds = useMemo(
+    () => new Set(changes.map((change) => change.exerciseId)),
+    [changes],
+  );
   const savePlan = useMutation({
     mutationFn: () =>
       rehabilitationApi.updatePlan(
@@ -117,7 +121,14 @@ export function PlanEditorPage() {
               {draft.exercises.map((exercise, index) => (
                 <article
                   key={exercise.exerciseId}
-                  className={exercise.enabled ? "" : "disabled-exercise"}
+                  className={[
+                    exercise.enabled ? "" : "disabled-exercise",
+                    changedExerciseIds.has(exercise.exerciseId)
+                      ? "has-field-change"
+                      : "",
+                  ]
+                    .filter(Boolean)
+                    .join(" ")}
                 >
                   <div className="drag-handle" aria-hidden="true">
                     ⠿
@@ -219,6 +230,15 @@ export function PlanEditorPage() {
               <span>变更摘要</span>
               <strong>{changes.length} 项修改</strong>
             </header>
+            {changes.length > 0 && (
+              <div className="change-overview">
+                <span aria-hidden="true">●</span>
+                <span>
+                  变更概览：{changedExerciseIds.size} 个动作，共 {changes.length}{" "}
+                  项参数已修改
+                </span>
+              </div>
+            )}
             {changes.length ? (
               <div className="change-list">
                 {changes.map((change, index) => (

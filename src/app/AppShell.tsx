@@ -6,6 +6,7 @@ const navigation = [
   { to: "/clients", label: "康复对象", icon: "◎" },
   { to: "/plans/plan-001/edit", label: "训练计划", icon: "▤" },
   { to: "/sessions/session-004", label: "训练记录", icon: "↗" },
+  { to: "/case-study", label: "案例展示", icon: "📋" },
 ];
 
 export function AppShell() {

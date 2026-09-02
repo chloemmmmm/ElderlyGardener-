@@ -48,6 +48,13 @@ export const router = createBrowserRouter(
             return { Component: PlanEditorPage };
           },
         },
+        {
+          path: "case-study",
+          lazy: async () => {
+            const { CaseStudyPage } = await import("../pages/CaseStudyPage");
+            return { Component: CaseStudyPage };
+          },
+        },
         { path: "*", element: <Navigate to="/dashboard" replace /> },
       ],
     },

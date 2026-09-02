@@ -7,6 +7,7 @@ import { getPublicAssetUrl } from "./config/public-path";
 import "./styles/tokens.css";
 import "./styles/global.css";
 import "./styles/components.css";
+import "./styles/case-study.css";
 
 const root = document.getElementById("root");
 

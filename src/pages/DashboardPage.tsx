@@ -213,6 +213,45 @@ export function DashboardPage() {
               ))}
             </div>
           </Panel>
+          <Panel title="今日证据链" subtitle="按时间线聚合传感器、AI 与人工判断">
+            <div className="evidence-chain">
+              {[
+                {
+                  id: "ev-001",
+                  source: "ai",
+                  time: "08:42",
+                  text: "王桂兰修剪动作幅度连续 3 次低于阈值",
+                },
+                {
+                  id: "ev-002",
+                  source: "sensor",
+                  time: "08:45",
+                  text: "传感器完整度 72%，疑似绑带松动",
+                },
+                {
+                  id: "ev-003",
+                  source: "therapist",
+                  time: "09:10",
+                  text: "林医生标记：建议复核绑带位置并观察下次训练",
+                },
+              ].map((item, index, list) => (
+                <div className="evidence-chain__item" key={item.id}>
+                  <div className="evidence-chain__line" aria-hidden="true">
+                    <span
+                      className={`evidence-chain__dot evidence-chain__dot--${item.source}`}
+                    />
+                    {index < list.length - 1 ? (
+                      <span className="evidence-chain__bar" />
+                    ) : null}
+                  </div>
+                  <div className="evidence-chain__content">
+                    <time>{item.time}</time>
+                    <span>{item.text}</span>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </Panel>
           <aside className="ai-workflow-card" aria-label="AI 辅助说明">
             <span className="ai-kicker">AI 辅助 · 可追溯</span>
             <strong>先证据，后建议</strong>

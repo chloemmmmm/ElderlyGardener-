@@ -67,6 +67,23 @@ export function SessionDetailPage() {
           </>
         }
       />
+      <aside className="context-hint" role="note">
+        <span aria-hidden="true">◎</span>
+        <div>
+          <strong>
+            当前对象：{client?.name ?? "康复对象"} · 阶段：
+            {client?.stage === "entering"
+              ? "进入期"
+              : client?.stage === "participating"
+                ? "参与期"
+                : "维持期"}
+          </strong>
+          <p>
+            最近反馈：{session.subjectiveFeedback}
+            {client?.attentionReason ? `；系统关注：${client.attentionReason}` : ""}
+          </p>
+        </div>
+      </aside>
       {summary.uncertainty && (
         <aside className="uncertainty-banner" role="note">
           <span aria-hidden="true">!</span>
