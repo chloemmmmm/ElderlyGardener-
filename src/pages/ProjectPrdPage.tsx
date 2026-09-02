@@ -6,6 +6,104 @@ function asset(path: string) {
   return getPublicAssetUrl(import.meta.env.BASE_URL, path);
 }
 
+function ProductArchitectureDiagram() {
+  return (
+    <svg viewBox="0 0 760 240" className="prd-diagram" role="img" aria-label="康护园产品架构：C 端硬件、VR 端、B 端后台与云端数据服务">
+      <defs>
+        <marker id="prd-arrow" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto" markerUnits="strokeWidth">
+          <path d="M0,0 L0,6 L9,3 z" fill="#176b55" />
+        </marker>
+      </defs>
+      <rect x="20" y="80" width="160" height="90" rx="10" fill="#e8f2ee" stroke="#176b55" strokeWidth="2" />
+      <text x="100" y="115" textAnchor="middle" fill="#153c32" fontSize="13" fontWeight="700">C 端 · 可穿戴套件</text>
+      <text x="100" y="135" textAnchor="middle" fill="#557166" fontSize="10">IMU · 弯曲 · 压力</text>
+      <text x="100" y="150" textAnchor="middle" fill="#557166" fontSize="10">气动 / 震动反馈</text>
+
+      <rect x="300" y="20" width="160" height="90" rx="10" fill="#f7fbf9" stroke="#bad0c8" strokeWidth="2" />
+      <text x="380" y="55" textAnchor="middle" fill="#153c32" fontSize="13" fontWeight="700">VR 端 · 园艺场景</text>
+      <text x="380" y="75" textAnchor="middle" fill="#557166" fontSize="10">浇水 · 松土 · 摘果</text>
+      <text x="380" y="90" textAnchor="middle" fill="#557166" fontSize="10">低晕动交互</text>
+
+      <rect x="300" y="140" width="160" height="90" rx="10" fill="#f7fbf9" stroke="#bad0c8" strokeWidth="2" />
+      <text x="380" y="175" textAnchor="middle" fill="#153c32" fontSize="13" fontWeight="700">B 端 · 康复师后台</text>
+      <text x="380" y="195" textAnchor="middle" fill="#557166" fontSize="10">工作台 · 计划 · 记录</text>
+      <text x="380" y="210" textAnchor="middle" fill="#557166" fontSize="10">证据链 · AI 建议</text>
+
+      <rect x="580" y="80" width="160" height="90" rx="10" fill="#e8f2ee" stroke="#176b55" strokeWidth="2" />
+      <text x="660" y="115" textAnchor="middle" fill="#153c32" fontSize="13" fontWeight="700">云端数据服务</text>
+      <text x="660" y="135" textAnchor="middle" fill="#557166" fontSize="10">训练数据 · 证据链</text>
+      <text x="660" y="150" textAnchor="middle" fill="#557166" fontSize="10">通知 · 搜索 · 日志</text>
+
+      <line x1="180" y1="125" x2="300" y2="125" stroke="#176b55" strokeWidth="2" markerEnd="url(#prd-arrow)" />
+      <line x1="460" y1="65" x2="580" y2="110" stroke="#176b55" strokeWidth="2" markerEnd="url(#prd-arrow)" />
+      <line x1="460" y1="185" x2="580" y2="140" stroke="#176b55" strokeWidth="2" markerEnd="url(#prd-arrow)" />
+      <line x1="460" y1="110" x2="460" y2="140" stroke="#bad0c8" strokeWidth="1.5" strokeDasharray="4 3" markerEnd="url(#prd-arrow)" />
+    </svg>
+  );
+}
+
+function InformationArchitectureDiagram() {
+  const levels = [
+    { label: "工作台", x: 380, children: ["待判断", "今日安排", "指标卡", "最新动态"] },
+    { label: "康复对象", x: 120, children: ["列表筛选", "360° 档案", "风险标签", "训练历史"] },
+    { label: "训练计划", x: 280, children: ["计划库", "计划编辑", "变更摘要", "阶段模板"] },
+    { label: "训练记录", x: 440, children: ["记录列表", "复盘页", "人工备注", "AI 摘要"] },
+    { label: "数据看板", x: 600, children: ["KPI", "风险分层", "趋势图", "治疗师负载"] },
+  ];
+  return (
+    <svg viewBox="0 0 760 220" className="prd-diagram" role="img" aria-label="B 端信息架构：工作台统领四大模块">
+      <rect x="340" y="16" width="80" height="36" rx="8" fill="#176b55" />
+      <text x="380" y="40" textAnchor="middle" fill="#fff" fontSize="13" fontWeight="700">工作台</text>
+      {levels.map((l) => {
+        const y = 90;
+        const cx = l.x;
+        return (
+          <g key={l.label}>
+            <line x1="380" y1="52" x2={cx} y2={y - 14} stroke="#bad0c8" strokeWidth="1.5" />
+            <rect x={cx - 44} y={y - 14} width="88" height="28" rx="6" fill="#e8f2ee" stroke="#176b55" />
+            <text x={cx} y={y + 5} textAnchor="middle" fill="#153c32" fontSize="11" fontWeight="700">
+              {l.label}
+            </text>
+            {l.children.map((c, ci) => (
+              <g key={c}>
+                <line x1={cx} y1={y + 14} x2={cx - 28 + ci * 19} y2={y + 44} stroke="#dfe9e4" strokeWidth="1" />
+                <rect x={cx - 38 + ci * 19} y={y + 44} width="36" height="22" rx="4" fill="#f7fbf9" stroke="#dfe9e4" />
+                <text x={cx - 20 + ci * 19} y={y + 59} textAnchor="middle" fill="#557166" fontSize="7">
+                  {c}
+                </text>
+              </g>
+            ))}
+          </g>
+        );
+      })}
+    </svg>
+  );
+}
+
+function UserFlowDiagram() {
+  const steps = ["发现异常", "复核证据", "调整计划", "记录判断", "同步老人"];
+  return (
+    <svg viewBox="0 0 760 90" className="prd-diagram" role="img" aria-label="康复师核心闭环流程">
+      <defs>
+        <marker id="prd-arrow" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto" markerUnits="strokeWidth">
+          <path d="M0,0 L0,6 L9,3 z" fill="#176b55" />
+        </marker>
+      </defs>
+      {steps.map((s, i) => (
+        <g key={s} transform={`translate(${20 + i * 150}, 20)`}>
+          <rect width="120" height="50" rx="8" fill={i === 0 || i === 4 ? "#e8f2ee" : "#f7fbf9"} stroke="#176b55" strokeWidth={i === 0 || i === 4 ? 2 : 1} />
+          <text x="60" y="30" textAnchor="middle" fill="#153c32" fontSize="12" fontWeight="700">
+            {s}
+          </text>
+        </g>
+      ))}
+      {steps.slice(0, -1).map((_, i) => (
+        <line key={i} x1={140 + i * 150} y1="45" x2={170 + i * 150} y2="45" stroke="#176b55" strokeWidth="2" markerEnd="url(#prd-arrow)" />
+      ))}
+    </svg>
+  );
+}
+
 function Section({
   id,
   eyebrow,
@@ -47,8 +145,8 @@ export function ProjectPrdPage() {
             <span>作者：徐伊宁</span>
             <span>状态：概念原型 · 作品集</span>
           </div>
-          <a className="project-button project-button--primary" href={asset("PRD.md")} download>
-            下载 Markdown 版 PRD
+          <a className="project-button project-button--primary" href={asset("PRD.docx")} download>
+            下载 Word 版 PRD
           </a>
         </div>
       </header>
@@ -58,6 +156,7 @@ export function ProjectPrdPage() {
           <p className="prd-lead">
             中国 60 岁以上人口已突破 2.8 亿，脑卒中、骨折术后与慢性病导致的上肢功能障碍严重影响老人独立生活能力。居家康复可及性高，但长期坚持率不足 30%。康护园通过「园艺任务化」与「多模态即时反馈」，把枯燥的上肢训练变成老人愿意重复、康复师可远程管理的完整闭环。
           </p>
+          <ProductArchitectureDiagram />
           <div className="prd-cards">
             <div className="prd-card">
               <h4>对老人</h4>
@@ -120,6 +219,7 @@ export function ProjectPrdPage() {
         </Section>
 
         <Section id="personas" eyebrow="03 用户与角色" title="核心用户画像">
+          <UserFlowDiagram />
           <div className="prd-personas">
             <div className="prd-persona">
               <div className="prd-persona__avatar" aria-hidden="true">
@@ -183,6 +283,7 @@ export function ProjectPrdPage() {
         </Section>
 
         <Section id="requirements" eyebrow="05 功能需求" title="三端功能需求清单">
+          <InformationArchitectureDiagram />
           <h3 className="prd-h3">B 端 · 康复师管理后台</h3>
           <table className="prd-table">
             <thead>
@@ -444,6 +545,14 @@ export function ProjectPrdPage() {
         </Section>
 
         <Section id="ux" eyebrow="08 体验原则" title="设计原则与交互约束">
+          <figure className="prd-preview">
+            <img
+              src={asset("assets/case-study/b-side-dashboard.jpg")}
+              alt="B 端后台数据看板设计稿"
+              loading="lazy"
+            />
+            <figcaption>B 端后台数据看板：KPI、风险分层与治疗师负载</figcaption>
+          </figure>
           <div className="prd-principles">
             <div className="prd-principle">
               <h4>Evidence First</h4>

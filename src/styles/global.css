@@ -122,6 +122,21 @@ a {
   margin-right: 4px;
   font-size: 8px;
 }
+.demo-stamp--pulse {
+  animation: demo-pulse 1.6s ease-in-out 3;
+  border-color: #9fddad;
+  box-shadow: 0 0 0 0 rgb(159 221 173 / 40%);
+}
+@keyframes demo-pulse {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgb(159 221 173 / 40%);
+    transform: scale(1);
+  }
+  50% {
+    box-shadow: 0 0 0 8px rgb(159 221 173 / 0%);
+    transform: scale(1.05);
+  }
+}
 .demo-video-overlay {
   position: fixed;
   z-index: 1000;

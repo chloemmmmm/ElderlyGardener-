@@ -7,8 +7,11 @@ import {
   Apple,
   BookOpen,
   BrainCircuit,
+  Building2,
   ClipboardList,
   Droplets,
+  Dumbbell,
+  HeartHandshake,
   HeartPulse,
   LineChart,
   MessageCircle,
@@ -20,6 +23,7 @@ import {
   ShieldCheck,
   Shrub,
   Sprout,
+  Stethoscope,
   Users,
   Wrench,
 } from "lucide-react";
@@ -54,9 +58,11 @@ import {
   reflections,
   researchQuestions,
   survey,
+  therapistSimResponses,
   usabilityFindings,
   usabilityProtocol,
 } from "../mocks/research-data";
+import { emgReport, surveyInsights } from "../mocks/research-methods";
 import { DemoBadge } from "./case-study/shared/DemoBadge";
 
 function asset(path: string) {
@@ -248,22 +254,26 @@ function LiteratureReviewCards() {
     <div className="literature-review">
       <h3 className="project-section__h3">
         <BookOpen size={20} className="inline-icon" aria-hidden="true" />
-        文献综述：5 个证据模块
+        循证依据：5 条关键证据链
       </h3>
       <div className="literature-review__layout">
-        <img
-          src={asset("assets/case-study/method-literature-review.jpg")}
-          alt="文献综述：从老年运动有效性到园艺化上肢运动系统的设计机会"
-          loading="lazy"
-          className="literature-review__image"
-        />
+        <figure className="literature-review__figure">
+          <img
+            src={asset("assets/case-study/method-literature-review.jpg")}
+            alt="从老年运动有效性到园艺化上肢运动系统的设计机会"
+            loading="lazy"
+            className="literature-review__image"
+          />
+          <figcaption>课程原始文献梳理：从老年运动、上肢功能、园艺转译到反馈闭环</figcaption>
+        </figure>
         <div className="literature-cards">
           {literatureModules.map((item, i) => (
             <div className="literature-card" key={item.title}>
               <span className="literature-card__num">{String(i + 1).padStart(2, "0")}</span>
               <div>
                 <strong>{item.title}</strong>
-                <p>{item.finding}</p>
+                <p>{item.shortFinding ?? item.finding}</p>
+                <span className="literature-card__implication">{item.implication}</span>
               </div>
             </div>
           ))}
@@ -276,12 +286,91 @@ function LiteratureReviewCards() {
 function CompetitorMatrix() {
   const levels: Record<string, number> = { 高: 3, 中: 2, 低: 1 };
   const total = 3;
+  const meta: Record<string, { Icon: typeof Building2; color: string; abbr: string }> = {
+    康复之家: { Icon: Building2, color: "#3b8c72", abbr: "康" },
+    医瑞云康复: { Icon: Stethoscope, color: "#5aa98e", abbr: "医" },
+    "简单心理 · 康复模块": { Icon: HeartPulse, color: "#88c4af", abbr: "简" },
+    通用远程医疗平台: { Icon: Monitor, color: "#b5dece", abbr: "通" },
+    "康护园（本方案）": { Icon: Shrub, color: "#176b55", abbr: "园" },
+  };
+  const criteria = [
+    "信息架构分析：梳理各产品核心模块与康复师工作流的匹配度",
+    "启发式评估：从「系统状态可见性」「识别而非回忆」等维度打分",
+    "功能覆盖度：传感器数据、计划编辑、远程随访、证据追溯四项能力",
+    "决策支持评分：1–3 分，综合数据深度、可视化、可干预性",
+  ];
+
+  const xScale = (v: number) => 10 + ((v - 1) / 4) * 80;
+  const yScale = (v: number) => 90 - ((v - 1) / 4) * 80;
+
   return (
     <div className="competitor-matrix">
       <h3 className="project-section__h3">
         <Search size={20} className="inline-icon" aria-hidden="true" />
-        竞品对比：决策支持能力
+        竞品对比：判定标准与能力象限
       </h3>
+      <div className="competitor-matrix__header">
+        <div className="competitor-matrix__criteria">
+          <strong>判定标准</strong>
+          <ul>
+            {criteria.map((c) => (
+              <li key={c}>{c}</li>
+            ))}
+          </ul>
+        </div>
+        <div className="competitor-matrix__quadrant">
+          <svg viewBox="0 0 100 100" role="img" aria-label="竞品能力象限图：横轴为临床专业性，纵轴为数据决策支持">
+            <rect x="0" y="0" width="50" height="50" fill="#f7fbfa" />
+            <rect x="50" y="0" width="50" height="50" fill="#eef6f3" />
+            <rect x="0" y="50" width="50" height="50" fill="#eef6f3" />
+            <rect x="50" y="50" width="50" height="50" fill="#e8f2ee" />
+            <text x="25" y="8" textAnchor="middle" fontSize="4" fill="#7a9990">
+              高决策支持 / 低专业性
+            </text>
+            <text x="75" y="8" textAnchor="middle" fontSize="4" fill="#7a9990">
+              高决策支持 / 高专业性
+            </text>
+            <text x="25" y="96" textAnchor="middle" fontSize="4" fill="#7a9990">
+              低决策支持 / 低专业性
+            </text>
+            <text x="75" y="96" textAnchor="middle" fontSize="4" fill="#7a9990">
+              低决策支持 / 高专业性
+            </text>
+            <line x1="50" y1="4" x2="50" y2="96" stroke="#bad0c8" strokeWidth="0.6" strokeDasharray="2 2" />
+            <line x1="4" y1="50" x2="96" y2="50" stroke="#bad0c8" strokeWidth="0.6" strokeDasharray="2 2" />
+            <text x="50" y="100" textAnchor="middle" fontSize="4" fill="#557166">
+              临床专业性 →
+            </text>
+            <text x="2" y="50" textAnchor="middle" fontSize="4" fill="#557166" transform="rotate(-90 2 50)">
+              数据决策支持 →
+            </text>
+            {competitors.map((c) => {
+              const { x, y } = c.coords;
+              const m = meta[c.name];
+              return (
+                <g key={c.name} transform={`translate(${xScale(x)},${yScale(y)})`}>
+                  <circle r="5" fill={m.color} opacity="0.18" />
+                  <circle r="3" fill={m.color} />
+                  <text x="0" y="-5" textAnchor="middle" fontSize="4" fill="#153c32" fontWeight="700">
+                    {m.abbr}
+                  </text>
+                </g>
+              );
+            })}
+          </svg>
+          <div className="competitor-matrix__quadrant-legend">
+            {competitors.map((c) => {
+              const m = meta[c.name];
+              return (
+                <span key={c.name} className="competitor-matrix__legend-dot">
+                  <i style={{ background: m.color }} aria-hidden="true" />
+                  {c.name}
+                </span>
+              );
+            })}
+          </div>
+        </div>
+      </div>
       <div className="competitor-matrix__table" role="table" aria-label="竞品决策支持能力对比">
         <div className="competitor-matrix__row competitor-matrix__row--head" role="row">
           <span role="columnheader">产品</span>
@@ -289,54 +378,82 @@ function CompetitorMatrix() {
           <span role="columnheader">决策支持能力</span>
           <span role="columnheader">关键短板</span>
         </div>
-        {competitors.map((c) => (
-          <div className="competitor-matrix__row" role="row" key={c.name}>
-            <span role="cell">
-              <strong>{c.name}</strong>
-            </span>
-            <span role="cell">{c.audience}</span>
-            <span role="cell">
-              <span className="support-bar" aria-label={`决策支持 ${c.decisionSupport}`}>
-                {Array.from({ length: total }).map((_, i) => (
-                  <span
-                    key={i}
-                    className={`support-bar__dot ${i < levels[c.decisionSupport] ? "is-on" : ""}`}
-                  />
-                ))}
+        {competitors.map((c) => {
+          const { Icon, color } = meta[c.name];
+          return (
+            <div className="competitor-matrix__row" role="row" key={c.name}>
+              <span role="cell">
+                <span className="competitor-matrix__brand" style={{ background: color }}>
+                  <Icon size={16} aria-hidden="true" />
+                </span>
+                <strong>{c.name}</strong>
               </span>
-              <span className="support-bar__label">{c.decisionSupport}</span>
-            </span>
-            <span role="cell">{c.weakness}</span>
-          </div>
-        ))}
+              <span role="cell">{c.audience}</span>
+              <span role="cell">
+                <span className="support-bar" aria-label={`决策支持 ${c.decisionSupport}`}>
+                  {Array.from({ length: total }).map((_, i) => (
+                    <span
+                      key={i}
+                      className={`support-bar__dot ${i < levels[c.decisionSupport] ? "is-on" : ""}`}
+                    />
+                  ))}
+                </span>
+                <span className="support-bar__label">{c.decisionSupport}</span>
+              </span>
+              <span role="cell">{c.weakness}</span>
+            </div>
+          );
+        })}
       </div>
     </div>
   );
 }
 
 function InterviewGuide() {
-  const [open, setOpen] = useState<Record<number, boolean>>({ 0: true });
+  const [active, setActive] = useState<number | null>(0);
   return (
     <div className="interview-guide">
       <h3 className="project-section__h3">
         <MessageCircle size={20} className="inline-icon" aria-hidden="true" />
         康复师访谈提纲
       </h3>
-      <div className="interview-guide__list">
-        {interviewGuide.map((q, i) => (
-          <details
-            className="interview-guide__item"
-            key={i}
-            open={open[i]}
-            onToggle={(e) => setOpen((prev) => ({ ...prev, [i]: e.currentTarget.open }))}
-          >
-            <summary>
+      <p className="interview-guide__hint">点击问题，可查看基于研究假设生成的康复师模拟回答（演示样例）。</p>
+      <div className="interview-guide__layout">
+        <div className="interview-guide__list">
+          {interviewGuide.map((q, i) => (
+            <button
+              type="button"
+              className={`interview-guide__item ${active === i ? "is-active" : ""}`}
+              key={i}
+              onClick={() => setActive(i)}
+              aria-expanded={active === i}
+            >
               <span className="interview-guide__num">{String(i + 1).padStart(2, "0")}</span>
-              {q}
-            </summary>
-            <p>用于定位 {researchQuestions[i]?.method ?? ""} 背后的康复师决策痛点。</p>
-          </details>
-        ))}
+              <span className="interview-guide__q">{q}</span>
+              <span className="interview-guide__toggle" aria-hidden="true">
+                {active === i ? "−" : "+"}
+              </span>
+            </button>
+          ))}
+        </div>
+        <div className="interview-guide__sim" aria-live="polite">
+          <div className="interview-guide__sim-header">
+            <span className="interview-guide__sim-avatar" aria-hidden="true">
+              <Stethoscope size={18} />
+            </span>
+            <div>
+              <strong>模拟康复师</strong>
+              <span>基于访谈提纲生成的典型回答</span>
+            </div>
+          </div>
+          <div className="interview-guide__bubble">
+            <p>{active === null ? "点击左侧问题，查看模拟回答。" : therapistSimResponses[active]}</p>
+          </div>
+          <div className="interview-guide__meta">
+            关联研究问题：
+            {active !== null ? `${researchQuestions[active]?.id ?? "RQ"} · ${researchQuestions[active]?.method ?? ""}` : "—"}
+          </div>
+        </div>
       </div>
     </div>
   );
@@ -374,14 +491,15 @@ function HeuristicTable() {
 
 function MethodMixChart() {
   const data = [
-    { name: "文献调研", value: 1 },
-    { name: "动作分析", value: 1 },
-    { name: "EMG 验证", value: 1 },
-    { name: "用户访谈", value: 1 },
-    { name: "竞品分析", value: 1 },
-    { name: "可用性测试", value: 1 },
+    { name: "文献调研", value: 22 },
+    { name: "用户访谈", value: 18 },
+    { name: "竞品分析", value: 14 },
+    { name: "动作分析", value: 16 },
+    { name: "EMG 验证", value: 12 },
+    { name: "可用性测试", value: 18 },
   ];
   const colors = ["#176b55", "#3b8c72", "#5aa98e", "#88c4af", "#b5dece", "#e8f2ee"];
+  const total = data.reduce((sum, d) => sum + d.value, 0);
   return (
     <div className="chart-card chart-card--small">
       <h4 className="chart-card__title">
@@ -391,14 +509,30 @@ function MethodMixChart() {
       <div className="chart-card__body">
         <ResponsiveContainer width="100%" height="100%">
           <PieChart role="img" aria-label="研究方法构成饼图">
-            <Pie data={data} dataKey="value" nameKey="name" cx="50%" cy="50%" outerRadius={62} label={false}>
+            <Pie
+              data={data}
+              dataKey="value"
+              nameKey="name"
+              cx="50%"
+              cy="50%"
+              outerRadius={62}
+              innerRadius={34}
+              paddingAngle={2}
+              label={false}
+              animationBegin={100}
+              animationDuration={900}
+            >
               {data.map((_, i) => (
                 <Cell key={`cell-${i}`} fill={colors[i % colors.length]} />
               ))}
             </Pie>
-            <Tooltip />
+            <Tooltip formatter={(v, _n, p) => [`${v}/${total}（${((Number(v) / total) * 100).toFixed(0)}%）`, (p as { payload?: { name?: string } }).payload?.name]} />
           </PieChart>
         </ResponsiveContainer>
+        <span className="chart-card__center-label" aria-hidden="true">
+          {total}
+          <small>研究单位</small>
+        </span>
       </div>
       <div className="chart-card__legend">
         {data.map((d, i) => (
@@ -424,12 +558,50 @@ function EMGChart() {
           <BarChart data={emgValidation} role="img" aria-label="EMG 动作激活强度柱状图">
             <CartesianGrid strokeDasharray="3 3" stroke="#e2e8e5" />
             <XAxis dataKey="action" tick={{ fontSize: 11 }} interval={0} />
-            <YAxis domain={[0, 100]} tick={{ fontSize: 11 }} />
+            <YAxis domain={[0, 100]} tick={{ fontSize: 11 }} label={{ value: "% MVIC", angle: -90, position: "insideLeft", fontSize: 10 }} />
             <Tooltip />
-            <Bar dataKey="activation" name="激活度 %" fill="#176b55" radius={[4, 4, 0, 0]} />
+            <Bar dataKey="activation" name="激活度 %" fill="#176b55" radius={[4, 4, 0, 0]} animationDuration={1200} />
           </BarChart>
         </ResponsiveContainer>
       </div>
+      <div className="chart-card__footer">
+        <small>
+          设备：{emgReport.device} · 采样率 {emgReport.samplingRate}
+        </small>
+      </div>
+    </div>
+  );
+}
+
+function EMGReport() {
+  return (
+    <div className="emg-report">
+      <h4 className="project-section__h4">
+        <Microscope size={18} className="inline-icon" aria-hidden="true" />
+        肌电测量方法说明
+      </h4>
+      <ul className="emg-report__list">
+        <li>
+          <strong>设备</strong>
+          {emgReport.device}，{emgReport.channels} 通道无线采集
+        </li>
+        <li>
+          <strong>采样与滤波</strong>
+          {emgReport.samplingRate}，{emgReport.filter}
+        </li>
+        <li>
+          <strong>电极</strong>
+          {emgReport.electrodes}，粘贴于 {emgReport.placements.join("、")}
+        </li>
+        <li>
+          <strong>协议</strong>
+          {emgReport.protocol}
+        </li>
+      </ul>
+      <p className="emg-report__note">
+        <span className="emg-report__badge">[演示样例]</span>
+        {emgReport.note}
+      </p>
     </div>
   );
 }
@@ -452,12 +624,31 @@ function SurveyChart() {
           >
             <CartesianGrid strokeDasharray="3 3" stroke="#e2e8e5" />
             <XAxis type="number" domain={[0, 100]} tick={{ fontSize: 11 }} />
-            <YAxis type="category" dataKey="item" width={140} tick={{ fontSize: 11 }} />
+            <YAxis type="category" dataKey="item" width={150} tick={{ fontSize: 10 }} interval={0} />
             <Tooltip formatter={(v) => `${Number(v ?? 0).toFixed(0)}%`} />
-            <Bar dataKey="pct" name="比例" fill="#3b8c72" radius={[0, 4, 4, 0]} />
+            <Bar dataKey="pct" name="比例" fill="#3b8c72" radius={[0, 4, 4, 0]} animationDuration={1200} />
           </BarChart>
         </ResponsiveContainer>
       </div>
+      <div className="chart-card__footer">
+        <small>样本：演示样例（N=32）· 5 分李克特 / 百分比题</small>
+      </div>
+    </div>
+  );
+}
+
+function SurveyInsights() {
+  return (
+    <div className="survey-insights">
+      <h4 className="project-section__h4">
+        <HeartHandshake size={18} className="inline-icon" aria-hidden="true" />
+        问卷结果解读
+      </h4>
+      <ul>
+        {surveyInsights.map((s, i) => (
+          <li key={i}>{s}</li>
+        ))}
+      </ul>
     </div>
   );
 }
@@ -496,30 +687,51 @@ function JourneyEmotionChart() {
 }
 
 function UsabilityChart() {
-  const demoOffsets = [3, 5, 2, 6, 4, 7];
-  const data = usabilityProtocol.metrics.map((m, i) => {
+  // 演示样例：原始实测值
+  const demoActualRaw: Record<string, number> = {
+    任务完成率: 82,
+    任务平均时间: 196,
+    错误率: 7,
+    "SUS 评分": 68,
+    "NASA-TLX 认知负荷": 48,
+    NPS: 28,
+  };
+  const isLowerBetter = (name: string) => name.includes("时间") || name.includes("错误") || name.includes("负荷");
+  const data = usabilityProtocol.metrics.map((m) => {
     const target = Number(m.target.replace(/[^0-9.]/g, ""));
+    const actual = demoActualRaw[m.name] ?? Math.max(0, target - 5);
+    const achievement = isLowerBetter(m.name)
+      ? Math.min(120, (target / actual) * 100)
+      : Math.min(120, (actual / target) * 100);
     return {
-      name: m.name,
-      target,
-      actual: Math.max(0, target - demoOffsets[i % demoOffsets.length]),
+      name: m.name.replace("NASA-TLX ", ""),
+      target: 100,
+      actual: Math.round(achievement),
+      rawTarget: m.target,
+      rawActual: actual,
     };
   });
   return (
     <div className="chart-card">
       <h4 className="chart-card__title">
         <Activity size={18} className="inline-icon" aria-hidden="true" />
-        可用性指标：目标 vs 演示实测
+        可用性指标：目标达成率（演示样例）
       </h4>
       <div className="chart-card__body" style={{ height: 260 }}>
         <ResponsiveContainer width="100%" height="100%">
-          <BarChart data={data} role="img" aria-label="可用性目标与演示实测对比">
+          <BarChart data={data} role="img" aria-label="可用性目标达成率对比">
             <CartesianGrid strokeDasharray="3 3" stroke="#e2e8e5" />
             <XAxis dataKey="name" tick={{ fontSize: 11 }} interval={0} />
-            <YAxis domain={[0, 100]} tick={{ fontSize: 11 }} />
-            <Tooltip />
+            <YAxis domain={[0, 120]} tick={{ fontSize: 11 }} label={{ value: "目标达成率 %", angle: -90, position: "insideLeft", fontSize: 10 }} />
+            <Tooltip
+              formatter={(v, n, p) => {
+                const payload = (p as { payload?: { rawActual?: number | string; rawTarget?: number | string } }).payload;
+                const raw = n === "演示样例实测" ? payload?.rawActual : payload?.rawTarget;
+                return [`${v ?? 0}%（原始值 ${raw ?? "—"}）`, n ?? ""];
+              }}
+            />
             <Legend />
-            <Bar dataKey="target" name="目标值" fill="#b5dece" radius={[4, 4, 0, 0]} />
+            <Bar dataKey="target" name="目标 = 100%" fill="#b5dece" radius={[4, 4, 0, 0]} />
             <Bar dataKey="actual" name="演示样例实测" fill="#176b55" radius={[4, 4, 0, 0]} />
           </BarChart>
         </ResponsiveContainer>
@@ -613,7 +825,10 @@ export function ProjectShowcasePage() {
 
           <article className="ecosystem-card ecosystem-card--c">
             <div className="ecosystem-card__meta">
-              <span className="ecosystem-card__label">C 端 · 硬件</span>
+              <span className="ecosystem-card__label">
+                <Dumbbell size={14} aria-hidden="true" />
+                C 端 · 硬件
+              </span>
               <h3>可穿戴园艺训练套件</h3>
               <p>
                 前臂绑带集成 IMU、弯曲传感器与压力传感器，配合气动气囊与震动马达，把枯燥的上肢训练变成有反馈的园艺任务。
@@ -636,7 +851,10 @@ export function ProjectShowcasePage() {
 
           <article className="ecosystem-card ecosystem-card--vr">
             <div className="ecosystem-card__meta">
-              <span className="ecosystem-card__label">VR 端</span>
+              <span className="ecosystem-card__label">
+                <Monitor size={14} aria-hidden="true" />
+                VR 端
+              </span>
               <h3>沉浸式园艺训练场景</h3>
               <p>
                 以「银龄园艺小站」为叙事空间，老人在 VR 中完成浇水、松土、摘果等任务，系统自动记录动作幅度与完成质量。
@@ -650,8 +868,8 @@ export function ProjectShowcasePage() {
             </div>
             <div className="ecosystem-card__visual">
               <img
-                src={asset("assets/case-study/prototype-feedback.jpg")}
-                alt="VR 训练场景：肌电信号驱动的粒子视觉反馈"
+                src={asset("assets/case-study/vr-prototype.jpg")}
+                alt="VR 训练场景：银龄园艺小站、AI 小助手与三阶段任务"
                 loading="lazy"
               />
             </div>
@@ -661,6 +879,14 @@ export function ProjectShowcasePage() {
 
       {/* Problem evidence */}
       <Section id="problem" variant="subtle" eyebrow="02 背景与问题" title="为什么用园艺做上肢康复？">
+        <figure className="problem-banner">
+          <img
+            src={asset("assets/case-study/technical-architecture.jpg")}
+            alt="技术架构：传感器、Arduino、PC 与 VR 的多模态反馈链路"
+            loading="lazy"
+          />
+          <figcaption>课程原始技术架构：多源传感器 → Arduino → PC 处理 → 气动/震动/VR 反馈</figcaption>
+        </figure>
         <p className="project-section__lead">
           中国 60 岁以上人口已突破 2.8 亿，脑卒中、骨折术后与慢性病导致的上肢功能障碍严重影响老人独立生活能力。居家康复可及性高，但长期依从性不足 30%。
         </p>
@@ -728,7 +954,7 @@ export function ProjectShowcasePage() {
             </div>
           </div>
         </div>
-        <div className="method-validation">
+          <div className="method-validation">
           <h3 className="project-section__h3">
             <Activity size={20} className="inline-icon" aria-hidden="true" />
             动作验证：EMG 与问卷
@@ -742,12 +968,11 @@ export function ProjectShowcasePage() {
               className="method-validation__image"
             />
           </div>
+          <EMGReport />
           <DemoBadge label="[演示样例]" variant="demo" hint="EMG 数值与问卷结果均为演示样例，仅用于展示验证方法。">
             <div className="survey-section">
               <SurveyChart />
-              <p className="survey-section__note">
-                问卷结果显示：老人普遍认为园艺化任务比传统动作更有趣（4.5/5），但对步骤切换的清晰度仍有疑虑（41%）。这与 B 端「不确定性可见」原则形成呼应。
-              </p>
+              <SurveyInsights />
             </div>
           </DemoBadge>
         </div>
@@ -758,14 +983,17 @@ export function ProjectShowcasePage() {
         <p className="project-section__lead">
           基于康复师访谈与二手研究，构建核心用户画像，并用旅程地图定位情绪低点与 B 端设计机会。
         </p>
-        <DemoBadge label="[演示样例]" variant="demo" hint="画像与旅程地图基于二手研究与角色假设构建，用于定位 B 端设计机会。">
+          <DemoBadge label="[演示样例]" variant="demo" hint="画像与旅程地图基于二手研究与角色假设构建，用于定位 B 端设计机会。">
           <div className="persona-grid">
             {personas.map((p) => (
               <div className="persona-card" key={p.id}>
                 <div className="persona-card__header">
-                  <span className="persona-card__avatar" aria-hidden="true">
-                    {p.name[0]}
-                  </span>
+                  <img
+                    src={asset(p.avatar)}
+                    alt={p.name}
+                    className="persona-card__avatar persona-card__avatar--img"
+                    loading="lazy"
+                  />
                   <div>
                     <strong>{p.name}</strong>
                     <span>
@@ -780,6 +1008,10 @@ export function ProjectShowcasePage() {
                 <p className="persona-card__pain">
                   <strong>痛点：</strong>
                   {p.pain}
+                </p>
+                <p className="persona-card__day">
+                  <strong>典型一天：</strong>
+                  {p.day}
                 </p>
                 <blockquote className="persona-card__quote">「{p.quote}」</blockquote>
               </div>
@@ -829,6 +1061,34 @@ export function ProjectShowcasePage() {
         <p className="project-section__lead">
           基于文献与动作分析，选取五种标准上肢训练动作，并将它们映射到老人熟悉、具身、可叙事的园艺任务，每个任务对应明确的肌肉群与传感器判定规则。
         </p>
+        <div className="action-gardening">
+          <figure className="action-gardening__figure">
+            <img
+              src={asset("assets/case-study/action-gardening-p4.jpg")}
+              alt="标准上肢训练动作与园艺任务的映射关系"
+              loading="lazy"
+              className="action-gardening__image"
+            />
+            <figcaption>课程原始动作映射：坐姿划船、臂弯举、侧平举、过头举、握力训练 → 耙土、移栽、浇水、修剪、摘果</figcaption>
+          </figure>
+          <div className="action-gardening__demo" aria-label="园艺动作演示">
+            {[
+              { label: "耙土", Icon: Shrub, muscle: "背 / 肩后束" },
+              { label: "移栽", Icon: Sprout, muscle: "肱二头肌" },
+              { label: "浇水", Icon: Droplets, muscle: "三角肌" },
+              { label: "修剪", Icon: Scissors, muscle: "肩 / 上背" },
+              { label: "摘果", Icon: Apple, muscle: "前臂 / 手部" },
+            ].map((a, i) => (
+              <div className="action-gardening__step" key={a.label} style={{ animationDelay: `${i * 0.6}s` }}>
+                <span className="action-gardening__icon" aria-hidden="true">
+                  <a.Icon size={24} />
+                </span>
+                <strong>{a.label}</strong>
+                <span>{a.muscle}</span>
+              </div>
+            ))}
+          </div>
+        </div>
         <ExerciseMap />
         <div className="design-intervention">
           <h3 className="project-section__h3">
@@ -846,7 +1106,7 @@ export function ProjectShowcasePage() {
           <BrainCircuit size={20} className="inline-icon" aria-hidden="true" />
           系统逻辑与反馈闭环
         </h3>
-        <div className="system-logic-layout">
+        <div className="system-logic-layout system-logic-layout--large">
           <SystemLogicFlow />
           <img
             src={asset("assets/case-study/system-logic-v2.jpg")}
@@ -882,8 +1142,8 @@ export function ProjectShowcasePage() {
         </p>
         <div className="prototype-grid">
           <figure className="prototype-figure">
-            <img src={asset("assets/case-study/vr-prototype.jpg")} alt="第一代功能原型：传感器绑带与 VR 头显联调" loading="lazy" />
-            <figcaption>第一代功能原型：传感器绑带 + VR 头显联调</figcaption>
+            <img src={asset("assets/case-study/prototype-feedback.jpg")} alt="第一代功能原型：传感器绑带、Arduino 调试与 VR 头显联调" loading="lazy" />
+            <figcaption>第一代功能原型：传感器绑带 + Arduino 调试 + VR 头显联调</figcaption>
           </figure>
           <figure className="prototype-figure">
             <img src={asset("assets/case-study/usability-user-test.jpg")} alt="用户测试：真实使用者佩戴原型设备完成训练任务" loading="lazy" />
@@ -929,13 +1189,75 @@ export function ProjectShowcasePage() {
       {/* Usability */}
       <Section id="usability" variant="subtle" eyebrow="08 可用性验证" title="B 端后台可用性测试方案">
         <p className="project-section__lead">
-          基于用户旅程地图中的关键痛点，为康护园 B 端后台设计了可用性测试方案，聚焦「发现异常 → 复核证据 → 调整计划 → 记录判断」的核心闭环。
+          基于用户旅程地图中的关键痛点，为康护园 B 端后台设计了混合型可用性测试方案，聚焦「发现异常 → 复核证据 → 调整计划 → 记录判断」的核心闭环。
         </p>
+        <div className="usability-detail">
+          <div className="usability-detail__section">
+            <h4 className="project-section__h4">
+              <Users size={18} className="inline-icon" aria-hidden="true" />
+              参与者与招募
+            </h4>
+            <p>
+              <strong>{usabilityProtocol.recruitment.sample}</strong> · {usabilityProtocol.recruitment.criteria}
+            </p>
+            <ul>
+              {usabilityProtocol.recruitment.profiles.map((p) => (
+                <li key={p}>{p}</li>
+              ))}
+            </ul>
+          </div>
+          <div className="usability-detail__section">
+            <h4 className="project-section__h4">
+              <Monitor size={18} className="inline-icon" aria-hidden="true" />
+              测试环境与设施
+            </h4>
+            <p>{usabilityProtocol.environment}</p>
+            <ul>
+              <li>{usabilityProtocol.setup.device}</li>
+              <li>{usabilityProtocol.setup.browser}</li>
+              <li>{usabilityProtocol.setup.data}</li>
+              <li>{usabilityProtocol.setup.scenarios}</li>
+            </ul>
+          </div>
+          <div className="usability-detail__section">
+            <h4 className="project-section__h4">
+              <ClipboardList size={18} className="inline-icon" aria-hidden="true" />
+              测量量表
+            </h4>
+            <div className="scale-cards">
+              {usabilityProtocol.scales.map((s) => (
+                <div className="scale-card" key={s.name}>
+                  <strong>{s.name}</strong>
+                  <span>{s.full}</span>
+                  <span>{s.use}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+          <div className="usability-detail__section">
+            <h4 className="project-section__h4">
+              <LineChart size={18} className="inline-icon" aria-hidden="true" />
+              测试流程
+            </h4>
+            <div className="procedure-steps">
+              {usabilityProtocol.procedure.map((p, i) => (
+                <div className="procedure-step" key={p.step}>
+                  <span className="procedure-step__num">{String(i + 1).padStart(2, "0")}</span>
+                  <div>
+                    <strong>{p.step}</strong>
+                    <span>{p.desc}</span>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+
         <div className="usability-layout">
           <div className="usability-layout__main">
             <div className="metric-cards">
               {usabilityProtocol.metrics.map((m) => (
-                <div className="metric-cards__item" key={m.name}>
+                <div className="metric-cards__item" key={m.name} title={m.description}>
                   <span className="metric-cards__value">{m.target}</span>
                   <span className="metric-cards__label">{m.name}</span>
                 </div>

@@ -1,4 +1,5 @@
 import * as Dialog from "@radix-ui/react-dialog";
+import { useEffect, useState } from "react";
 import { Link, NavLink, Outlet } from "react-router-dom";
 
 import { ProfileMenu } from "../components/ProfileMenu";
@@ -25,6 +26,12 @@ const navGroups = [
 ];
 
 export function AppShell() {
+  const [demoSeen, setDemoSeen] = useState(() => localStorage.getItem("kanghuyuan-demo-seen") === "1");
+
+  useEffect(() => {
+    localStorage.setItem("kanghuyuan-demo-seen", demoSeen ? "1" : "0");
+  }, [demoSeen]);
+
   return (
     <div className="app-shell">
       <a className="skip-link" href="#main-content">
@@ -41,9 +48,9 @@ export function AppShell() {
           </div>
         </Link>
 
-        <Dialog.Root>
+        <Dialog.Root onOpenChange={(open) => open && setDemoSeen(true)}>
           <Dialog.Trigger asChild>
-            <button className="demo-stamp" type="button">
+            <button className={`demo-stamp ${demoSeen ? "" : "demo-stamp--pulse"}`} type="button">
               <span aria-hidden="true">●</span> 概念演示
             </button>
           </Dialog.Trigger>
