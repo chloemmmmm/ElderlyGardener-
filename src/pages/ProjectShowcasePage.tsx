@@ -1,14 +1,59 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 import { getPublicAssetUrl } from "../config/public-path";
 import {
+  Activity,
+  Apple,
+  BookOpen,
+  BrainCircuit,
+  ClipboardList,
+  Droplets,
+  HeartPulse,
+  LineChart,
+  MessageCircle,
+  Microscope,
+  Monitor,
+  ScanLine,
+  Scissors,
+  Search,
+  ShieldCheck,
+  Shrub,
+  Sprout,
+  Users,
+  Wrench,
+} from "lucide-react";
+import {
+  Area,
+  AreaChart,
+  Bar,
+  BarChart,
+  CartesianGrid,
+  Cell,
+  Legend,
+  Pie,
+  PieChart,
+  ResponsiveContainer,
+  Tooltip,
+  XAxis,
+  YAxis,
+} from "recharts";
+
+import {
   authorBio,
+  competitors,
   dataDisclaimer,
   designPrinciples,
+  emgValidation,
+  heuristicEvaluation,
+  interviewGuide,
   journeyStages,
+  literatureModules,
+  methodMatrix,
   personas,
   reflections,
+  researchQuestions,
+  survey,
   usabilityFindings,
   usabilityProtocol,
 } from "../mocks/research-data";
@@ -50,12 +95,12 @@ function Section({
 
 function ResearchTimeline() {
   const steps = [
-    { n: "01", label: "问题域", desc: "老龄化 + 上肢功能障碍 + 居家康复依从性低" },
-    { n: "02", label: "文献调研", desc: "园艺动作可转译为标准化上肢训练" },
-    { n: "03", label: "用户研究", desc: "康复师访谈 · 用户画像 · 旅程地图" },
-    { n: "04", label: "设计决策", desc: "动作映射 · 多模态反馈 · 证据优先" },
-    { n: "05", label: "原型验证", desc: "C 端硬件 + VR 场景 + B 端后台" },
-    { n: "06", label: "可用性测试", desc: "核心闭环任务 · 指标度量 · 迭代" },
+    { n: "01", label: "问题域", desc: "老龄化 + 上肢功能障碍 + 居家康复依从性低", Icon: Search },
+    { n: "02", label: "文献调研", desc: "园艺动作可转译为标准化上肢训练", Icon: BookOpen },
+    { n: "03", label: "用户研究", desc: "康复师访谈 · 用户画像 · 旅程地图", Icon: Users },
+    { n: "04", label: "设计决策", desc: "动作映射 · 多模态反馈 · 证据优先", Icon: BrainCircuit },
+    { n: "05", label: "原型验证", desc: "C 端硬件 + VR 场景 + B 端后台", Icon: Wrench },
+    { n: "06", label: "可用性测试", desc: "核心闭环任务 · 指标度量 · 迭代", Icon: HeartPulse },
   ];
   return (
     <div className="research-timeline">
@@ -63,7 +108,10 @@ function ResearchTimeline() {
       <div className="research-timeline__items">
         {steps.map((s) => (
           <div className="research-timeline__item" key={s.n}>
-            <span className="research-timeline__num">{s.n}</span>
+            <span className="research-timeline__num">
+              <s.Icon size={16} aria-hidden="true" />
+              {s.n}
+            </span>
             <strong>{s.label}</strong>
             <span>{s.desc}</span>
           </div>
@@ -75,11 +123,11 @@ function ResearchTimeline() {
 
 function ExerciseMap() {
   const rows = [
-    { exercise: "坐姿划船 Seated Row", muscle: "背 / 肩后束", garden: "耙土整地", icon: "𑁍" },
-    { exercise: "臂弯举 Arm Curl", muscle: "肱二头肌", garden: "移栽幼苗", icon: "🌱" },
-    { exercise: "侧平举 Side Arm Raise", muscle: "三角肌", garden: "浇水施肥", icon: "💧" },
-    { exercise: "过头举 Overhead Raise", muscle: "肩 / 上背", garden: "修剪枝条", icon: "✂" },
-    { exercise: "握力训练 Hand Grip", muscle: "前臂 / 手部", garden: "采摘果实", icon: "🍎" },
+    { exercise: "坐姿划船 Seated Row", muscle: "背 / 肩后束", garden: "耙土整地", Icon: Shrub },
+    { exercise: "臂弯举 Arm Curl", muscle: "肱二头肌", garden: "移栽幼苗", Icon: Sprout },
+    { exercise: "侧平举 Side Arm Raise", muscle: "三角肌", garden: "浇水施肥", Icon: Droplets },
+    { exercise: "过头举 Overhead Raise", muscle: "肩 / 上背", garden: "修剪枝条", Icon: Scissors },
+    { exercise: "握力训练 Hand Grip", muscle: "前臂 / 手部", garden: "采摘果实", Icon: Apple },
   ];
   return (
     <div className="exercise-map">
@@ -87,7 +135,7 @@ function ExerciseMap() {
         <div className="exercise-map__row" key={r.exercise}>
           <div className="exercise-map__cell exercise-map__cell--exercise">
             <span className="exercise-map__icon" aria-hidden="true">
-              {r.icon}
+              <r.Icon size={22} strokeWidth={1.8} />
             </span>
             <div>
               <strong>{r.exercise}</strong>
@@ -166,6 +214,320 @@ function SystemLogicFlow() {
   );
 }
 
+function MethodMatrix() {
+  return (
+    <div className="method-matrix">
+      <h3 className="project-section__h3">
+        <Microscope size={20} className="inline-icon" aria-hidden="true" />
+        研究问题 × 方法 × 产出
+      </h3>
+      <div className="method-matrix__table" role="table" aria-label="研究问题方法矩阵">
+        <div role="rowgroup">
+          <div className="method-matrix__row method-matrix__row--head" role="row">
+            <span role="columnheader">研究问题</span>
+            <span role="columnheader">方法</span>
+            <span role="columnheader">产出</span>
+          </div>
+          {methodMatrix.map((m) => (
+            <div className="method-matrix__row" role="row" key={m.rq}>
+              <span role="cell">
+                <strong>{m.rq}</strong> {m.question}
+              </span>
+              <span role="cell">{m.method}</span>
+              <span role="cell">{m.output}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function LiteratureReviewCards() {
+  return (
+    <div className="literature-review">
+      <h3 className="project-section__h3">
+        <BookOpen size={20} className="inline-icon" aria-hidden="true" />
+        文献综述：5 个证据模块
+      </h3>
+      <div className="literature-review__layout">
+        <img
+          src={asset("assets/case-study/method-literature-review.jpg")}
+          alt="文献综述：从老年运动有效性到园艺化上肢运动系统的设计机会"
+          loading="lazy"
+          className="literature-review__image"
+        />
+        <div className="literature-cards">
+          {literatureModules.map((item, i) => (
+            <div className="literature-card" key={item.title}>
+              <span className="literature-card__num">{String(i + 1).padStart(2, "0")}</span>
+              <div>
+                <strong>{item.title}</strong>
+                <p>{item.finding}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function CompetitorMatrix() {
+  const levels: Record<string, number> = { 高: 3, 中: 2, 低: 1 };
+  const total = 3;
+  return (
+    <div className="competitor-matrix">
+      <h3 className="project-section__h3">
+        <Search size={20} className="inline-icon" aria-hidden="true" />
+        竞品对比：决策支持能力
+      </h3>
+      <div className="competitor-matrix__table" role="table" aria-label="竞品决策支持能力对比">
+        <div className="competitor-matrix__row competitor-matrix__row--head" role="row">
+          <span role="columnheader">产品</span>
+          <span role="columnheader">目标用户</span>
+          <span role="columnheader">决策支持能力</span>
+          <span role="columnheader">关键短板</span>
+        </div>
+        {competitors.map((c) => (
+          <div className="competitor-matrix__row" role="row" key={c.name}>
+            <span role="cell">
+              <strong>{c.name}</strong>
+            </span>
+            <span role="cell">{c.audience}</span>
+            <span role="cell">
+              <span className="support-bar" aria-label={`决策支持 ${c.decisionSupport}`}>
+                {Array.from({ length: total }).map((_, i) => (
+                  <span
+                    key={i}
+                    className={`support-bar__dot ${i < levels[c.decisionSupport] ? "is-on" : ""}`}
+                  />
+                ))}
+              </span>
+              <span className="support-bar__label">{c.decisionSupport}</span>
+            </span>
+            <span role="cell">{c.weakness}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+function InterviewGuide() {
+  const [open, setOpen] = useState<Record<number, boolean>>({ 0: true });
+  return (
+    <div className="interview-guide">
+      <h3 className="project-section__h3">
+        <MessageCircle size={20} className="inline-icon" aria-hidden="true" />
+        康复师访谈提纲
+      </h3>
+      <div className="interview-guide__list">
+        {interviewGuide.map((q, i) => (
+          <details
+            className="interview-guide__item"
+            key={i}
+            open={open[i]}
+            onToggle={(e) => setOpen((prev) => ({ ...prev, [i]: e.currentTarget.open }))}
+          >
+            <summary>
+              <span className="interview-guide__num">{String(i + 1).padStart(2, "0")}</span>
+              {q}
+            </summary>
+            <p>用于定位 {researchQuestions[i]?.method ?? ""} 背后的康复师决策痛点。</p>
+          </details>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+function HeuristicTable() {
+  const severityClass: Record<string, string> = { 高: "severity--high", 中: "severity--medium", 低: "severity--low" };
+  return (
+    <div className="heuristic-table">
+      <h3 className="project-section__h3">
+        <ScanLine size={20} className="inline-icon" aria-hidden="true" />
+        启发式评估：B 端后台可用性问题
+      </h3>
+      <div className="heuristic-table__grid" role="table" aria-label="启发式评估结果">
+        <div className="heuristic-table__row heuristic-table__row--head" role="row">
+          <span role="columnheader">启发式原则</span>
+          <span role="columnheader">问题描述</span>
+          <span role="columnheader">严重程度</span>
+        </div>
+        {heuristicEvaluation.map((h) => (
+          <div className="heuristic-table__row" role="row" key={h.id}>
+            <span role="cell">
+              <strong>{h.principle}</strong>
+            </span>
+            <span role="cell">{h.issue}</span>
+            <span role="cell">
+              <span className={`severity-pill ${severityClass[h.severity]}`}>{h.severity}</span>
+            </span>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+function MethodMixChart() {
+  const data = [
+    { name: "文献调研", value: 1 },
+    { name: "动作分析", value: 1 },
+    { name: "EMG 验证", value: 1 },
+    { name: "用户访谈", value: 1 },
+    { name: "竞品分析", value: 1 },
+    { name: "可用性测试", value: 1 },
+  ];
+  const colors = ["#176b55", "#3b8c72", "#5aa98e", "#88c4af", "#b5dece", "#e8f2ee"];
+  return (
+    <div className="chart-card chart-card--small">
+      <h4 className="chart-card__title">
+        <LineChart size={18} className="inline-icon" aria-hidden="true" />
+        研究方法构成
+      </h4>
+      <div className="chart-card__body">
+        <ResponsiveContainer width="100%" height="100%">
+          <PieChart role="img" aria-label="研究方法构成饼图">
+            <Pie data={data} dataKey="value" nameKey="name" cx="50%" cy="50%" outerRadius={62} label={false}>
+              {data.map((_, i) => (
+                <Cell key={`cell-${i}`} fill={colors[i % colors.length]} />
+              ))}
+            </Pie>
+            <Tooltip />
+          </PieChart>
+        </ResponsiveContainer>
+      </div>
+      <div className="chart-card__legend">
+        {data.map((d, i) => (
+          <span className="chart-card__legend-item" key={d.name}>
+            <i style={{ background: colors[i % colors.length] }} aria-hidden="true" />
+            {d.name}
+          </span>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+function EMGChart() {
+  return (
+    <div className="chart-card">
+      <h4 className="chart-card__title">
+        <Activity size={18} className="inline-icon" aria-hidden="true" />
+        园艺动作 EMG 激活强度（演示样例）
+      </h4>
+      <div className="chart-card__body">
+        <ResponsiveContainer width="100%" height="100%">
+          <BarChart data={emgValidation} role="img" aria-label="EMG 动作激活强度柱状图">
+            <CartesianGrid strokeDasharray="3 3" stroke="#e2e8e5" />
+            <XAxis dataKey="action" tick={{ fontSize: 11 }} interval={0} />
+            <YAxis domain={[0, 100]} tick={{ fontSize: 11 }} />
+            <Tooltip />
+            <Bar dataKey="activation" name="激活度 %" fill="#176b55" radius={[4, 4, 0, 0]} />
+          </BarChart>
+        </ResponsiveContainer>
+      </div>
+    </div>
+  );
+}
+
+function SurveyChart() {
+  return (
+    <div className="chart-card">
+      <h4 className="chart-card__title">
+        <ClipboardList size={18} className="inline-icon" aria-hidden="true" />
+        问卷摘要（演示样例）
+      </h4>
+      <div className="chart-card__body">
+        <ResponsiveContainer width="100%" height="100%">
+          <BarChart
+            data={survey.map((s) => ({ ...s, pct: (s.value / s.total) * 100 }))}
+            layout="vertical"
+            margin={{ left: 16, right: 24 }}
+            role="img"
+            aria-label="问卷结果条形图"
+          >
+            <CartesianGrid strokeDasharray="3 3" stroke="#e2e8e5" />
+            <XAxis type="number" domain={[0, 100]} tick={{ fontSize: 11 }} />
+            <YAxis type="category" dataKey="item" width={140} tick={{ fontSize: 11 }} />
+            <Tooltip formatter={(v) => `${Number(v ?? 0).toFixed(0)}%`} />
+            <Bar dataKey="pct" name="比例" fill="#3b8c72" radius={[0, 4, 4, 0]} />
+          </BarChart>
+        </ResponsiveContainer>
+      </div>
+    </div>
+  );
+}
+
+function JourneyEmotionChart() {
+  return (
+    <div className="chart-card">
+      <h4 className="chart-card__title">
+        <HeartPulse size={18} className="inline-icon" aria-hidden="true" />
+        康复师旅程情绪曲线
+      </h4>
+      <div className="chart-card__body" style={{ height: 240 }}>
+        <ResponsiveContainer width="100%" height="100%">
+          <AreaChart
+            data={journeyStages.map((s) => ({ stage: s.stage, emotion: s.emotion }))}
+            margin={{ left: -16, right: 16 }}
+            role="img"
+            aria-label="康复师旅程情绪曲线"
+          >
+            <defs>
+              <linearGradient id="emotionFill" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="5%" stopColor="#176b55" stopOpacity={0.25} />
+                <stop offset="95%" stopColor="#176b55" stopOpacity={0} />
+              </linearGradient>
+            </defs>
+            <CartesianGrid strokeDasharray="3 3" stroke="#e2e8e5" />
+            <XAxis dataKey="stage" tick={{ fontSize: 12 }} />
+            <YAxis domain={[0, 5]} tick={{ fontSize: 12 }} />
+            <Tooltip />
+            <Area type="monotone" dataKey="emotion" name="情绪得分" stroke="#176b55" fill="url(#emotionFill)" strokeWidth={2} />
+          </AreaChart>
+        </ResponsiveContainer>
+      </div>
+    </div>
+  );
+}
+
+function UsabilityChart() {
+  const demoOffsets = [3, 5, 2, 6, 4, 7];
+  const data = usabilityProtocol.metrics.map((m, i) => {
+    const target = Number(m.target.replace(/[^0-9.]/g, ""));
+    return {
+      name: m.name,
+      target,
+      actual: Math.max(0, target - demoOffsets[i % demoOffsets.length]),
+    };
+  });
+  return (
+    <div className="chart-card">
+      <h4 className="chart-card__title">
+        <Activity size={18} className="inline-icon" aria-hidden="true" />
+        可用性指标：目标 vs 演示实测
+      </h4>
+      <div className="chart-card__body" style={{ height: 260 }}>
+        <ResponsiveContainer width="100%" height="100%">
+          <BarChart data={data} role="img" aria-label="可用性目标与演示实测对比">
+            <CartesianGrid strokeDasharray="3 3" stroke="#e2e8e5" />
+            <XAxis dataKey="name" tick={{ fontSize: 11 }} interval={0} />
+            <YAxis domain={[0, 100]} tick={{ fontSize: 11 }} />
+            <Tooltip />
+            <Legend />
+            <Bar dataKey="target" name="目标值" fill="#b5dece" radius={[4, 4, 0, 0]} />
+            <Bar dataKey="actual" name="演示样例实测" fill="#176b55" radius={[4, 4, 0, 0]} />
+          </BarChart>
+        </ResponsiveContainer>
+      </div>
+    </div>
+  );
+}
+
 export function ProjectShowcasePage() {
   useEffect(() => {
     document.title = "项目展示｜康护园";
@@ -209,8 +571,8 @@ export function ProjectShowcasePage() {
           </div>
           <div className="project-hero__media">
             <img
-              src={asset("assets/case-study/fig-cover.png")}
-              alt="康护园系统概念图：可穿戴设备、VR 园艺场景与康复师后台"
+              src={asset("assets/case-study/cover-demo.jpg")}
+              alt="康护园第一代功能原型：可穿戴臂带、VR 头显与 PC 调试场景"
               loading="eager"
             />
           </div>
@@ -222,7 +584,10 @@ export function ProjectShowcasePage() {
         <div className="ecosystem-grid">
           <article className="ecosystem-card ecosystem-card--b">
             <div className="ecosystem-card__meta">
-              <span className="ecosystem-card__label">B 端</span>
+              <span className="ecosystem-card__label">
+                <Monitor size={14} aria-hidden="true" />
+                B 端
+              </span>
               <h3>康复师远程管理后台</h3>
               <p>
                 将可穿戴设备采集的多模态数据转化为康复师可操作的决策支持：风险分层、计划编辑、训练复盘、证据链追溯。
@@ -262,7 +627,7 @@ export function ProjectShowcasePage() {
             </div>
             <div className="ecosystem-card__visual">
               <img
-                src={asset("assets/case-study/fig-imu-module.png")}
+                src={asset("assets/case-study/imu-module.jpg")}
                 alt="C 端可穿戴传感器模块与 Arduino 测试"
                 loading="lazy"
               />
@@ -285,8 +650,8 @@ export function ProjectShowcasePage() {
             </div>
             <div className="ecosystem-card__visual">
               <img
-                src={asset("assets/case-study/fig-vr-scene.png")}
-                alt="VR 园艺训练场景截图"
+                src={asset("assets/case-study/prototype-feedback.jpg")}
+                alt="VR 训练场景：肌电信号驱动的粒子视觉反馈"
                 loading="lazy"
               />
             </div>
@@ -327,11 +692,24 @@ export function ProjectShowcasePage() {
       {/* Research process */}
       <Section id="research" eyebrow="03 研究方法" title="从问题到产品的研究链路">
         <p className="project-section__lead">
-          围绕「动作有效性—转译可行性—康复师决策支持」三个层次，依次完成文献调研、动作分析、用户研究与可用性测试方案设计。
+          围绕「动作有效性—转译可行性—康复师决策支持」三个层次，依次完成文献调研、竞品分析、康复师访谈、动作分析、EMG 验证、用户研究与可用性测试方案设计。
         </p>
         <ResearchTimeline />
+        <MethodMatrix />
+        <div className="method-charts">
+          <MethodMixChart />
+          <CompetitorMatrix />
+        </div>
+        <LiteratureReviewCards />
+        <InterviewGuide />
+        <DemoBadge label="[演示样例]" variant="demo" hint="启发式评估条目为演示样例，用于展示 B 端可用性检查方法。">
+          <HeuristicTable />
+        </DemoBadge>
         <div className="insight-highlights">
-          <h3 className="project-section__h3">关键洞察</h3>
+          <h3 className="project-section__h3">
+            <BrainCircuit size={20} className="inline-icon" aria-hidden="true" />
+            关键洞察
+          </h3>
           <div className="insight-cards">
             <div className="insight-card">
               <span className="insight-card__num">01</span>
@@ -350,10 +728,36 @@ export function ProjectShowcasePage() {
             </div>
           </div>
         </div>
+        <div className="method-validation">
+          <h3 className="project-section__h3">
+            <Activity size={20} className="inline-icon" aria-hidden="true" />
+            动作验证：EMG 与问卷
+          </h3>
+          <div className="method-validation__grid">
+            <EMGChart />
+            <img
+              src={asset("assets/case-study/method-emg-mapping.jpg")}
+              alt="EMG 动作映射：5 个标准上肢训练动作与目标肌群"
+              loading="lazy"
+              className="method-validation__image"
+            />
+          </div>
+          <DemoBadge label="[演示样例]" variant="demo" hint="EMG 数值与问卷结果均为演示样例，仅用于展示验证方法。">
+            <div className="survey-section">
+              <SurveyChart />
+              <p className="survey-section__note">
+                问卷结果显示：老人普遍认为园艺化任务比传统动作更有趣（4.5/5），但对步骤切换的清晰度仍有疑虑（41%）。这与 B 端「不确定性可见」原则形成呼应。
+              </p>
+            </div>
+          </DemoBadge>
+        </div>
       </Section>
 
       {/* Personas & Journey */}
       <Section id="users" variant="subtle" eyebrow="04 用户洞察" title="康复师画像与旅程地图">
+        <p className="project-section__lead">
+          基于康复师访谈与二手研究，构建核心用户画像，并用旅程地图定位情绪低点与 B 端设计机会。
+        </p>
         <DemoBadge label="[演示样例]" variant="demo" hint="画像与旅程地图基于二手研究与角色假设构建，用于定位 B 端设计机会。">
           <div className="persona-grid">
             {personas.map((p) => (
@@ -384,7 +788,11 @@ export function ProjectShowcasePage() {
         </DemoBadge>
 
         <DemoBadge label="[演示样例]" variant="demo" hint="旅程地图用于识别康复师在工作各阶段的情绪低点与设计机会。">
-          <h3 className="project-section__h3">康复师用户旅程地图</h3>
+          <h3 className="project-section__h3">
+            <HeartPulse size={20} className="inline-icon" aria-hidden="true" />
+            康复师用户旅程地图
+          </h3>
+          <JourneyEmotionChart />
           <div className="journey-map">
             <div className="journey-map__track">
               {journeyStages.map((s) => (
@@ -422,8 +830,41 @@ export function ProjectShowcasePage() {
           基于文献与动作分析，选取五种标准上肢训练动作，并将它们映射到老人熟悉、具身、可叙事的园艺任务，每个任务对应明确的肌肉群与传感器判定规则。
         </p>
         <ExerciseMap />
-        <h3 className="project-section__h3">系统逻辑与反馈闭环</h3>
-        <SystemLogicFlow />
+        <div className="design-intervention">
+          <h3 className="project-section__h3">
+            <Sprout size={20} className="inline-icon" aria-hidden="true" />
+            设计介入策略
+          </h3>
+          <img
+            src={asset("assets/case-study/method-design-intervention.jpg")}
+            alt="设计介入三阶段：进入训练、参与训练、坚持训练"
+            loading="lazy"
+            className="design-intervention__image"
+          />
+        </div>
+        <h3 className="project-section__h3">
+          <BrainCircuit size={20} className="inline-icon" aria-hidden="true" />
+          系统逻辑与反馈闭环
+        </h3>
+        <div className="system-logic-layout">
+          <SystemLogicFlow />
+          <img
+            src={asset("assets/case-study/system-logic-v2.jpg")}
+            alt="系统逻辑 V2：触发逻辑与反馈闭环"
+            loading="lazy"
+            className="system-logic-layout__image"
+          />
+        </div>
+        <img
+          src={asset("assets/case-study/method-action-judgment.jpg")}
+          alt="动作判断：5 个标准上肢训练动作的判定规则"
+          loading="lazy"
+          className="action-judgment-image"
+        />
+        <h3 className="project-section__h3">
+          <ShieldCheck size={20} className="inline-icon" aria-hidden="true" />
+          设计原则
+        </h3>
         <div className="design-principles">
           {designPrinciples.map((p) => (
             <div className="design-principles__card" key={p.title}>
@@ -441,17 +882,17 @@ export function ProjectShowcasePage() {
         </p>
         <div className="prototype-grid">
           <figure className="prototype-figure">
-            <img src={asset("assets/case-study/fig-prototype-demo.png")} alt="第一代功能原型测试场景" loading="lazy" />
+            <img src={asset("assets/case-study/vr-prototype.jpg")} alt="第一代功能原型：传感器绑带与 VR 头显联调" loading="lazy" />
             <figcaption>第一代功能原型：传感器绑带 + VR 头显联调</figcaption>
           </figure>
           <figure className="prototype-figure">
-            <img src={asset("assets/case-study/fig-vr-scene.png")} alt="VR 园艺训练场景" loading="lazy" />
-            <figcaption>VR 场景：银龄园艺小站中的浇水与摘果任务</figcaption>
+            <img src={asset("assets/case-study/usability-user-test.jpg")} alt="用户测试：真实使用者佩戴原型设备完成训练任务" loading="lazy" />
+            <figcaption>用户测试：真实使用者完成训练任务并给出反馈</figcaption>
           </figure>
         </div>
         <DemoBadge label="[课程原始数据]" variant="original">
           <p style={{ margin: 0 }}>
-            来自课程汇报 p.11 的用户测试反馈：老人认可即时反馈与任务化设计，但指出步骤切换不够清晰、震动频繁会打断节奏、以及难以判断是角度还是力度不足。这些发现直接推动了 B 端「不确定性可见」与「证据链复盘」的设计原则。
+            来自课程汇报 p.24 的用户测试反馈：老人认可即时反馈与任务化设计，但指出步骤切换不够清晰、震动频繁会打断节奏、以及难以判断是角度还是力度不足。这些发现直接推动了 B 端「不确定性可见」与「证据链复盘」的设计原则。
           </p>
         </DemoBadge>
       </Section>
@@ -490,37 +931,49 @@ export function ProjectShowcasePage() {
         <p className="project-section__lead">
           基于用户旅程地图中的关键痛点，为康护园 B 端后台设计了可用性测试方案，聚焦「发现异常 → 复核证据 → 调整计划 → 记录判断」的核心闭环。
         </p>
-        <div className="metric-cards">
-          {usabilityProtocol.metrics.map((m) => (
-            <div className="metric-cards__item" key={m.name}>
-              <span className="metric-cards__value">{m.target}</span>
-              <span className="metric-cards__label">{m.name}</span>
+        <div className="usability-layout">
+          <div className="usability-layout__main">
+            <div className="metric-cards">
+              {usabilityProtocol.metrics.map((m) => (
+                <div className="metric-cards__item" key={m.name}>
+                  <span className="metric-cards__value">{m.target}</span>
+                  <span className="metric-cards__label">{m.name}</span>
+                </div>
+              ))}
             </div>
-          ))}
+            <DemoBadge label="[演示样例]" variant="demo" hint="可用性测试协议、任务场景与发现均为演示样例，用于展示验证方法框架。">
+              <h3 className="project-section__h3" style={{ marginTop: 0 }}>
+                关键发现
+              </h3>
+              <ul className="findings-list">
+                {usabilityFindings.map((f, i) => (
+                  <li key={i}>
+                    <span
+                      className={`findings-list__badge findings-list__badge--${
+                        f.severity === "正向"
+                          ? "positive"
+                          : f.severity === "高"
+                            ? "high"
+                            : "medium"
+                      }`}
+                    >
+                      {f.severity}
+                    </span>
+                    <span>{f.finding}</span>
+                  </li>
+                ))}
+              </ul>
+            </DemoBadge>
+          </div>
+          <div className="usability-layout__side">
+            <img
+              src={asset("assets/case-study/usability-user-test.jpg")}
+              alt="用户测试：真实使用者佩戴原型设备完成训练任务并给出反馈"
+              loading="lazy"
+            />
+            <UsabilityChart />
+          </div>
         </div>
-        <DemoBadge label="[演示样例]" variant="demo" hint="可用性测试协议、任务场景与发现均为演示样例，用于展示验证方法框架。">
-          <h3 className="project-section__h3" style={{ marginTop: 0 }}>
-            关键发现
-          </h3>
-          <ul className="findings-list">
-            {usabilityFindings.map((f, i) => (
-              <li key={i}>
-                <span
-                  className={`findings-list__badge findings-list__badge--${
-                    f.severity === "正向"
-                      ? "positive"
-                      : f.severity === "高"
-                        ? "high"
-                        : "medium"
-                  }`}
-                >
-                  {f.severity}
-                </span>
-                <span>{f.finding}</span>
-              </li>
-            ))}
-          </ul>
-        </DemoBadge>
       </Section>
 
       {/* Reflection */}

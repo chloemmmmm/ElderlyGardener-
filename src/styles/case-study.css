@@ -1426,6 +1426,459 @@
   color: var(--color-text-muted);
 }
 
+/* ============================================================
+   研究方法补全 + 可视化增强（v2）
+   ============================================================ */
+.inline-icon {
+  flex: none;
+  vertical-align: -0.2em;
+}
+.project-section__h3 {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.ecosystem-card__label {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.research-timeline__num {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+}
+.project-button--brand {
+  background: var(--color-brand);
+  color: #fff;
+}
+
+/* —— 研究问题 × 方法 × 产出矩阵 —— */
+.method-matrix {
+  margin: 28px 0 30px;
+}
+.method-matrix__table {
+  overflow-x: auto;
+  background: #fff;
+  border: 1px solid var(--color-border);
+  border-radius: 14px;
+}
+.method-matrix__row {
+  display: grid;
+  grid-template-columns: 1.25fr 0.85fr 1fr;
+  min-width: 820px;
+}
+.method-matrix__row > span {
+  padding: 13px 16px;
+  border-top: 1px solid var(--color-border);
+  font-size: 0.9rem;
+  line-height: 1.6;
+  color: var(--color-text);
+}
+.method-matrix__row--head {
+  background: #f4f8f7;
+}
+.method-matrix__row--head > span {
+  border-top: 0;
+  color: var(--color-brand);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.method-matrix__row > span:first-child strong {
+  margin-right: 6px;
+  color: var(--color-brand);
+  font-size: 0.85rem;
+}
+
+/* —— 研究方法构成 + 竞品对比 —— */
+.method-charts {
+  display: grid;
+  grid-template-columns: minmax(0, 300px) minmax(0, 1fr);
+  gap: 20px;
+  align-items: stretch;
+  margin: 6px 0 8px;
+}
+.chart-card {
+  display: flex;
+  flex-direction: column;
+  min-height: 260px;
+  background: #fff;
+  border: 1px solid var(--color-border);
+  border-radius: 14px;
+  padding: 16px 16px 10px;
+  box-shadow: 0 10px 30px rgb(15 52 42 / 5%);
+}
+.chart-card__title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0 0 8px;
+  font-size: 0.95rem;
+  font-weight: 700;
+}
+.chart-card__body {
+  flex: 1;
+  width: 100%;
+  position: relative;
+}
+.chart-card__body .recharts-responsive-container {
+  position: absolute !important;
+  inset: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+}
+.chart-card__legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 12px;
+  padding: 6px 2px 4px;
+  font-size: 11px;
+  line-height: 1.6;
+  color: var(--color-text-muted);
+}
+.chart-card__legend-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+.chart-card__legend-item i {
+  display: inline-block;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+}
+.competitor-matrix {
+  background: #fff;
+  border: 1px solid var(--color-border);
+  border-radius: 14px;
+  padding: 16px;
+}
+.competitor-matrix__table {
+  overflow-x: auto;
+}
+.competitor-matrix__row {
+  display: grid;
+  grid-template-columns: 130px 1.1fr 0.8fr 1.3fr;
+  min-width: 640px;
+}
+.competitor-matrix__row > span {
+  padding: 11px 12px;
+  border-top: 1px solid var(--color-border);
+  font-size: 0.875rem;
+  line-height: 1.55;
+}
+.competitor-matrix__row--head {
+  background: #f4f8f7;
+}
+.competitor-matrix__row--head > span {
+  border-top: 0;
+  color: var(--color-brand);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.support-bar {
+  display: inline-flex;
+  gap: 4px;
+  margin-right: 8px;
+  vertical-align: middle;
+}
+.support-bar__dot {
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  background: #dfe9e4;
+}
+.support-bar__dot.is-on {
+  background: var(--color-brand);
+}
+.support-bar__label {
+  font-size: 12px;
+  color: var(--color-text-muted);
+}
+
+/* —— 文献综述 5 卡 —— */
+.literature-review {
+  margin: 30px 0 26px;
+}
+.literature-review__layout {
+  display: grid;
+  grid-template-columns: 0.9fr 1.1fr;
+  gap: 22px;
+  align-items: start;
+}
+.literature-review__image {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  border-radius: 14px;
+  border: 1px solid var(--color-border);
+  box-shadow: 0 10px 30px rgb(15 52 42 / 6%);
+}
+.literature-cards {
+  display: grid;
+  gap: 9px;
+}
+.literature-card {
+  display: flex;
+  gap: 13px;
+  align-items: flex-start;
+  padding: 12px 14px;
+  background: #fff;
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+}
+.literature-card__num {
+  flex: none;
+  width: 30px;
+  height: 30px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: #e8f2ee;
+  color: var(--color-brand);
+  font-size: 12px;
+  font-weight: 800;
+}
+.literature-card strong {
+  display: block;
+  margin-bottom: 3px;
+  font-size: 0.95rem;
+  line-height: 1.4;
+}
+.literature-card p {
+  margin: 0;
+  font-size: 0.85rem;
+  line-height: 1.55;
+  color: var(--color-text-muted);
+}
+
+/* —— 康复师访谈提纲（折叠） —— */
+.interview-guide {
+  margin: 8px 0 30px;
+}
+.interview-guide__list {
+  display: grid;
+  gap: 8px;
+}
+.interview-guide__item {
+  background: #fff;
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+  overflow: hidden;
+}
+.interview-guide__item summary {
+  list-style: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 13px 16px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  line-height: 1.5;
+}
+.interview-guide__item summary::-webkit-details-marker {
+  display: none;
+}
+.interview-guide__item summary:hover {
+  background: #fbfdfc;
+}
+.interview-guide__item summary::after {
+  content: "+";
+  margin-left: auto;
+  flex: none;
+  color: var(--color-brand);
+  font-size: 1.1rem;
+  font-weight: 800;
+}
+.interview-guide__item[open] summary::after {
+  content: "−";
+}
+.interview-guide__item[open] summary {
+  border-bottom: 1px solid var(--color-border);
+  background: #fbfdfc;
+}
+.interview-guide__num {
+  flex: none;
+  width: 28px;
+  height: 28px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: #e8f2ee;
+  color: var(--color-brand);
+  font-size: 12px;
+  font-weight: 800;
+}
+.interview-guide__item p {
+  margin: 0;
+  padding: 12px 16px 14px;
+  font-size: 0.875rem;
+  line-height: 1.65;
+  color: var(--color-text-muted);
+}
+
+/* —— 启发式评估表 —— */
+.heuristic-table {
+  margin: 6px 0 26px;
+}
+.heuristic-table__grid {
+  overflow-x: auto;
+  background: #fff;
+  border: 1px solid var(--color-border);
+  border-radius: 14px;
+}
+.heuristic-table__row {
+  display: grid;
+  grid-template-columns: 170px 1fr 110px;
+  min-width: 660px;
+}
+.heuristic-table__row > span {
+  padding: 12px 14px;
+  border-top: 1px solid var(--color-border);
+  font-size: 0.875rem;
+  line-height: 1.55;
+}
+.heuristic-table__row--head {
+  background: #f4f8f7;
+}
+.heuristic-table__row--head > span {
+  border-top: 0;
+  color: var(--color-brand);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.severity-pill {
+  display: inline-block;
+  padding: 3px 10px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1.5;
+}
+.severity-pill.severity--high {
+  background: var(--color-danger-soft);
+  color: var(--color-danger);
+}
+.severity-pill.severity--medium {
+  background: var(--color-attention-soft);
+  color: var(--color-attention);
+}
+.severity-pill.severity--low {
+  background: var(--color-surface-subtle);
+  color: var(--color-brand);
+}
+
+/* —— 动作验证：EMG 与问卷 —— */
+.method-validation {
+  margin-top: 30px;
+}
+.method-validation__grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 20px;
+  align-items: start;
+  margin: 10px 0 8px;
+}
+.method-validation__image {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  border-radius: 14px;
+  border: 1px solid var(--color-border);
+}
+.survey-section {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 0.9fr);
+  gap: 18px;
+  align-items: stretch;
+  margin-top: 6px;
+}
+.survey-section__note {
+  margin: 0;
+  padding: 16px 18px;
+  background: #f4f8f7;
+  border-left: 3px solid var(--color-brand);
+  border-radius: 0 12px 12px 0;
+  font-size: 0.9rem;
+  line-height: 1.7;
+  color: var(--color-text);
+}
+
+/* —— 设计决策区图 —— */
+.design-intervention {
+  margin: 28px 0 8px;
+}
+.design-intervention__image {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  border-radius: 14px;
+  border: 1px solid var(--color-border);
+  box-shadow: 0 10px 30px rgb(15 52 42 / 6%);
+}
+.system-logic-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
+  gap: 24px;
+  align-items: center;
+  margin: 4px 0 26px;
+}
+.system-logic-layout__image {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  border-radius: 14px;
+  border: 1px solid var(--color-border);
+}
+.action-judgment-image {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  border-radius: 14px;
+  border: 1px solid var(--color-border);
+  box-shadow: 0 10px 30px rgb(15 52 42 / 6%);
+}
+
+/* —— 可用性验证双栏 —— */
+.usability-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+  gap: 24px;
+  align-items: stretch;
+}
+.usability-layout__side {
+  display: grid;
+  gap: 16px;
+}
+.usability-layout__side > img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  border-radius: 14px;
+  border: 1px solid var(--color-border);
+}
+
 @media (max-width: 1024px) {
   .project-hero__inner,
   .ecosystem-card,
@@ -1442,6 +1895,14 @@
   .persona-grid,
   .prototype-grid {
     grid-template-columns: repeat(2, 1fr);
+  }
+  .method-charts,
+  .literature-review__layout,
+  .method-validation__grid,
+  .survey-section,
+  .system-logic-layout,
+  .usability-layout {
+    grid-template-columns: 1fr;
   }
 }
 
@@ -1476,6 +1937,27 @@
   }
   .research-timeline__line {
     display: none;
+  }
+  .method-matrix__row,
+  .heuristic-table__row,
+  .competitor-matrix__row {
+    grid-template-columns: 1fr;
+    min-width: 0;
+  }
+  .method-matrix__row > span,
+  .heuristic-table__row > span,
+  .competitor-matrix__row > span {
+    border-top: 1px solid var(--color-border);
+  }
+  .method-matrix__row--head,
+  .heuristic-table__row--head,
+  .competitor-matrix__row--head {
+    display: none;
+  }
+  .method-matrix__table,
+  .heuristic-table__grid,
+  .competitor-matrix__table {
+    overflow: visible;
   }
 }
 

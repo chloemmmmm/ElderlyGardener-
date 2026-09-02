@@ -271,3 +271,5 @@ export const authorBio = {
 
 export const dataDisclaimer =
   "本页面包含三类数据：来自课程项目文件的原始内容、为补充研究链条而构建的演示样例（均已标注），以及公开统计数据。演示样例仅用于展示研究方法框架，不代表真实用户研究结果。";
+
+export * from "./research-methods";
