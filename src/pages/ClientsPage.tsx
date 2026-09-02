@@ -29,6 +29,7 @@ export function ClientsPage() {
     alert:
       params.get("alert") === "needs-attention" ? "needs-attention" : "all",
   });
+  const [noticeVisible, setNoticeVisible] = useState(false);
   const clients = useQuery({
     queryKey: ["clients", query],
     queryFn: ({ signal }) => rehabilitationApi.getClients(query, signal),
@@ -47,11 +48,32 @@ export function ClientsPage() {
         title="康复对象"
         description="统一查看训练阶段、计划执行与风险线索。名单、标签与完成率均为作品集演示数据。"
         actions={
-          <button className="primary-button" type="button">
+          <button
+            className="primary-button"
+            type="button"
+            onClick={() => setNoticeVisible(true)}
+          >
             ＋ 新增康复对象
           </button>
         }
       />
+      {noticeVisible && (
+        <div className="demo-notice" role="status">
+          <span aria-hidden="true">✳</span>
+          <p>
+            演示版聚焦“对象管理 → 计划调整 → 训练复盘”的既有闭环；
+            新增对象走入院建档流程，暂不在本次演示范围内。
+          </p>
+          <button
+            className="demo-notice__close"
+            type="button"
+            aria-label="关闭提示"
+            onClick={() => setNoticeVisible(false)}
+          >
+            ×
+          </button>
+        </div>
+      )}
       <div className="filter-bar" aria-label="对象筛选">
         <label className="search-field">
           <span aria-hidden="true">⌕</span>

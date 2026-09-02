@@ -68,7 +68,9 @@
   background: white;
   border: 1px solid var(--color-border);
   border-radius: 10px;
-  transition: border-color 160ms ease, box-shadow 160ms ease;
+  transition:
+    border-color 160ms ease,
+    box-shadow 160ms ease;
 }
 .plan-card:hover {
   border-color: #b9cbc3;
@@ -463,4 +465,69 @@
   color: var(--color-text-muted);
   font-size: 10.5px;
   text-align: right;
+}
+/* ---------- 7. 侧栏个人菜单 ---------- */
+.profile-menu-wrap {
+  position: relative;
+}
+.profile-menu {
+  position: absolute;
+  left: -13px;
+  right: -13px;
+  bottom: calc(100% + 10px);
+  z-index: 60;
+  background: white;
+  color: var(--color-text);
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+  box-shadow: 0 18px 44px rgb(15 52 42 / 22%);
+  overflow: hidden;
+  animation: panel-in 140ms ease;
+}
+.profile-menu__role {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  padding: 12px;
+  border-bottom: 1px solid var(--color-border);
+}
+.profile-menu__role div {
+  display: grid;
+  gap: 1px;
+  min-width: 0;
+}
+.profile-menu__role strong {
+  font-size: 13px;
+  color: var(--color-text);
+}
+.profile-menu__role div > span {
+  font-size: 11px;
+  color: var(--color-text-muted);
+}
+.profile-menu__link {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 11px 12px;
+  color: var(--color-text);
+  font-size: 12.5px;
+  text-decoration: none;
+  transition:
+    background 120ms ease,
+    color 120ms ease;
+}
+.profile-menu__link:hover {
+  background: #f0f6f3;
+  color: var(--color-brand);
+}
+.profile-menu__link + .profile-menu__link {
+  border-top: 1px solid #eef3f1;
+}
+.profile-menu__note {
+  margin: 0;
+  padding: 9px 12px 11px;
+  border-top: 1px solid var(--color-border);
+  color: var(--color-text-muted);
+  font-size: 10.5px;
+  line-height: 1.6;
 }

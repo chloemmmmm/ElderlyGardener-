@@ -58,4 +58,34 @@ describe("AppShell", () => {
       screen.queryByRole("dialog", { name: "康护园 · 概念演示" }),
     ).not.toBeInTheDocument();
   });
+
+  it("opens the profile menu, exposes shortcuts, and closes it with Escape", async () => {
+    const user = userEvent.setup();
+
+    renderShell();
+
+    expect(
+      screen.queryByRole("region", { name: "个人菜单" }),
+    ).not.toBeInTheDocument();
+
+    await user.click(screen.getByRole("button", { name: "打开个人菜单" }));
+
+    expect(
+      screen.getByRole("region", { name: "个人菜单" }),
+    ).toBeInTheDocument();
+    expect(screen.getByRole("link", { name: /查看案例展示/ })).toHaveAttribute(
+      "href",
+      "/case-study",
+    );
+    expect(screen.getByRole("link", { name: /查看数据看板/ })).toHaveAttribute(
+      "href",
+      "/analytics",
+    );
+
+    await user.keyboard("{Escape}");
+
+    expect(
+      screen.queryByRole("region", { name: "个人菜单" }),
+    ).not.toBeInTheDocument();
+  });
 });

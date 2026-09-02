@@ -1,6 +1,7 @@
 import * as Dialog from "@radix-ui/react-dialog";
 import { NavLink, Outlet } from "react-router-dom";
 
+import { ProfileMenu } from "../components/ProfileMenu";
 import { TopbarNotifications } from "../components/TopbarNotifications";
 import { TopbarSearch } from "../components/TopbarSearch";
 
@@ -60,7 +61,10 @@ export function AppShell() {
                   <span className="demo-video-kicker">CONCEPT DEMO</span>
                   <Dialog.Title>康护园 · 概念演示</Dialog.Title>
                 </div>
-                <Dialog.Close className="demo-video-close" aria-label="关闭概念演示">
+                <Dialog.Close
+                  className="demo-video-close"
+                  aria-label="关闭概念演示"
+                >
                   ×
                 </Dialog.Close>
               </div>
@@ -99,23 +103,7 @@ export function AppShell() {
           <span>优先复核数据异常与连续未完成训练。</span>
         </div>
 
-        <div className="profile-chip">
-          <span className="avatar" aria-hidden="true">
-            林
-          </span>
-          <div>
-            <strong>林医生</strong>
-            <span>康复治疗师</span>
-          </div>
-          <button
-            type="button"
-            aria-label="个人菜单（演示中暂未开放）"
-            title="演示中暂未开放"
-            disabled
-          >
-            •••
-          </button>
-        </div>
+        <ProfileMenu />
       </aside>
 
       <div className="workspace">
