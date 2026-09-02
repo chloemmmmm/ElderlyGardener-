@@ -336,6 +336,8 @@ a {
   min-width: 0;
 }
 .topbar {
+  position: relative;
+  z-index: var(--z-sticky);
   height: 64px;
   padding: 0 34px;
   display: flex;
