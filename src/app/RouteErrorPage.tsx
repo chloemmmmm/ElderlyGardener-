@@ -12,11 +12,11 @@ export function RouteErrorPage() {
       <h1>{missing ? "没有找到这个页面" : "页面暂时无法显示"}</h1>
       <p>
         {missing
-          ? "链接可能已经变化，请从工作台重新开始。"
-          : "当前操作没有保存到服务器。你可以返回工作台后重试。"}
+          ? "链接可能已经变化，请从项目展示主页重新开始。"
+          : "当前操作没有保存到服务器。你可以返回项目展示主页后重试。"}
       </p>
-      <Link className="primary-button link-button" to="/dashboard">
-        返回工作台
+      <Link className="primary-button link-button" to="/">
+        返回项目展示主页
       </Link>
     </main>
   );

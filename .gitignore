@@ -7,4 +7,5 @@ premium-audit.json
 .DS_Store
 *.log
 work/
+.local/
 

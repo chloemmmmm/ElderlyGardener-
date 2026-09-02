@@ -1,5 +1,5 @@
 import * as Dialog from "@radix-ui/react-dialog";
-import { NavLink, Outlet } from "react-router-dom";
+import { Link, NavLink, Outlet } from "react-router-dom";
 
 import { ProfileMenu } from "../components/ProfileMenu";
 import { TopbarNotifications } from "../components/TopbarNotifications";
@@ -19,11 +19,8 @@ const navGroups = [
     ],
   },
   {
-    label: "洞察与展示",
-    items: [
-      { to: "/analytics", label: "数据看板", icon: "◈" },
-      { to: "/case-study", label: "案例展示", icon: "✦" },
-    ],
+    label: "洞察",
+    items: [{ to: "/analytics", label: "数据看板", icon: "◈" }],
   },
 ];
 
@@ -34,7 +31,7 @@ export function AppShell() {
         跳到主要内容
       </a>
       <aside className="sidebar" aria-label="应用侧栏">
-        <div className="brand-lockup">
+        <Link className="brand-lockup" to="/" title="返回项目展示主页">
           <span className="brand-mark" aria-hidden="true">
             芽
           </span>
@@ -42,7 +39,7 @@ export function AppShell() {
             <strong>康护园</strong>
             <span>远程训练管理</span>
           </div>
-        </div>
+        </Link>
 
         <Dialog.Root>
           <Dialog.Trigger asChild>

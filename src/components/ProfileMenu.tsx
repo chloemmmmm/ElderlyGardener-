@@ -53,8 +53,8 @@ export function ProfileMenu() {
               <span>康复治疗师 · 演示角色</span>
             </div>
           </header>
-          <Link className="profile-menu__link" to="/case-study">
-            ✦ 查看案例展示 · 研究过程
+          <Link className="profile-menu__link" to="/">
+            ✦ 查看项目展示 · 研究过程
           </Link>
           <Link className="profile-menu__link" to="/analytics">
             ◈ 查看数据看板

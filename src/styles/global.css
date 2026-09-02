@@ -72,6 +72,8 @@ a {
   align-items: center;
   gap: 11px;
   padding: 0 7px;
+  color: inherit;
+  text-decoration: none;
 }
 .brand-mark {
   width: 40px;

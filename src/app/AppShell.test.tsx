@@ -73,9 +73,9 @@ describe("AppShell", () => {
     expect(
       screen.getByRole("region", { name: "个人菜单" }),
     ).toBeInTheDocument();
-    expect(screen.getByRole("link", { name: /查看案例展示/ })).toHaveAttribute(
+    expect(screen.getByRole("link", { name: /查看项目展示/ })).toHaveAttribute(
       "href",
-      "/case-study",
+      "/",
     );
     expect(screen.getByRole("link", { name: /查看数据看板/ })).toHaveAttribute(
       "href",
