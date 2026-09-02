@@ -4,10 +4,12 @@ import type { ClientListQuery, TrainingPlan } from "../domain/models";
 import {
   buildAnalytics,
   buildPlanList,
+  buildSearchResults,
   buildSessionList,
   clients,
   dashboardData,
   interventions,
+  notificationsSeed,
   plans,
   sessions,
 } from "./data";
@@ -123,5 +125,27 @@ export const handlers = [
   http.get("/api/analytics", async () => {
     await delay(40);
     return HttpResponse.json(buildAnalytics());
+  }),
+  http.get("/api/notifications", async () => {
+    await delay(30);
+    return HttpResponse.json(notificationsSeed);
+  }),
+  http.put("/api/notifications/read-all", async () => {
+    await delay(40);
+    for (const notification of notificationsSeed) notification.read = true;
+    return HttpResponse.json(notificationsSeed);
+  }),
+  http.put("/api/notifications/:notificationId/read", async ({ params }) => {
+    await delay(30);
+    const notification = notificationsSeed.find(
+      (item) => item.id === params.notificationId,
+    );
+    if (notification) notification.read = true;
+    return HttpResponse.json(notificationsSeed);
+  }),
+  http.get("/api/search", async ({ request }) => {
+    await delay(50);
+    const url = new URL(request.url);
+    return HttpResponse.json(buildSearchResults(url.searchParams.get("q") ?? ""));
   }),
 ];

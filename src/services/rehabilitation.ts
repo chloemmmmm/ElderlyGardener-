@@ -1,10 +1,12 @@
 import type {
   AnalyticsData,
+  AppNotification,
   ClientDetail,
   ClientListQuery,
   DashboardData,
   PaginatedClients,
   PlanListItem,
+  SearchResults,
   SessionListItem,
   TrainingPlan,
   TrainingSession,
@@ -67,5 +69,25 @@ export const rehabilitationApi = {
   },
   getAnalytics(signal?: AbortSignal) {
     return apiRequest<AnalyticsData>("/api/analytics", { signal });
+  },
+  getNotifications(signal?: AbortSignal) {
+    return apiRequest<AppNotification[]>("/api/notifications", { signal });
+  },
+  markNotificationRead(notificationId: string) {
+    return apiRequest<AppNotification[]>(
+      `/api/notifications/${notificationId}/read`,
+      { method: "PUT" },
+    );
+  },
+  markAllNotificationsRead() {
+    return apiRequest<AppNotification[]>("/api/notifications/read-all", {
+      method: "PUT",
+    });
+  },
+  search(query: string, signal?: AbortSignal) {
+    return apiRequest<SearchResults>(
+      `/api/search?q=${encodeURIComponent(query)}`,
+      { signal },
+    );
   },
 };

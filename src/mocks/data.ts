@@ -1,10 +1,12 @@
 import type {
   AnalyticsData,
+  AppNotification,
   AttentionItem,
   Client,
   DashboardData,
   InterventionNote,
   PlanListItem,
+  SearchResults,
   SensorQuality,
   SessionListItem,
   TrainingPlan,
@@ -420,5 +422,97 @@ export function buildAnalytics(): AnalyticsData {
         avgCompletionRate: Math.round(entry.sum / entry.count),
       }),
     ),
+  };
+}
+
+// ---- 平台完善 v2：通知中心与全局搜索 ----
+
+export const notificationsSeed: AppNotification[] = [
+  {
+    id: "ntf-001",
+    kind: "decision",
+    title: "AI 建议待你确认",
+    detail: "郑文海连续 3 次动作幅度下降，建议核对会话证据后调整计划。",
+    occurredAt: "09:10",
+    read: false,
+    target: { to: "/sessions/session-026", label: "查看会话证据" },
+  },
+  {
+    id: "ntf-002",
+    kind: "plan",
+    title: "计划即将到期",
+    detail: "孙明远的训练计划 2 天后到期，完成率 71%，建议安排评估。",
+    occurredAt: "08:40",
+    read: false,
+    target: { to: "/clients/client-007", label: "查看对象档案" },
+  },
+  {
+    id: "ntf-003",
+    kind: "adherence",
+    title: "依从性变化提醒",
+    detail: "王桂兰连续 3 天未完成训练，7 日完成率降至 42%。",
+    occurredAt: "08:12",
+    read: false,
+    target: { to: "/clients/client-001", label: "查看对象档案" },
+  },
+  {
+    id: "ntf-004",
+    kind: "sensor",
+    title: "传感器数据质量提示",
+    detail: "陈秀英最近一次训练完整度 76%，疑似佩戴位置问题。",
+    occurredAt: "昨天 17:26",
+    read: false,
+    target: { to: "/sessions/session-018", label: "查看会话记录" },
+  },
+  {
+    id: "ntf-005",
+    kind: "system",
+    title: "训练记录已确认",
+    detail: "周治疗师确认了周玉梅 08-30 的训练记录。",
+    occurredAt: "昨天 10:18",
+    read: true,
+    target: { to: "/sessions/session-028", label: "查看记录" },
+  },
+];
+
+export function buildSearchResults(query: string): SearchResults {
+  const q = query.trim();
+  if (!q) return { clients: [], plans: [], sessions: [] };
+  const matches = (value: string) => value.includes(q);
+  const planItems = buildPlanList();
+  const sessionItems = buildSessionList();
+  const matchedClients = clients
+    .filter((client) => matches(client.name) || matches(client.planName))
+    .map((client) => ({
+      id: client.id,
+      name: client.name,
+      detail: `${client.age} 岁 · ${client.planName}`,
+      to: `/clients/${client.id}`,
+    }));
+  const matchedPlans = planItems
+    .filter((plan) => matches(plan.clientName) || matches(plan.name))
+    .map((plan) => ({
+      id: plan.id,
+      name: plan.name,
+      detail: `${plan.clientName} · ${plan.sevenDayCompletionRate}% 完成率`,
+      to: `/plans/${plan.id}/edit`,
+    }));
+  const matchedSessions = sessionItems
+    .filter(
+      (session) =>
+        matches(session.clientName) || matches(session.planName),
+    )
+    .map((session) => ({
+      id: session.id,
+      name: session.clientName,
+      detail: `${session.startedAt.slice(5, 10).replace("-", "/")} · ${
+        session.planName
+      }`,
+      to: `/sessions/${session.id}`,
+    }));
+  return {
+    clients: matchedClients.slice(0, 4),
+    plans: matchedPlans.slice(0, 4),
+    sessions: matchedSessions.slice(0, 4),
   };
 }

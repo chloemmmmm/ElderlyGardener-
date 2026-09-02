@@ -1,6 +1,9 @@
 import * as Dialog from "@radix-ui/react-dialog";
 import { NavLink, Outlet } from "react-router-dom";
 
+import { TopbarNotifications } from "../components/TopbarNotifications";
+import { TopbarSearch } from "../components/TopbarSearch";
+
 const navGroups = [
   {
     label: "总览",
@@ -121,24 +124,8 @@ export function AppShell() {
             <span aria-hidden="true" /> 设备数据同步正常
           </div>
           <div className="topbar-actions">
-            <button
-              className="icon-button"
-              type="button"
-              aria-label="搜索（演示中暂未开放）"
-              title="演示中暂未开放"
-              disabled
-            >
-              ⌕
-            </button>
-            <button
-              className="icon-button notification-button"
-              type="button"
-              aria-label="通知（演示中暂未开放）"
-              title="演示中暂未开放"
-              disabled
-            >
-              ♢<span>3</span>
-            </button>
+            <TopbarSearch />
+            <TopbarNotifications />
             <span className="current-date">2026年8月31日 · 周一</span>
           </div>
         </header>

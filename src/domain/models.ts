@@ -195,3 +195,26 @@ export interface AnalyticsData {
     avgCompletionRate: number;
   }>;
 }
+
+export type NotificationKind =
+  | "decision"
+  | "plan"
+  | "adherence"
+  | "sensor"
+  | "system";
+
+export interface AppNotification {
+  id: string;
+  kind: NotificationKind;
+  title: string;
+  detail: string;
+  occurredAt: string;
+  read: boolean;
+  target: { to: string; label: string } | null;
+}
+
+export interface SearchResults {
+  clients: Array<{ id: string; name: string; detail: string; to: string }>;
+  plans: Array<{ id: string; name: string; detail: string; to: string }>;
+  sessions: Array<{ id: string; name: string; detail: string; to: string }>;
+}

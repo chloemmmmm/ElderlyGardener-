@@ -1,16 +1,26 @@
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { MemoryRouter } from "react-router-dom";
 
 import { AppShell } from "./AppShell";
 
-describe("AppShell", () => {
-  it("renders the therapist workspace and primary navigation", () => {
-    render(
+function renderShell() {
+  const queryClient = new QueryClient({
+    defaultOptions: { queries: { retry: false } },
+  });
+  return render(
+    <QueryClientProvider client={queryClient}>
       <MemoryRouter initialEntries={["/dashboard"]}>
         <AppShell />
-      </MemoryRouter>,
-    );
+      </MemoryRouter>
+    </QueryClientProvider>,
+  );
+}
+
+describe("AppShell", () => {
+  it("renders the therapist workspace and primary navigation", () => {
+    renderShell();
 
     expect(screen.getByRole("link", { name: "工作台" })).toHaveAttribute(
       "aria-current",
@@ -26,11 +36,7 @@ describe("AppShell", () => {
   it("opens the concept demo video and closes it with Escape", async () => {
     const user = userEvent.setup();
 
-    render(
-      <MemoryRouter initialEntries={["/dashboard"]}>
-        <AppShell />
-      </MemoryRouter>,
-    );
+    renderShell();
 
     expect(
       screen.queryByRole("dialog", { name: "康护园 · 概念演示" }),
