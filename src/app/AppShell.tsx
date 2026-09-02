@@ -1,12 +1,26 @@
 import * as Dialog from "@radix-ui/react-dialog";
 import { NavLink, Outlet } from "react-router-dom";
 
-const navigation = [
-  { to: "/dashboard", label: "工作台", icon: "⌂" },
-  { to: "/clients", label: "康复对象", icon: "◎" },
-  { to: "/plans/plan-001/edit", label: "训练计划", icon: "▤" },
-  { to: "/sessions/session-004", label: "训练记录", icon: "↗" },
-  { to: "/case-study", label: "案例展示", icon: "📋" },
+const navGroups = [
+  {
+    label: "总览",
+    items: [{ to: "/dashboard", label: "工作台", icon: "⌂" }],
+  },
+  {
+    label: "对象与训练",
+    items: [
+      { to: "/clients", label: "康复对象", icon: "◎" },
+      { to: "/plans", label: "训练计划", icon: "▤" },
+      { to: "/sessions", label: "训练记录", icon: "↗" },
+    ],
+  },
+  {
+    label: "洞察与展示",
+    items: [
+      { to: "/analytics", label: "数据看板", icon: "◈" },
+      { to: "/case-study", label: "案例展示", icon: "✦" },
+    ],
+  },
 ];
 
 export function AppShell() {
@@ -61,14 +75,18 @@ export function AppShell() {
         </Dialog.Root>
 
         <nav aria-label="主要导航" className="primary-nav">
-          <p className="nav-eyebrow">工作区</p>
-          {navigation.map((item) => (
-            <NavLink key={item.to} to={item.to}>
-              <span className="nav-icon" aria-hidden="true">
-                {item.icon}
-              </span>
-              {item.label}
-            </NavLink>
+          {navGroups.map((group) => (
+            <div className="nav-group" key={group.label}>
+              <p className="nav-group-title">{group.label}</p>
+              {group.items.map((item) => (
+                <NavLink key={item.to} to={item.to}>
+                  <span className="nav-icon" aria-hidden="true">
+                    {item.icon}
+                  </span>
+                  {item.label}
+                </NavLink>
+              ))}
+            </div>
           ))}
         </nav>
 

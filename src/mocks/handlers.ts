@@ -1,7 +1,16 @@
 import { delay, http, HttpResponse } from "msw";
 
 import type { ClientListQuery, TrainingPlan } from "../domain/models";
-import { clients, dashboardData, interventions, plans, sessions } from "./data";
+import {
+  buildAnalytics,
+  buildPlanList,
+  buildSessionList,
+  clients,
+  dashboardData,
+  interventions,
+  plans,
+  sessions,
+} from "./data";
 
 const severityRank = { high: 0, medium: 1, low: 2 } as const;
 
@@ -102,5 +111,17 @@ export const handlers = [
     plan.exercises = input.exercises;
     plan.updatedAt = new Date("2026-08-31T16:20:00+08:00").toISOString();
     return HttpResponse.json(plan);
+  }),
+  http.get("/api/sessions", async () => {
+    await delay(40);
+    return HttpResponse.json(buildSessionList());
+  }),
+  http.get("/api/plans", async () => {
+    await delay(40);
+    return HttpResponse.json(buildPlanList());
+  }),
+  http.get("/api/analytics", async () => {
+    await delay(40);
+    return HttpResponse.json(buildAnalytics());
   }),
 ];

@@ -143,3 +143,55 @@ export interface ClientDetail {
 }
 
 export type UpdateTrainingPlanInput = Pick<TrainingPlan, "exercises">;
+
+export type SessionState = TrainingSession["status"];
+
+export interface SessionListItem {
+  id: string;
+  clientId: string;
+  clientName: string;
+  planName: string;
+  startedAt: string;
+  durationMinutes: number;
+  status: SessionState;
+  completionRate: number;
+  sensorCompleteness: number;
+  worstQuality: SensorQuality;
+}
+
+export interface PlanListItem {
+  id: string;
+  clientId: string;
+  clientName: string;
+  name: string;
+  stage: TrainingStage;
+  status: PlanStatus;
+  sevenDayCompletionRate: number;
+  updatedAt: string;
+  exerciseCount: number;
+  latestSessionAt: string | null;
+}
+
+export interface AnalyticsData {
+  summary: {
+    activeClients: number;
+    needsAttention: number;
+    weeklyCompletionRate: number;
+    weeklyTrendDelta: number;
+    avgDurationMinutes: number;
+  };
+  riskDistribution: Array<{ severity: AttentionSeverity; count: number }>;
+  stageDistribution: Array<{ stage: TrainingStage; count: number }>;
+  weeklyTrend: DashboardData["completionTrend"];
+  exerciseCoverage: Array<{
+    exerciseId: string;
+    name: string;
+    avgRangeCompletion: number;
+    avgFeedbackPerSession: number;
+  }>;
+  completionByOwner: Array<{
+    ownerName: string;
+    clientCount: number;
+    avgCompletionRate: number;
+  }>;
+}

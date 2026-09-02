@@ -1,8 +1,11 @@
 import type {
+  AnalyticsData,
   ClientDetail,
   ClientListQuery,
   DashboardData,
   PaginatedClients,
+  PlanListItem,
+  SessionListItem,
   TrainingPlan,
   TrainingSession,
   UpdateTrainingPlanInput,
@@ -55,5 +58,14 @@ export const rehabilitationApi = {
       },
       body: JSON.stringify(input),
     });
+  },
+  getSessions(signal?: AbortSignal) {
+    return apiRequest<SessionListItem[]>("/api/sessions", { signal });
+  },
+  getPlans(signal?: AbortSignal) {
+    return apiRequest<PlanListItem[]>("/api/plans", { signal });
+  },
+  getAnalytics(signal?: AbortSignal) {
+    return apiRequest<AnalyticsData>("/api/analytics", { signal });
   },
 };

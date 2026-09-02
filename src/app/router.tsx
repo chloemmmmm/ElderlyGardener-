@@ -49,6 +49,27 @@ export const router = createBrowserRouter(
           },
         },
         {
+          path: "sessions",
+          lazy: async () => {
+            const { SessionsPage } = await import("../pages/SessionsPage");
+            return { Component: SessionsPage };
+          },
+        },
+        {
+          path: "plans",
+          lazy: async () => {
+            const { PlansPage } = await import("../pages/PlansPage");
+            return { Component: PlansPage };
+          },
+        },
+        {
+          path: "analytics",
+          lazy: async () => {
+            const { AnalyticsPage } = await import("../pages/AnalyticsPage");
+            return { Component: AnalyticsPage };
+          },
+        },
+        {
           path: "case-study",
           lazy: async () => {
             const { CaseStudyPage } = await import("../pages/CaseStudyPage");

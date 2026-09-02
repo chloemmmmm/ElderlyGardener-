@@ -1,8 +1,12 @@
 import type {
+  AnalyticsData,
   AttentionItem,
   Client,
   DashboardData,
   InterventionNote,
+  PlanListItem,
+  SensorQuality,
+  SessionListItem,
   TrainingPlan,
   TrainingSession,
 } from "../domain/models";
@@ -264,3 +268,157 @@ export const dashboardData: DashboardData = {
     },
   ],
 };
+
+// ---- 平台完善 v1：全局列表与数据看板聚合（由 handlers 调用）----
+
+const qualityRank = { good: 0, fair: 1, low: 2 } as const;
+
+function findClient(clientId: string) {
+  const client = clients.find((item) => item.id === clientId);
+  if (!client) throw new Error(`未知康复对象: ${clientId}`);
+  return client;
+}
+
+export function buildSessionList(): SessionListItem[] {
+  return sessions
+    .map((session) => {
+      const client = findClient(session.clientId);
+      const target = session.exercises.reduce(
+        (sum, item) => sum + item.targetRepetitions,
+        0,
+      );
+      const completed = session.exercises.reduce(
+        (sum, item) => sum + item.completedRepetitions,
+        0,
+      );
+      const worstQuality = session.exercises.reduce<SensorQuality>(
+        (worst, item) =>
+          qualityRank[item.sensorQuality] > qualityRank[worst]
+            ? item.sensorQuality
+            : worst,
+        "good",
+      );
+      return {
+        id: session.id,
+        clientId: session.clientId,
+        clientName: client.name,
+        planName: client.planName,
+        startedAt: session.startedAt,
+        durationMinutes: session.durationMinutes,
+        status: session.status,
+        completionRate:
+          target === 0 ? 0 : Math.round((completed / target) * 100),
+        sensorCompleteness: Math.round(session.sensorCompleteness * 100),
+        worstQuality,
+      };
+    })
+    .sort((a, b) => b.startedAt.localeCompare(a.startedAt));
+}
+
+export function buildPlanList(): PlanListItem[] {
+  return plans
+    .map((plan) => {
+      const client = findClient(plan.clientId);
+      return {
+        id: plan.id,
+        clientId: plan.clientId,
+        clientName: client.name,
+        name: plan.name,
+        stage: client.stage,
+        status: plan.status,
+        sevenDayCompletionRate: client.sevenDayCompletionRate,
+        updatedAt: plan.updatedAt,
+        exerciseCount: plan.exercises.length,
+        latestSessionAt: client.latestSessionAt,
+      };
+    })
+    .sort((a, b) => b.updatedAt.localeCompare(a.updatedAt));
+}
+
+export function buildAnalytics(): AnalyticsData {
+  const clientsTotal = clients.length;
+  const completionValues = clients.map(
+    (item) => item.sevenDayCompletionRate,
+  );
+  const averageCompletion = Math.round(
+    completionValues.reduce((sum, value) => sum + value, 0) / clientsTotal,
+  );
+  const trend = dashboardData.completionTrend;
+  const trendDelta =
+    trend.length > 1
+      ? trend[trend.length - 1]!.completed - trend[trend.length - 2]!.completed
+      : 0;
+  const averageDuration = Math.round(
+    sessions.reduce((sum, item) => sum + item.durationMinutes, 0) /
+      sessions.length,
+  );
+  const severityOrder: AttentionItem["severity"][] = ["high", "medium", "low"];
+  const stageOrder: Client["stage"][] = [
+    "entering",
+    "participating",
+    "sustaining",
+  ];
+  const exerciseMap = new Map<
+    string,
+    { name: string; rangeSum: number; feedbackSum: number; count: number }
+  >();
+  for (const session of sessions) {
+    for (const exercise of session.exercises) {
+      const entry = exerciseMap.get(exercise.exerciseId) ?? {
+        name: exercise.name,
+        rangeSum: 0,
+        feedbackSum: 0,
+        count: 0,
+      };
+      entry.rangeSum += exercise.rangeCompletion;
+      entry.feedbackSum += exercise.feedbackCount;
+      entry.count += 1;
+      exerciseMap.set(exercise.exerciseId, entry);
+    }
+  }
+  const ownerMap = new Map<string, { sum: number; count: number }>();
+  for (const client of clients) {
+    const entry = ownerMap.get(client.ownerName) ?? { sum: 0, count: 0 };
+    entry.sum += client.sevenDayCompletionRate;
+    entry.count += 1;
+    ownerMap.set(client.ownerName, entry);
+  }
+  return {
+    summary: {
+      activeClients: clients.filter((item) => item.planStatus !== "paused")
+        .length,
+      needsAttention: clients.filter((item) => item.attentionReason).length,
+      weeklyCompletionRate: averageCompletion,
+      weeklyTrendDelta: trendDelta,
+      avgDurationMinutes: averageDuration,
+    },
+    riskDistribution: severityOrder.map((severity) => ({
+      severity,
+      count: clients.filter((item) => item.attentionSeverity === severity)
+        .length,
+    })),
+    stageDistribution: stageOrder.map((stage) => ({
+      stage,
+      count: clients.filter((item) => item.stage === stage).length,
+    })),
+    weeklyTrend: trend,
+    exerciseCoverage: [...exerciseMap.entries()].map(
+      ([exerciseId, entry]) => ({
+        exerciseId,
+        name: entry.name,
+        avgRangeCompletion: Math.round(
+          (entry.rangeSum / entry.count) * 100,
+        ),
+        avgFeedbackPerSession:
+          Math.round((entry.feedbackSum / entry.count) * 10) / 10,
+      }),
+    ),
+    completionByOwner: [...ownerMap.entries()].map(
+      ([ownerName, entry]) => ({
+        ownerName,
+        clientCount: entry.count,
+        avgCompletionRate: Math.round(entry.sum / entry.count),
+      }),
+    ),
+  };
+}
