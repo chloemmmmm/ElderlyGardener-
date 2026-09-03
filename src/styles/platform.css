@@ -620,3 +620,168 @@
 .project-footer__inner p {
   margin: 0;
 }
+
+/* ---------- 9. 简历弹窗 ---------- */
+.project-header__actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.resume-button-wrap {
+  position: relative;
+}
+.resume-button {
+  padding: 7px 12px;
+  border: 1px solid var(--color-border);
+  border-radius: 999px;
+  background: white;
+  color: var(--color-text);
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 120ms ease;
+}
+.resume-button:hover {
+  border-color: var(--color-brand);
+  color: var(--color-brand);
+}
+.resume-modal {
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-dialog);
+  display: grid;
+  place-items: center;
+  padding: 24px;
+}
+.resume-modal__overlay {
+  position: absolute;
+  inset: 0;
+  background: rgb(15 52 42 / 52%);
+  backdrop-filter: blur(3px);
+}
+.resume-modal__card {
+  position: relative;
+  width: min(560px, calc(100vw - 40px));
+  max-height: calc(100vh - 48px);
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  background: white;
+  border-radius: 14px;
+  box-shadow: 0 30px 90px rgb(0 0 0 / 22%);
+  overflow: hidden;
+  animation: resume-modal-in 200ms ease-out;
+}
+@keyframes resume-modal-in {
+  from {
+    opacity: 0;
+    transform: translateY(-10px) scale(0.98);
+  }
+}
+.resume-modal__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 18px 22px;
+  border-bottom: 1px solid var(--color-border);
+}
+.resume-modal__head > div {
+  display: grid;
+  gap: 2px;
+}
+.resume-modal__head strong {
+  font-size: 18px;
+  color: var(--color-text);
+}
+.resume-modal__head span {
+  font-size: 12px;
+  color: var(--color-text-muted);
+}
+.resume-modal__close {
+  width: 32px;
+  height: 32px;
+  border: 0;
+  border-radius: 50%;
+  background: #f0f6f3;
+  color: var(--color-text-muted);
+  font-size: 20px;
+  line-height: 1;
+  cursor: pointer;
+}
+.resume-modal__body {
+  overflow-y: auto;
+  padding: 18px 22px;
+  display: grid;
+  gap: 18px;
+}
+.resume-modal__section h4 {
+  margin: 0 0 10px;
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-brand);
+}
+.resume-modal__list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 10px;
+}
+.resume-modal__list li {
+  display: grid;
+  gap: 3px;
+  padding: 10px 12px;
+  background: #f9fbfa;
+  border-radius: 8px;
+}
+.resume-modal__list strong {
+  font-size: 13px;
+  color: var(--color-text);
+}
+.resume-modal__list span {
+  font-size: 11px;
+  line-height: 1.55;
+  color: var(--color-text-muted);
+}
+.resume-modal__tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+}
+.resume-modal__tag {
+  padding: 5px 9px;
+  border-radius: 6px;
+  background: #f0f6f3;
+  color: var(--color-text);
+  font-size: 11px;
+  font-weight: 500;
+}
+.resume-modal__tag--skill {
+  background: #e8f2ee;
+  color: #105b48;
+}
+.resume-modal__foot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 16px 22px;
+  border-top: 1px solid var(--color-border);
+}
+.resume-modal__contact {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  color: var(--color-text-muted);
+  font-size: 11px;
+}
+@media (max-width: 640px) {
+  .resume-modal__foot {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .resume-modal__contact {
+    justify-content: center;
+  }
+}

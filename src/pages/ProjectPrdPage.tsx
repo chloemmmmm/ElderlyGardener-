@@ -8,97 +8,308 @@ function asset(path: string) {
 
 function ProductArchitectureDiagram() {
   return (
-    <svg viewBox="0 0 760 240" className="prd-diagram" role="img" aria-label="康护园产品架构：C 端硬件、VR 端、B 端后台与云端数据服务">
+    <svg
+      viewBox="0 0 760 240"
+      className="prd-diagram"
+      role="img"
+      aria-label="康护园产品架构：C 端硬件、VR 端、B 端后台与云端数据服务"
+    >
       <defs>
-        <marker id="prd-arrow" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto" markerUnits="strokeWidth">
+        <marker
+          id="prd-arrow"
+          markerWidth="10"
+          markerHeight="10"
+          refX="9"
+          refY="3"
+          orient="auto"
+          markerUnits="strokeWidth"
+        >
           <path d="M0,0 L0,6 L9,3 z" fill="#176b55" />
         </marker>
       </defs>
-      <rect x="20" y="80" width="160" height="90" rx="10" fill="#e8f2ee" stroke="#176b55" strokeWidth="2" />
-      <text x="100" y="115" textAnchor="middle" fill="#153c32" fontSize="13" fontWeight="700">C 端 · 可穿戴套件</text>
-      <text x="100" y="135" textAnchor="middle" fill="#557166" fontSize="10">IMU · 弯曲 · 压力</text>
-      <text x="100" y="150" textAnchor="middle" fill="#557166" fontSize="10">气动 / 震动反馈</text>
+      <rect
+        x="20"
+        y="80"
+        width="160"
+        height="90"
+        rx="10"
+        fill="#e8f2ee"
+        stroke="#176b55"
+        strokeWidth="2"
+      />
+      <text
+        x="100"
+        y="115"
+        textAnchor="middle"
+        fill="#153c32"
+        fontSize="13"
+        fontWeight="700"
+      >
+        C 端 · 可穿戴套件
+      </text>
+      <text x="100" y="135" textAnchor="middle" fill="#557166" fontSize="10">
+        IMU · 弯曲 · 压力
+      </text>
+      <text x="100" y="150" textAnchor="middle" fill="#557166" fontSize="10">
+        气动 / 震动反馈
+      </text>
 
-      <rect x="300" y="20" width="160" height="90" rx="10" fill="#f7fbf9" stroke="#bad0c8" strokeWidth="2" />
-      <text x="380" y="55" textAnchor="middle" fill="#153c32" fontSize="13" fontWeight="700">VR 端 · 园艺场景</text>
-      <text x="380" y="75" textAnchor="middle" fill="#557166" fontSize="10">浇水 · 松土 · 摘果</text>
-      <text x="380" y="90" textAnchor="middle" fill="#557166" fontSize="10">低晕动交互</text>
+      <rect
+        x="300"
+        y="20"
+        width="160"
+        height="90"
+        rx="10"
+        fill="#f7fbf9"
+        stroke="#bad0c8"
+        strokeWidth="2"
+      />
+      <text
+        x="380"
+        y="55"
+        textAnchor="middle"
+        fill="#153c32"
+        fontSize="13"
+        fontWeight="700"
+      >
+        VR 端 · 园艺场景
+      </text>
+      <text x="380" y="75" textAnchor="middle" fill="#557166" fontSize="10">
+        浇水 · 松土 · 摘果
+      </text>
+      <text x="380" y="90" textAnchor="middle" fill="#557166" fontSize="10">
+        低晕动交互
+      </text>
 
-      <rect x="300" y="140" width="160" height="90" rx="10" fill="#f7fbf9" stroke="#bad0c8" strokeWidth="2" />
-      <text x="380" y="175" textAnchor="middle" fill="#153c32" fontSize="13" fontWeight="700">B 端 · 康复师后台</text>
-      <text x="380" y="195" textAnchor="middle" fill="#557166" fontSize="10">工作台 · 计划 · 记录</text>
-      <text x="380" y="210" textAnchor="middle" fill="#557166" fontSize="10">证据链 · AI 建议</text>
+      <rect
+        x="300"
+        y="140"
+        width="160"
+        height="90"
+        rx="10"
+        fill="#f7fbf9"
+        stroke="#bad0c8"
+        strokeWidth="2"
+      />
+      <text
+        x="380"
+        y="175"
+        textAnchor="middle"
+        fill="#153c32"
+        fontSize="13"
+        fontWeight="700"
+      >
+        B 端 · 康复师后台
+      </text>
+      <text x="380" y="195" textAnchor="middle" fill="#557166" fontSize="10">
+        工作台 · 计划 · 记录
+      </text>
+      <text x="380" y="210" textAnchor="middle" fill="#557166" fontSize="10">
+        证据链 · AI 建议
+      </text>
 
-      <rect x="580" y="80" width="160" height="90" rx="10" fill="#e8f2ee" stroke="#176b55" strokeWidth="2" />
-      <text x="660" y="115" textAnchor="middle" fill="#153c32" fontSize="13" fontWeight="700">云端数据服务</text>
-      <text x="660" y="135" textAnchor="middle" fill="#557166" fontSize="10">训练数据 · 证据链</text>
-      <text x="660" y="150" textAnchor="middle" fill="#557166" fontSize="10">通知 · 搜索 · 日志</text>
+      <rect
+        x="580"
+        y="80"
+        width="160"
+        height="90"
+        rx="10"
+        fill="#e8f2ee"
+        stroke="#176b55"
+        strokeWidth="2"
+      />
+      <text
+        x="660"
+        y="115"
+        textAnchor="middle"
+        fill="#153c32"
+        fontSize="13"
+        fontWeight="700"
+      >
+        云端数据服务
+      </text>
+      <text x="660" y="135" textAnchor="middle" fill="#557166" fontSize="10">
+        训练数据 · 证据链
+      </text>
+      <text x="660" y="150" textAnchor="middle" fill="#557166" fontSize="10">
+        通知 · 搜索 · 日志
+      </text>
 
-      <line x1="180" y1="125" x2="300" y2="125" stroke="#176b55" strokeWidth="2" markerEnd="url(#prd-arrow)" />
-      <line x1="460" y1="65" x2="580" y2="110" stroke="#176b55" strokeWidth="2" markerEnd="url(#prd-arrow)" />
-      <line x1="460" y1="185" x2="580" y2="140" stroke="#176b55" strokeWidth="2" markerEnd="url(#prd-arrow)" />
-      <line x1="460" y1="110" x2="460" y2="140" stroke="#bad0c8" strokeWidth="1.5" strokeDasharray="4 3" markerEnd="url(#prd-arrow)" />
+      <line
+        x1="180"
+        y1="125"
+        x2="300"
+        y2="125"
+        stroke="#176b55"
+        strokeWidth="2"
+        markerEnd="url(#prd-arrow)"
+      />
+      <line
+        x1="460"
+        y1="65"
+        x2="580"
+        y2="110"
+        stroke="#176b55"
+        strokeWidth="2"
+        markerEnd="url(#prd-arrow)"
+      />
+      <line
+        x1="460"
+        y1="185"
+        x2="580"
+        y2="140"
+        stroke="#176b55"
+        strokeWidth="2"
+        markerEnd="url(#prd-arrow)"
+      />
+      <line
+        x1="460"
+        y1="110"
+        x2="460"
+        y2="140"
+        stroke="#bad0c8"
+        strokeWidth="1.5"
+        strokeDasharray="4 3"
+        markerEnd="url(#prd-arrow)"
+      />
     </svg>
   );
 }
 
 function InformationArchitectureDiagram() {
-  const levels = [
-    { label: "工作台", x: 380, children: ["待判断", "今日安排", "指标卡", "最新动态"] },
-    { label: "康复对象", x: 120, children: ["列表筛选", "360° 档案", "风险标签", "训练历史"] },
-    { label: "训练计划", x: 280, children: ["计划库", "计划编辑", "变更摘要", "阶段模板"] },
-    { label: "训练记录", x: 440, children: ["记录列表", "复盘页", "人工备注", "AI 摘要"] },
-    { label: "数据看板", x: 600, children: ["KPI", "风险分层", "趋势图", "治疗师负载"] },
+  const modules = [
+    {
+      label: "康复对象",
+      children: ["列表筛选", "360° 档案", "风险标签", "训练历史"],
+    },
+    {
+      label: "训练计划",
+      children: ["计划库", "计划编辑", "变更摘要", "阶段模板"],
+    },
+    {
+      label: "训练记录",
+      children: ["记录列表", "复盘页", "人工备注", "AI 摘要"],
+    },
+    {
+      label: "数据看板",
+      children: ["KPI", "风险分层", "趋势图", "治疗师负载"],
+    },
   ];
   return (
-    <svg viewBox="0 0 760 220" className="prd-diagram" role="img" aria-label="B 端信息架构：工作台统领四大模块">
-      <rect x="340" y="16" width="80" height="36" rx="8" fill="#176b55" />
-      <text x="380" y="40" textAnchor="middle" fill="#fff" fontSize="13" fontWeight="700">工作台</text>
-      {levels.map((l) => {
-        const y = 90;
-        const cx = l.x;
-        return (
-          <g key={l.label}>
-            <line x1="380" y1="52" x2={cx} y2={y - 14} stroke="#bad0c8" strokeWidth="1.5" />
-            <rect x={cx - 44} y={y - 14} width="88" height="28" rx="6" fill="#e8f2ee" stroke="#176b55" />
-            <text x={cx} y={y + 5} textAnchor="middle" fill="#153c32" fontSize="11" fontWeight="700">
-              {l.label}
-            </text>
-            {l.children.map((c, ci) => (
-              <g key={c}>
-                <line x1={cx} y1={y + 14} x2={cx - 28 + ci * 19} y2={y + 44} stroke="#dfe9e4" strokeWidth="1" />
-                <rect x={cx - 38 + ci * 19} y={y + 44} width="36" height="22" rx="4" fill="#f7fbf9" stroke="#dfe9e4" />
-                <text x={cx - 20 + ci * 19} y={y + 59} textAnchor="middle" fill="#557166" fontSize="7">
+    <div
+      className="ia-diagram"
+      role="img"
+      aria-label="B 端信息架构：工作台统领四大模块"
+    >
+      <div className="ia-diagram__root">工作台</div>
+      <div className="ia-diagram__branches">
+        {modules.map((m) => (
+          <div className="ia-diagram__branch" key={m.label}>
+            <div className="ia-diagram__node">{m.label}</div>
+            <div className="ia-diagram__leaves">
+              {m.children.map((c) => (
+                <span className="ia-diagram__leaf" key={c}>
                   {c}
-                </text>
-              </g>
-            ))}
-          </g>
-        );
-      })}
-    </svg>
+                </span>
+              ))}
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+function ProblemStatement() {
+  const stats = [
+    { value: "2.8 亿", label: "中国 60 岁以上人口", tone: "brand" },
+    { value: "< 30%", label: "居家康复长期坚持率", tone: "danger" },
+    { value: "0", label: "即时多模态反馈的现有方案", tone: "neutral" },
+  ];
+  return (
+    <div className="problem-statement">
+      <div className="problem-statement__cards">
+        {stats.map((s, i) => (
+          <div
+            className={`problem-statement__card problem-statement__card--${s.tone}`}
+            key={s.label}
+            style={{ animationDelay: `${i * 120}ms` }}
+          >
+            <strong>{s.value}</strong>
+            <span>{s.label}</span>
+          </div>
+        ))}
+      </div>
+      <div className="problem-statement__arrow" aria-hidden="true">
+        ↓
+      </div>
+      <div className="problem-statement__solution">
+        <strong>康护园的解题思路</strong>
+        <p>
+          把「重复性上肢训练」转译为「浇水、松土、摘果」等园艺任务，通过 C
+          端可穿戴套件 + VR 沉浸式场景提供即时反馈；康复师在 B
+          端后台远程查看数据异常、调整计划，形成老人愿意坚持、康复师高效管理的完整闭环。
+        </p>
+      </div>
+    </div>
   );
 }
 
 function UserFlowDiagram() {
   const steps = ["发现异常", "复核证据", "调整计划", "记录判断", "同步老人"];
   return (
-    <svg viewBox="0 0 760 90" className="prd-diagram" role="img" aria-label="康复师核心闭环流程">
+    <svg
+      viewBox="0 0 760 90"
+      className="prd-diagram"
+      role="img"
+      aria-label="康复师核心闭环流程"
+    >
       <defs>
-        <marker id="prd-arrow" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto" markerUnits="strokeWidth">
+        <marker
+          id="prd-arrow"
+          markerWidth="10"
+          markerHeight="10"
+          refX="9"
+          refY="3"
+          orient="auto"
+          markerUnits="strokeWidth"
+        >
           <path d="M0,0 L0,6 L9,3 z" fill="#176b55" />
         </marker>
       </defs>
       {steps.map((s, i) => (
         <g key={s} transform={`translate(${20 + i * 150}, 20)`}>
-          <rect width="120" height="50" rx="8" fill={i === 0 || i === 4 ? "#e8f2ee" : "#f7fbf9"} stroke="#176b55" strokeWidth={i === 0 || i === 4 ? 2 : 1} />
-          <text x="60" y="30" textAnchor="middle" fill="#153c32" fontSize="12" fontWeight="700">
+          <rect
+            width="120"
+            height="50"
+            rx="8"
+            fill={i === 0 || i === 4 ? "#e8f2ee" : "#f7fbf9"}
+            stroke="#176b55"
+            strokeWidth={i === 0 || i === 4 ? 2 : 1}
+          />
+          <text
+            x="60"
+            y="30"
+            textAnchor="middle"
+            fill="#153c32"
+            fontSize="12"
+            fontWeight="700"
+          >
             {s}
           </text>
         </g>
       ))}
       {steps.slice(0, -1).map((_, i) => (
-        <line key={i} x1={140 + i * 150} y1="45" x2={170 + i * 150} y2="45" stroke="#176b55" strokeWidth="2" markerEnd="url(#prd-arrow)" />
+        <line
+          key={i}
+          x1={140 + i * 150}
+          y1="45"
+          x2={170 + i * 150}
+          y2="45"
+          stroke="#176b55"
+          strokeWidth="2"
+          markerEnd="url(#prd-arrow)"
+        />
       ))}
     </svg>
   );
@@ -126,18 +337,20 @@ function Section({
 
 export function ProjectPrdPage() {
   useEffect(() => {
-    document.title = "产品 PRD｜康护园";
+    document.title = "ElderlyGardener · 产品 PRD";
   }, []);
 
   return (
     <div className="project-prd">
       <header className="project-prd__header">
         <div className="project-prd__header-inner">
-          <span className="project-prd__label">Product Requirements Document</span>
-          <h1 className="project-prd__title">康护园 · 产品需求文档</h1>
+          <span className="project-prd__label">
+            Product Requirements Document
+          </span>
+          <h1 className="project-prd__title">ElderlyGardener · 产品需求文档</h1>
           <p className="project-prd__subtitle">
-            面向认知障碍与高龄老人的上肢康复训练系统：B 端康复师管理后台 + C 端可穿戴园艺套件 + VR
-            沉浸式训练场景。
+            面向认知障碍与高龄老人的上肢康复训练系统：B 端康复师管理后台 + C
+            端可穿戴园艺套件 + VR 沉浸式训练场景。
           </p>
           <div className="project-prd__meta">
             <span>版本：v1.0</span>
@@ -145,35 +358,59 @@ export function ProjectPrdPage() {
             <span>作者：徐伊宁</span>
             <span>状态：概念原型 · 作品集</span>
           </div>
-          <a className="project-button project-button--primary" href={asset("PRD.docx")} download>
+          <a
+            className="project-button project-button--primary"
+            href={asset("PRD.docx")}
+            download
+          >
             下载 Word 版 PRD
           </a>
         </div>
       </header>
 
       <div className="project-prd__body">
-        <Section id="overview" eyebrow="01 产品概述" title="我们要解决什么问题？">
+        <Section
+          id="overview"
+          eyebrow="01 产品概述"
+          title="我们要解决什么问题？"
+        >
           <p className="prd-lead">
-            中国 60 岁以上人口已突破 2.8 亿，脑卒中、骨折术后与慢性病导致的上肢功能障碍严重影响老人独立生活能力。居家康复可及性高，但长期坚持率不足 30%。康护园通过「园艺任务化」与「多模态即时反馈」，把枯燥的上肢训练变成老人愿意重复、康复师可远程管理的完整闭环。
+            中国 60 岁以上人口已突破 2.8
+            亿，脑卒中、骨折术后与慢性病导致的上肢功能障碍严重影响老人独立生活能力。居家康复虽然可及性高，但由于训练枯燥、反馈延迟、缺乏专业监督，长期坚持率不足
+            30%。康护园通过「园艺任务化」与「多模态即时反馈」，把枯燥的上肢训练变成老人愿意重复、康复师可远程管理的完整闭环。
           </p>
+          <ProblemStatement />
           <ProductArchitectureDiagram />
           <div className="prd-cards">
             <div className="prd-card">
               <h4>对老人</h4>
-              <p>在 VR 园艺场景中完成浇水、松土、摘果等任务，获得气动/震动/视觉反馈，提升依从性与动作质量。</p>
+              <p>
+                在 VR
+                园艺场景中完成浇水、松土、摘果等任务，获得气动/震动/视觉反馈，提升依从性与动作质量。
+              </p>
             </div>
             <div className="prd-card">
               <h4>对康复师</h4>
-              <p>在 B 端后台集中查看风险分层、训练记录与证据链，快速判断优先级并调整计划，保留最终决策权。</p>
+              <p>
+                在 B
+                端后台集中查看风险分层、训练记录与证据链，快速判断优先级并调整计划，保留最终决策权。
+              </p>
             </div>
             <div className="prd-card">
               <h4>对产品</h4>
-              <p>以研究驱动设计，将 C 端训练数据与 B 端决策支持打通，形成可验证、可迭代的产品原型。</p>
+              <p>
+                以研究驱动设计，将 C 端训练数据与 B
+                端决策支持打通，形成可验证、可迭代的产品原型。
+              </p>
             </div>
           </div>
         </Section>
 
-        <Section id="goals" eyebrow="02 目标与成功指标" title="衡量产品价值的关键指标">
+        <Section
+          id="goals"
+          eyebrow="02 目标与成功指标"
+          title="衡量产品价值的关键指标"
+        >
           <table className="prd-table">
             <thead>
               <tr>
@@ -222,31 +459,39 @@ export function ProjectPrdPage() {
           <UserFlowDiagram />
           <div className="prd-personas">
             <div className="prd-persona">
-              <div className="prd-persona__avatar" aria-hidden="true">
-                师
-              </div>
+              <img
+                className="prd-persona__avatar prd-persona__avatar--img"
+                src={asset("assets/case-study/prd-avatar-therapist.png")}
+                alt="康复治疗师"
+              />
               <div>
                 <h4>康复治疗师（B 端核心用户）</h4>
                 <p>
-                  负责 15–30 位居家老人的随访与计划调整。核心诉求：在每日有限时间内，优先看到「需要我出手」的对象与证据，而不是被海量数据淹没。
+                  负责 15–30
+                  位居家老人的随访与计划调整。核心诉求：在每日有限时间内，优先看到「需要我出手」的对象与证据，而不是被海量数据淹没。
                 </p>
               </div>
             </div>
             <div className="prd-persona">
-              <div className="prd-persona__avatar" aria-hidden="true">
-                老
-              </div>
+              <img
+                className="prd-persona__avatar prd-persona__avatar--img"
+                src={asset("assets/case-study/prd-avatar-elderly.png")}
+                alt="居家老人"
+              />
               <div>
                 <h4>居家老人（C 端/VR 使用者）</h4>
                 <p>
-                  65 岁以上，存在上肢功能障碍或认知衰退早期迹象。需要低认知负荷、即时反馈、有成就感的训练体验，并能获得家属/康复师的远程关注。
+                  65
+                  岁以上，存在上肢功能障碍或认知衰退早期迹象。需要低认知负荷、即时反馈、有成就感的训练体验，并能获得家属/康复师的远程关注。
                 </p>
               </div>
             </div>
             <div className="prd-persona">
-              <div className="prd-persona__avatar" aria-hidden="true">
-                属
-              </div>
+              <img
+                className="prd-persona__avatar prd-persona__avatar--img"
+                src={asset("assets/case-study/prd-avatar-caregiver.png")}
+                alt="家属与照护者"
+              />
               <div>
                 <h4>家属 / 照护者（协同角色）</h4>
                 <p>
@@ -257,20 +502,33 @@ export function ProjectPrdPage() {
           </div>
         </Section>
 
-        <Section id="scope" eyebrow="04 产品范围" title="In Scope / Out of Scope">
+        <Section
+          id="scope"
+          eyebrow="04 产品范围"
+          title="In Scope / Out of Scope"
+        >
           <div className="prd-scope">
             <div>
-              <h4 className="prd-scope__title prd-scope__title--in">In Scope</h4>
+              <h4 className="prd-scope__title prd-scope__title--in">
+                In Scope
+              </h4>
               <ul>
-                <li>B 端康复师管理后台：工作台、对象档案、计划管理、训练记录、数据看板、通知、搜索</li>
-                <li>C 端可穿戴硬件原型：IMU + 弯曲 + 压力传感器，气动/震动反馈</li>
+                <li>
+                  B
+                  端康复师管理后台：工作台、对象档案、计划管理、训练记录、数据看板、通知、搜索
+                </li>
+                <li>
+                  C 端可穿戴硬件原型：IMU + 弯曲 + 压力传感器，气动/震动反馈
+                </li>
                 <li>VR 园艺训练场景：浇水、松土、摘果三段任务与动作判定</li>
                 <li>传感器数据到 B 端的证据链呈现与 AI 辅助建议</li>
                 <li>可用性测试方案与迭代闭环</li>
               </ul>
             </div>
             <div>
-              <h4 className="prd-scope__title prd-scope__title--out">Out of Scope</h4>
+              <h4 className="prd-scope__title prd-scope__title--out">
+                Out of Scope
+              </h4>
               <ul>
                 <li>真实临床级医疗器械认证（如 NMPA/FDA）</li>
                 <li>大规模硬件生产、供应链与售后体系</li>
@@ -282,7 +540,11 @@ export function ProjectPrdPage() {
           </div>
         </Section>
 
-        <Section id="requirements" eyebrow="05 功能需求" title="三端功能需求清单">
+        <Section
+          id="requirements"
+          eyebrow="05 功能需求"
+          title="三端功能需求清单"
+        >
           <InformationArchitectureDiagram />
           <h3 className="prd-h3">B 端 · 康复师管理后台</h3>
           <table className="prd-table">
@@ -368,7 +630,9 @@ export function ProjectPrdPage() {
               <tr>
                 <td rowSpan={2}>系统</td>
                 <td>B-014</td>
-                <td>通知中心：AI 待确认、计划到期、依从性、数据质量、系统提醒</td>
+                <td>
+                  通知中心：AI 待确认、计划到期、依从性、数据质量、系统提醒
+                </td>
                 <td>P1</td>
               </tr>
               <tr>
@@ -462,7 +726,9 @@ export function ProjectPrdPage() {
               </tr>
               <tr>
                 <td>V-004</td>
-                <td>即时视觉反馈：动作达标触发水花、落叶、果实掉落等正向动画</td>
+                <td>
+                  即时视觉反馈：动作达标触发水花、落叶、果实掉落等正向动画
+                </td>
                 <td>P1</td>
               </tr>
               <tr>
@@ -522,24 +788,30 @@ export function ProjectPrdPage() {
         <Section id="data" eyebrow="07 数据模型" title="核心实体与关系">
           <ul className="prd-entities">
             <li>
-              <strong>Therapist（康复师）</strong>：id、姓名、机构、角色、联系方式、偏好设置
+              <strong>Therapist（康复师）</strong>
+              ：id、姓名、机构、角色、联系方式、偏好设置
             </li>
             <li>
-              <strong>Client（康复对象/老人）</strong>：id、姓名、年龄、诊断、康复阶段、风险标签、ADL
+              <strong>Client（康复对象/老人）</strong>
+              ：id、姓名、年龄、诊断、康复阶段、风险标签、ADL
               基线、照护者信息、关联 Therapist
             </li>
             <li>
-              <strong>Plan（训练计划）</strong>：id、clientId、阶段目标、起止时间、版本历史、变更记录、状态
+              <strong>Plan（训练计划）</strong>
+              ：id、clientId、阶段目标、起止时间、版本历史、变更记录、状态
             </li>
             <li>
-              <strong>Exercise（训练动作）</strong>：id、planId、动作类型、目标角度/力度/次数、启用状态、园艺映射
+              <strong>Exercise（训练动作）</strong>
+              ：id、planId、动作类型、目标角度/力度/次数、启用状态、园艺映射
             </li>
             <li>
-              <strong>Session（训练记录）</strong>：id、clientId、planId、开始/结束时间、完成状态、动作表现、AI
+              <strong>Session（训练记录）</strong>
+              ：id、clientId、planId、开始/结束时间、完成状态、动作表现、AI
               摘要、人工备注
             </li>
             <li>
-              <strong>Notification（通知）</strong>：id、recipientId、类型、标题、内容、目标链接、已读状态、创建时间
+              <strong>Notification（通知）</strong>
+              ：id、recipientId、类型、标题、内容、目标链接、已读状态、创建时间
             </li>
           </ul>
         </Section>
@@ -547,11 +819,14 @@ export function ProjectPrdPage() {
         <Section id="ux" eyebrow="08 体验原则" title="设计原则与交互约束">
           <figure className="prd-preview">
             <img
-              src={asset("assets/case-study/b-side-dashboard.jpg")}
-              alt="B 端后台数据看板设计稿"
+              src={asset("assets/case-study/design-principles.jpg")}
+              alt="B 端后台工作台界面：需要判断、今日安排、7 日完成趋势与今日证据链"
               loading="lazy"
             />
-            <figcaption>B 端后台数据看板：KPI、风险分层与治疗师负载</figcaption>
+            <figcaption>
+              B 端后台工作台： Evidence First
+              理念落地——优先展示需要康复师行动的异常信号
+            </figcaption>
           </figure>
           <div className="prd-principles">
             <div className="prd-principle">
@@ -605,22 +880,31 @@ export function ProjectPrdPage() {
           </div>
         </Section>
 
-        <Section id="risks" eyebrow="10 风险与开放问题" title="待验证与待决策事项">
+        <Section
+          id="risks"
+          eyebrow="10 风险与开放问题"
+          title="待验证与待决策事项"
+        >
           <ul className="prd-risks">
             <li>
-              <strong>研究真实性：</strong>当前用户画像、可用性测试与部分数据为演示样例，需补充一手访谈与试点数据。
+              <strong>研究真实性：</strong>
+              当前用户画像、可用性测试与部分数据为演示样例，需补充一手访谈与试点数据。
             </li>
             <li>
-              <strong>硬件工程：</strong>传感器与 VR 渲染的同步精度、老年人晕动症风险、长期使用舒适性需工程验证。
+              <strong>硬件工程：</strong>传感器与 VR
+              渲染的同步精度、老年人晕动症风险、长期使用舒适性需工程验证。
             </li>
             <li>
-              <strong>临床合规：</strong>作为涉及健康数据的系统，需明确医疗器械分类、数据隐私与伦理审批路径。
+              <strong>临床合规：</strong>
+              作为涉及健康数据的系统，需明确医疗器械分类、数据隐私与伦理审批路径。
             </li>
             <li>
-              <strong>商业模式：</strong>面向机构（B2B）还是面向家庭（B2B2C）尚未验证，需后续市场调研。
+              <strong>商业模式：</strong>
+              面向机构（B2B）还是面向家庭（B2B2C）尚未验证，需后续市场调研。
             </li>
             <li>
-              <strong>技术栈：</strong>VR 引擎（Unity / WebXR）、后端服务、硬件通信协议需在原型阶段选型并验证稳定性。
+              <strong>技术栈：</strong>VR 引擎（Unity /
+              WebXR）、后端服务、硬件通信协议需在原型阶段选型并验证稳定性。
             </li>
           </ul>
         </Section>

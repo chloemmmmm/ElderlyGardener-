@@ -36,7 +36,9 @@
   color: var(--color-text-muted);
   font-size: 0.8125rem;
   text-decoration: none;
-  transition: background 0.15s ease, color 0.15s ease;
+  transition:
+    background 0.15s ease,
+    color 0.15s ease;
 }
 
 .case-study__toc a:hover,
@@ -388,7 +390,11 @@
   width: 5rem;
   height: 5rem;
   border-radius: 50%;
-  background: linear-gradient(135deg, var(--color-surface-subtle), var(--color-mint, #ddeae4));
+  background: linear-gradient(
+    135deg,
+    var(--color-surface-subtle),
+    var(--color-mint, #ddeae4)
+  );
   display: flex;
   align-items: center;
   justify-content: center;
@@ -909,7 +915,9 @@
   font-size: 14px;
   font-weight: 700;
   text-decoration: none;
-  transition: transform 120ms ease, box-shadow 120ms ease;
+  transition:
+    transform 120ms ease,
+    box-shadow 120ms ease;
 }
 .project-button:hover {
   transform: translateY(-1px);
@@ -2131,7 +2139,10 @@
   border-radius: 12px;
   cursor: pointer;
   text-align: left;
-  transition: background 0.15s, border-color 0.15s, box-shadow 0.15s;
+  transition:
+    background 0.15s,
+    border-color 0.15s,
+    box-shadow 0.15s;
 }
 .interview-guide__item:hover {
   background: #fbfdfc;
@@ -2270,9 +2281,18 @@
   color: var(--color-text-muted);
 }
 @keyframes action-pulse {
-  0%, 100% { transform: translateY(0); box-shadow: 0 0 0 rgb(23 107 85 / 0%); }
-  40% { transform: translateY(-4px); box-shadow: 0 8px 18px rgb(23 107 85 / 12%); }
-  60% { transform: translateY(-4px); }
+  0%,
+  100% {
+    transform: translateY(0);
+    box-shadow: 0 0 0 rgb(23 107 85 / 0%);
+  }
+  40% {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 18px rgb(23 107 85 / 12%);
+  }
+  60% {
+    transform: translateY(-4px);
+  }
 }
 
 /* —— 系统逻辑与反馈闭环：大图 —— */
@@ -2811,5 +2831,339 @@
   .prd-table {
     display: block;
     overflow-x: auto;
+  }
+}
+
+/* ---------- PRD enhancements ---------- */
+.prd-persona__avatar--img {
+  object-fit: cover;
+  background: #eef5f1;
+}
+
+.problem-statement {
+  margin: 20px 0 28px;
+  display: grid;
+  gap: 16px;
+}
+.problem-statement__cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+}
+.problem-statement__card {
+  padding: 22px 16px;
+  text-align: center;
+  border-radius: 14px;
+  border: 1px solid var(--color-border);
+  background: white;
+  animation: problem-card-in 520ms ease both;
+}
+@keyframes problem-card-in {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.problem-statement__card--brand {
+  border-color: #b8d8c8;
+  background: #f4faf7;
+}
+.problem-statement__card--danger {
+  border-color: #e8c4c0;
+  background: #fdf6f5;
+}
+.problem-statement__card--neutral {
+  border-color: #d5dde0;
+  background: #f8fafa;
+}
+.problem-statement__card strong {
+  display: block;
+  font-size: 30px;
+  font-family: var(--font-display);
+  letter-spacing: -0.02em;
+  margin-bottom: 6px;
+}
+.problem-statement__card--brand strong {
+  color: var(--color-brand);
+}
+.problem-statement__card--danger strong {
+  color: #b94a40;
+}
+.problem-statement__card--neutral strong {
+  color: var(--color-text);
+}
+.problem-statement__card span {
+  font-size: 13px;
+  color: var(--color-text-muted);
+  line-height: 1.5;
+}
+.problem-statement__arrow {
+  text-align: center;
+  font-size: 24px;
+  color: var(--color-brand);
+  animation: problem-bounce 1.4s ease-in-out infinite;
+}
+@keyframes problem-bounce {
+  0%,
+  100% {
+    transform: translateY(0);
+    opacity: 0.6;
+  }
+  50% {
+    transform: translateY(5px);
+    opacity: 1;
+  }
+}
+.problem-statement__solution {
+  padding: 18px 22px;
+  border-radius: 14px;
+  background: #153c32;
+  color: #f7fbf9;
+}
+.problem-statement__solution strong {
+  display: block;
+  font-size: 15px;
+  margin-bottom: 8px;
+}
+.problem-statement__solution p {
+  margin: 0;
+  font-size: 13px;
+  line-height: 1.7;
+  color: #cfe0db;
+}
+
+.ia-diagram {
+  margin: 18px 0 26px;
+  padding: 28px 24px 32px;
+  border: 1px solid var(--color-border);
+  border-radius: 14px;
+  background: white;
+  box-shadow: 0 10px 30px rgb(15 52 42 / 5%);
+  display: grid;
+  gap: 22px;
+}
+.ia-diagram__root {
+  justify-self: center;
+  padding: 10px 28px;
+  border-radius: 10px;
+  background: var(--color-brand);
+  color: white;
+  font-weight: 700;
+  font-size: 15px;
+}
+.ia-diagram__branches {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 14px;
+}
+.ia-diagram__branch {
+  display: grid;
+  gap: 10px;
+}
+.ia-diagram__node {
+  padding: 10px 8px;
+  border-radius: 8px;
+  background: #e8f2ee;
+  border: 1px solid #b8d8c8;
+  color: #153c32;
+  font-weight: 700;
+  font-size: 13px;
+  text-align: center;
+}
+.ia-diagram__leaves {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  justify-content: center;
+}
+.ia-diagram__leaf {
+  padding: 5px 8px;
+  border-radius: 6px;
+  background: #f7fbf9;
+  border: 1px solid #dfe9e4;
+  color: #557166;
+  font-size: 11px;
+}
+@media (max-width: 900px) {
+  .problem-statement__cards,
+  .ia-diagram__branches {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+@media (max-width: 640px) {
+  .problem-statement__cards,
+  .ia-diagram__branches {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ============================================================
+   用户本轮追加：访谈、旅程、系统逻辑、可用性布局优化
+   ============================================================ */
+
+/* —— 访谈提纲：多回答气泡 —— */
+.interview-guide__bubbles {
+  display: grid;
+  gap: 10px;
+}
+.interview-guide__bubble {
+  padding: 12px 14px;
+  background: #f4f8f7;
+  border-radius: 14px 14px 14px 4px;
+  font-size: 0.875rem;
+  line-height: 1.65;
+  color: var(--color-text);
+  animation: bubble-in 360ms ease both;
+}
+.interview-guide__bubble--prompt {
+  color: var(--color-text-muted);
+}
+@keyframes bubble-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* —— 用户旅程地图：情绪分色圆点 —— */
+.journey-map__dot {
+  font-size: 0.875rem;
+  transition: color 0.2s ease;
+}
+.journey-map__dot--high {
+  color: var(--color-brand);
+}
+.journey-map__dot--medium {
+  color: #c7a03c;
+}
+.journey-map__dot--low {
+  color: #c45c54;
+}
+.journey-map__dot--off {
+  color: var(--color-border);
+  opacity: 0.55;
+}
+
+/* —— 园艺动作映射：行入场动画 —— */
+.exercise-map__row {
+  animation: exercise-row-in 480ms ease both;
+}
+.exercise-map__row:nth-child(1) {
+  animation-delay: 0ms;
+}
+.exercise-map__row:nth-child(2) {
+  animation-delay: 80ms;
+}
+.exercise-map__row:nth-child(3) {
+  animation-delay: 160ms;
+}
+.exercise-map__row:nth-child(4) {
+  animation-delay: 240ms;
+}
+.exercise-map__row:nth-child(5) {
+  animation-delay: 320ms;
+}
+@keyframes exercise-row-in {
+  from {
+    opacity: 0;
+    transform: translateX(-12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+.exercise-map__arrow {
+  animation: exercise-arrow-pulse 1.6s ease-in-out infinite;
+}
+@keyframes exercise-arrow-pulse {
+  0%,
+  100% {
+    opacity: 0.55;
+    transform: translateX(0);
+  }
+  50% {
+    opacity: 1;
+    transform: translateX(3px);
+  }
+}
+
+/* —— 系统逻辑：双图等宽布局 —— */
+.system-logic-layout--large {
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+  align-items: stretch;
+}
+.system-logic-layout__figure {
+  margin: 0;
+  display: grid;
+  gap: 10px;
+}
+.system-logic-layout__figure img {
+  width: 100%;
+  height: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  border-radius: 14px;
+  border: 1px solid var(--color-border);
+  box-shadow: 0 10px 30px rgb(15 52 42 / 6%);
+}
+.system-logic-layout__figure figcaption {
+  font-size: 0.78rem;
+  color: var(--color-text-muted);
+  text-align: center;
+}
+
+/* —— 可用性指标：不拥挤 + 关键发现底部对齐 —— */
+.metric-cards {
+  grid-template-columns: repeat(3, 1fr);
+}
+.findings-list li {
+  align-items: flex-end;
+}
+
+/* —— 试点时间线大图 —— */
+.pilot-timeline {
+  margin: 28px 0 32px;
+  background: #fff;
+  border: 1px solid var(--color-border);
+  border-radius: 16px;
+  padding: 14px 14px 12px;
+  box-shadow: 0 10px 30px rgb(15 52 42 / 5%);
+}
+.pilot-timeline__image {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 12px;
+  border: 1px solid var(--color-border);
+}
+.pilot-timeline figcaption {
+  margin-top: 10px;
+  font-size: 0.78rem;
+  color: var(--color-text-muted);
+  text-align: center;
+  line-height: 1.5;
+}
+
+@media (max-width: 1024px) {
+  .system-logic-layout--large {
+    grid-template-columns: 1fr;
+  }
+  .metric-cards {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+@media (max-width: 640px) {
+  .metric-cards {
+    grid-template-columns: repeat(2, 1fr);
   }
 }
