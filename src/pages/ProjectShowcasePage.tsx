@@ -8,23 +8,30 @@ import {
   BookOpen,
   BrainCircuit,
   ClipboardList,
+  ClipboardPen,
   Droplets,
   Dumbbell,
+  FlagTriangleRight,
   HeartHandshake,
   HeartPulse,
   LineChart,
   MessageCircle,
   Microscope,
   Monitor,
+  PhoneCall,
   ScanLine,
   Scissors,
   Search,
   ShieldCheck,
   Shrub,
+  SlidersHorizontal,
   Sprout,
   Stethoscope,
+  UserRound,
   Users,
   Wrench,
+  ChevronLeft,
+  ChevronRight,
 } from "lucide-react";
 import {
   Area,
@@ -666,53 +673,124 @@ function MethodMixChart() {
   ];
   const total = data.reduce((sum, d) => sum + d.value, 0);
   return (
-    <div className="chart-card chart-card--small">
+    <div className="chart-card method-mix">
       <h4 className="chart-card__title">
         <LineChart size={18} className="inline-icon" aria-hidden="true" />
         研究方法构成
       </h4>
-      <div className="chart-card__body">
-        <ResponsiveContainer width="100%" height="100%">
-          <PieChart role="img" aria-label="研究方法构成饼图">
-            <Pie
-              data={data}
-              dataKey="value"
-              nameKey="name"
-              cx="50%"
-              cy="50%"
-              outerRadius={62}
-              innerRadius={34}
-              paddingAngle={2}
-              label={false}
-              animationBegin={100}
-              animationDuration={900}
-            >
-              {data.map((_, i) => (
-                <Cell key={`cell-${i}`} fill={colors[i % colors.length]} />
-              ))}
-            </Pie>
-            <Tooltip
-              formatter={(v, _n, p) => [
-                `${v}/${total}（${((Number(v) / total) * 100).toFixed(0)}%）`,
-                (p as { payload?: { name?: string } }).payload?.name,
-              ]}
-            />
-          </PieChart>
-        </ResponsiveContainer>
-        <span className="chart-card__center-label" aria-hidden="true">
-          {total}
-          <small>研究单位</small>
-        </span>
-      </div>
-      <div className="chart-card__legend">
-        {data.map((d, i) => (
-          <span className="chart-card__legend-item" key={d.name}>
-            <i
-              style={{ background: colors[i % colors.length] }}
-              aria-hidden="true"
-            />
-            {d.name}
+      <div className="method-mix__layout">
+        <div className="chart-card__body method-mix__body">
+          <ResponsiveContainer width="100%" height="100%">
+            <PieChart role="img" aria-label="研究方法构成饼图">
+              <Pie
+                data={data}
+                dataKey="value"
+                nameKey="name"
+                cx="50%"
+                cy="50%"
+                outerRadius={62}
+                innerRadius={34}
+                paddingAngle={2}
+                label={false}
+                animationBegin={100}
+                animationDuration={900}
+              >
+                {data.map((_, i) => (
+                  <Cell key={`cell-${i}`} fill={colors[i % colors.length]} />
+                ))}
+              </Pie>
+              <Tooltip
+                formatter={(v, _n, p) => [
+                  `${v}/${total}（${((Number(v) / total) * 100).toFixed(0)}%）`,
+                  (p as { payload?: { name?: string } }).payload?.name,
+                ]}
+              />
+            </PieChart>
+          </ResponsiveContainer>
+          <span className="chart-card__center-label" aria-hidden="true">
+            {total}
+            <small>研究单位</small>
           </span>
+        </div>
+        <div className="chart-card__legend method-mix__legend">
+          {data.map((d, i) => (
+            <span className="chart-card__legend-item" key={d.name}>
+              <i
+                style={{ background: colors[i % colors.length] }}
+                aria-hidden="true"
+              />
+              {d.name}
+              <em>{d.value}</em>
+            </span>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function ArchitectureCarousel() {
+  const slides = [
+    {
+      src: "assets/case-study/technical-architecture.jpg",
+      alt: "技术架构：传感器、Arduino、PC 与 VR 的多模态反馈链路",
+      caption:
+        "课程原始技术架构：多源传感器 → Arduino → PC 处理 → 气动/震动/VR 反馈",
+    },
+    {
+      src: "assets/case-study/system-logic-v2.jpg",
+      alt: "系统逻辑与反馈闭环示意图",
+      caption: "系统逻辑 V2：触发逻辑与反馈闭环",
+    },
+    {
+      src: "assets/case-study/method-action-judgment.jpg",
+      alt: "动作判定规则示意图",
+      caption: "动作判定规则：5 个标准上肢训练动作",
+    },
+  ];
+  const [idx, setIdx] = useState(0);
+  const go = (next: number) => setIdx((next + slides.length) % slides.length);
+  return (
+    <div className="arch-carousel">
+      <div className="arch-carousel__viewport">
+        <div
+          className="arch-carousel__track"
+          style={{ transform: `translateX(-${idx * 100}%)` }}
+        >
+          {slides.map((s) => (
+            <figure className="arch-carousel__slide" key={s.src}>
+              <img src={asset(s.src)} alt={s.alt} loading="lazy" />
+              <figcaption>{s.caption}</figcaption>
+            </figure>
+          ))}
+        </div>
+        <button
+          type="button"
+          className="arch-carousel__btn arch-carousel__btn--prev"
+          aria-label="上一张"
+          onClick={() => go(idx - 1)}
+        >
+          <ChevronLeft size={20} aria-hidden="true" />
+        </button>
+        <button
+          type="button"
+          className="arch-carousel__btn arch-carousel__btn--next"
+          aria-label="下一张"
+          onClick={() => go(idx + 1)}
+        >
+          <ChevronRight size={20} aria-hidden="true" />
+        </button>
+      </div>
+      <div className="arch-carousel__dots">
+        {slides.map((s, i) => (
+          <button
+            key={s.src}
+            type="button"
+            className={`arch-carousel__dot ${i === idx ? "is-active" : ""}`}
+            aria-label={`查看第 ${i + 1} 张：${s.caption}`}
+            aria-current={i === idx}
+            onClick={() => setIdx(i)}
+          />
         ))}
       </div>
     </div>
@@ -800,7 +878,7 @@ function SurveyChart() {
     <div className="chart-card">
       <h4 className="chart-card__title">
         <ClipboardList size={18} className="inline-icon" aria-hidden="true" />
-        问卷摘要（演示样例）
+        问卷摘要（演示样本）
       </h4>
       <div className="chart-card__body">
         <ResponsiveContainer width="100%" height="100%">
@@ -839,6 +917,16 @@ function SurveyChart() {
 }
 
 function SurveyInsights() {
+  const highlightNums = (text: string) =>
+    text.split(/(\d+(?:\.\d+)?)/).map((part, i) =>
+      /^\d/.test(part) ? (
+        <mark className="survey-insights__num" key={i}>
+          {part}
+        </mark>
+      ) : (
+        part
+      ),
+    );
   return (
     <div className="survey-insights">
       <h4 className="project-section__h4">
@@ -847,7 +935,7 @@ function SurveyInsights() {
       </h4>
       <ul>
         {surveyInsights.map((s, i) => (
-          <li key={i}>{s}</li>
+          <li key={i}>{highlightNums(s)}</li>
         ))}
       </ul>
     </div>
@@ -897,8 +985,63 @@ function JourneyEmotionChart() {
   );
 }
 
+function JourneyStoryboard() {
+  const icons = [
+    UserRound,
+    Stethoscope,
+    ClipboardPen,
+    PhoneCall,
+    LineChart,
+    SlidersHorizontal,
+    FlagTriangleRight,
+  ];
+  const scenes = [
+    "接诊新对象，翻阅分散的病史与居家记录",
+    "量表初评 + 可穿戴初检，基线难以落地",
+    "在计划编辑器中组合参数，版本难对比",
+    "电话 / 微信回访，反馈主观、难定位原因",
+    "在多个页面间跳转，还原一次训练过程",
+    "调整参数却缺少记录，交接依赖口头",
+    "导出报告，训练与改善证据一目了然",
+  ];
+  return (
+    <div
+      className="journey-storyboard"
+      role="list"
+      aria-label="康复师用户旅程故事板：七个关键场景"
+    >
+      {journeyStages.map((s, i) => {
+        const Icon = icons[i % icons.length];
+        const tone = s.emotion <= 2 ? "low" : s.emotion === 3 ? "mid" : "high";
+        return (
+          <div
+            className="journey-storyboard__panel"
+            role="listitem"
+            key={s.stage}
+            style={{ animationDelay: `${i * 0.9}s` }}
+          >
+            <span className="journey-storyboard__marker" aria-hidden="true">
+              SC {String(i + 1).padStart(2, "0")}
+            </span>
+            <div className="journey-storyboard__frame" aria-hidden="true">
+              <Icon size={32} strokeWidth={1.6} />
+            </div>
+            <h5>{s.stage}</h5>
+            <p>{scenes[i]}</p>
+            <span
+              className={`journey-storyboard__mood journey-storyboard__mood--${tone}`}
+            >
+              情绪 {s.emotion}/5
+            </span>
+          </div>
+        );
+      })}
+    </div>
+  );
+}
+
 function UsabilityChart() {
-  // 演示样例：原始实测值
+  // 演示样本：原始实测值
   const demoActualRaw: Record<string, number> = {
     任务完成率: 82,
     任务平均时间: 196,
@@ -927,7 +1070,7 @@ function UsabilityChart() {
     <div className="chart-card">
       <h4 className="chart-card__title">
         <Activity size={18} className="inline-icon" aria-hidden="true" />
-        可用性指标：目标达成率（演示样例）
+        可用性指标：目标达成率（演示样本）
       </h4>
       <div className="chart-card__body" style={{ height: 260 }}>
         <ResponsiveContainer width="100%" height="100%">
@@ -968,7 +1111,7 @@ function UsabilityChart() {
             />
             <Bar
               dataKey="actual"
-              name="演示样例实测"
+              name="演示样本实测"
               fill="#176b55"
               radius={[4, 4, 0, 0]}
             />
@@ -1195,9 +1338,9 @@ export function ProjectShowcasePage() {
         <LiteratureReviewCards />
         <InterviewGuide />
         <DemoBadge
-          label="[演示样例]"
+          label="[演示样本]"
           variant="demo"
-          hint="启发式评估条目为演示样例，用于展示 B 端可用性检查方法。"
+          hint="启发式评估条目为演示样本，用于展示 B 端可用性检查方法。"
         >
           <HeuristicTable />
         </DemoBadge>
@@ -1237,7 +1380,14 @@ export function ProjectShowcasePage() {
             动作验证：EMG 与问卷
           </h3>
           <div className="method-validation__grid">
-            <EMGChart />
+            <div className="method-validation__left">
+              <p className="method-validation__intro">
+                将 5 个标准上肢动作转译为对应园艺任务后，以
+                %MVIC（最大自主等长收缩百分比）归一化目标肌群激活强度。结果显示各动作激活均保持在
+                70% MVIC 以上，「动作转译」没有稀释训练强度。
+              </p>
+              <EMGChart />
+            </div>
             <img
               src={asset("assets/case-study/method-emg-mapping.jpg")}
               alt="EMG 动作映射：5 个标准上肢训练动作与目标肌群"
@@ -1247,9 +1397,9 @@ export function ProjectShowcasePage() {
           </div>
           <EMGReport />
           <DemoBadge
-            label="[演示样例]"
+            label="[演示样本]"
             variant="demo"
-            hint="EMG 数值与问卷结果均为演示样例，仅用于展示验证方法。"
+            hint="EMG 数值与问卷结果均为演示样本，仅用于展示验证方法。"
           >
             <div className="survey-section">
               <SurveyChart />
@@ -1271,7 +1421,7 @@ export function ProjectShowcasePage() {
           B 端设计机会。
         </p>
         <DemoBadge
-          label="[演示样例]"
+          label="[演示样本]"
           variant="demo"
           hint="画像与旅程地图基于二手研究与角色假设构建，用于定位 B 端设计机会。"
         >
@@ -1313,7 +1463,7 @@ export function ProjectShowcasePage() {
         </DemoBadge>
 
         <DemoBadge
-          label="[演示样例]"
+          label="[演示样本]"
           variant="demo"
           hint="旅程地图用于识别康复师在工作各阶段的情绪低点与设计机会。"
         >
@@ -1322,6 +1472,7 @@ export function ProjectShowcasePage() {
             康复师用户旅程地图
           </h3>
           <JourneyEmotionChart />
+          <JourneyStoryboard />
           <div className="journey-map">
             <div className="journey-map__track">
               {journeyStages.map((s) => (
@@ -1418,37 +1569,7 @@ export function ProjectShowcasePage() {
           <BrainCircuit size={20} className="inline-icon" aria-hidden="true" />
           系统逻辑与反馈闭环
         </h3>
-        <figure className="technical-architecture">
-          <img
-            src={asset("assets/case-study/technical-architecture.jpg")}
-            alt="技术架构：传感器、Arduino、PC 与 VR 的多模态反馈链路"
-            loading="lazy"
-            className="technical-architecture__image"
-          />
-          <figcaption>
-            课程原始技术架构：多源传感器 → Arduino → PC 处理 → 气动/震动/VR 反馈
-          </figcaption>
-        </figure>
-        <div className="system-logic-layout system-logic-layout--large">
-          <figure className="system-logic-layout__figure">
-            <img
-              src={asset("assets/case-study/system-logic-v2.jpg")}
-              alt="系统逻辑与反馈闭环示意图"
-              loading="lazy"
-              className="system-logic-layout__image"
-            />
-            <figcaption>系统逻辑 V2：触发逻辑与反馈闭环</figcaption>
-          </figure>
-          <figure className="system-logic-layout__figure">
-            <img
-              src={asset("assets/case-study/method-action-judgment.jpg")}
-              alt="动作判定规则示意图"
-              loading="lazy"
-              className="system-logic-layout__image"
-            />
-            <figcaption>动作判定规则：5 个标准上肢训练动作</figcaption>
-          </figure>
-        </div>
+        <ArchitectureCarousel />
         <h3 className="project-section__h3">
           <ShieldCheck size={20} className="inline-icon" aria-hidden="true" />
           设计原则
@@ -1653,9 +1774,9 @@ export function ProjectShowcasePage() {
               ))}
             </div>
             <DemoBadge
-              label="[演示样例]"
+              label="[演示样本]"
               variant="demo"
-              hint="可用性测试协议、任务场景与发现均为演示样例，用于展示验证方法框架。"
+              hint="可用性测试协议、任务场景与发现均为演示样本，用于展示验证方法框架。"
             >
               <h3 className="project-section__h3" style={{ marginTop: 0 }}>
                 关键发现
@@ -1682,6 +1803,25 @@ export function ProjectShowcasePage() {
           </div>
           <div className="usability-layout__side">
             <UsabilityChart />
+            <div className="chart-card usability-side-card">
+              <h4 className="chart-card__title">
+                <Users size={18} className="inline-icon" aria-hidden="true" />
+                测试对象构成（{usabilityProtocol.recruitment.sample}）
+              </h4>
+              <ul className="usability-side-card__list">
+                {usabilityProtocol.recruitment.profiles.map((p) => (
+                  <li key={p}>{p}</li>
+                ))}
+              </ul>
+            </div>
+            <div className="chart-card usability-side-card">
+              <h4 className="chart-card__title">
+                <Monitor size={18} className="inline-icon" aria-hidden="true" />
+                测试情境
+              </h4>
+              <p>{usabilityProtocol.setup.scenarios}</p>
+              <small>{usabilityProtocol.environment}</small>
+            </div>
           </div>
         </div>
       </Section>

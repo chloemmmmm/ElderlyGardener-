@@ -52,7 +52,7 @@ export function PlansPage() {
       <PageHeader
         eyebrow="Plan library"
         title="训练计划"
-        description="以康复对象为中心管理园艺上肢训练计划：阶段、执行状态与最近调整一目了然。计划内容均为演示样例。"
+        description="以康复对象为中心管理园艺上肢训练计划：阶段、执行状态与最近调整一目了然。计划内容均为演示样本。"
         actions={
           <button
             className="primary-button"

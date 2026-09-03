@@ -888,7 +888,7 @@ export function ProjectPrdPage() {
           <ul className="prd-risks">
             <li>
               <strong>研究真实性：</strong>
-              当前用户画像、可用性测试与部分数据为演示样例，需补充一手访谈与试点数据。
+              当前用户画像、可用性测试与部分数据为演示样本，需补充一手访谈与试点数据。
             </li>
             <li>
               <strong>硬件工程：</strong>传感器与 VR

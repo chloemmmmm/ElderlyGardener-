@@ -60,7 +60,7 @@ export function ProfileMenu() {
             ◈ 查看数据看板
           </Link>
           <p className="profile-menu__note">
-            康护园为作品集概念演示，界面中的对象、记录与数值均为演示样例数据。
+            康护园为作品集概念演示，界面中的对象、记录与数值均为演示样本数据。
           </p>
         </section>
       ) : null}

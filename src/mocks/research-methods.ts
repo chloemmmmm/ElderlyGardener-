@@ -1,7 +1,7 @@
 /**
  * 研究方法补充数据
  *
- * 以下 heuristicEvaluation / emgValidation / survey 为演示样例，
+ * 以下 heuristicEvaluation / emgValidation / survey 为演示样本，
  * 用于补全作品集的研究方法链路，不代表真实实验结果。
  */
 
@@ -27,13 +27,13 @@ export const methodMatrix = [
   {
     rq: "RQ4",
     question: "康复师在远程管理多名居家训练老人时，核心的决策痛点是什么？",
-    method: "康复师访谈（演示样例）+ 竞品分析",
+    method: "康复师访谈（演示样本）+ 竞品分析",
     output: "康复师画像、旅程地图与 B 端信息优先级",
   },
   {
     rq: "RQ5",
     question: "B 端管理后台应如何呈现证据，才能在「AI 辅助」与「人工决策」之间建立信任？",
-    method: "用户旅程地图 + 可用性测试（演示样例）",
+    method: "用户旅程地图 + 可用性测试（演示样本）",
     output: "证据链可视化的交互方案与可用性指标",
   },
 ];
@@ -86,7 +86,7 @@ export const emgReport = {
   placements: ["肱桡肌/桡侧腕伸肌", "三角肌中束", "肱二头肌", "斜方肌中下部"],
   protocol:
     "受试者坐位完成 5 个园艺化动作，每个动作保持 5 秒、重复 3 次，取 RMS 均方根值进行标准化处理，以最大自主等长收缩（MVIC）百分比输出激活强度。",
-  note: "本报告为演示样例，用于说明动作验证方法，不代表真实实验数据。",
+  note: "本报告为演示样本，用于说明动作验证方法，不代表真实实验数据。",
 };
 
 export const emgValidation = [

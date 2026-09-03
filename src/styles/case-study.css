@@ -187,7 +187,7 @@
   background: var(--color-surface-subtle);
 }
 
-/* 演示样例标注 */
+/* 演示样本标注 */
 .demo-badge {
   border-radius: var(--radius-lg);
   margin: 1.25rem 0;
@@ -1157,6 +1157,8 @@
   margin-bottom: 12px;
 }
 .persona-card {
+  display: flex;
+  flex-direction: column;
   padding: 22px;
   background: white;
   border: 1px solid var(--color-border);
@@ -1195,6 +1197,7 @@
 }
 .persona-card__quote {
   margin: 12px 0 0;
+  margin-top: auto;
   padding: 10px 12px;
   border-left: 3px solid var(--color-brand);
   background: #f4f8f7;
@@ -1214,6 +1217,54 @@
   grid-template-columns: 1fr auto 1fr;
   gap: 14px;
   align-items: center;
+  animation: exercise-map-sweep 7s ease-in-out infinite;
+}
+.exercise-map__row:nth-child(2) {
+  animation-delay: 0.7s;
+}
+.exercise-map__row:nth-child(3) {
+  animation-delay: 1.4s;
+}
+.exercise-map__row:nth-child(4) {
+  animation-delay: 2.1s;
+}
+.exercise-map__row:nth-child(5) {
+  animation-delay: 2.8s;
+}
+@keyframes exercise-map-sweep {
+  0%,
+  20%,
+  100% {
+    transform: translateX(0);
+  }
+  8% {
+    transform: translateX(6px);
+  }
+}
+.exercise-map__cell--garden {
+  animation: exercise-map-pulse 7s ease-in-out infinite;
+}
+.exercise-map__row:nth-child(2) .exercise-map__cell--garden {
+  animation-delay: 0.7s;
+}
+.exercise-map__row:nth-child(3) .exercise-map__cell--garden {
+  animation-delay: 1.4s;
+}
+.exercise-map__row:nth-child(4) .exercise-map__cell--garden {
+  animation-delay: 2.1s;
+}
+.exercise-map__row:nth-child(5) .exercise-map__cell--garden {
+  animation-delay: 2.8s;
+}
+@keyframes exercise-map-pulse {
+  0%,
+  20%,
+  100% {
+    box-shadow: 0 0 0 0 rgb(23 107 85 / 0%);
+  }
+  8% {
+    box-shadow: 0 6px 18px rgb(23 107 85 / 35%);
+  }
 }
 .exercise-map__cell {
   padding: 16px 18px;
@@ -1515,13 +1566,34 @@
 
 /* —— 研究方法构成 + 竞品对比 —— */
 .method-charts {
-  display: flex;
-  justify-content: center;
+  display: block;
   margin: 6px 0 8px;
 }
-.method-charts .chart-card {
+.method-mix {
   width: 100%;
-  max-width: 520px;
+}
+.method-mix__layout {
+  display: grid;
+  grid-template-columns: 240px minmax(0, 1fr);
+  gap: 12px;
+  align-items: center;
+}
+.method-mix__body {
+  height: 200px;
+  position: relative;
+}
+.method-mix__legend {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px 20px;
+  margin: 0;
+}
+.method-mix__legend .chart-card__legend-item em {
+  margin-left: auto;
+  font-style: normal;
+  font-weight: 700;
+  color: var(--color-brand);
+  font-variant-numeric: tabular-nums;
 }
 .chart-card {
   display: flex;
@@ -1886,6 +1958,18 @@
 .method-validation {
   margin-top: 30px;
 }
+.method-validation__left {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  min-width: 0;
+}
+.method-validation__intro {
+  margin: 0;
+  font-size: 0.9rem;
+  line-height: 1.75;
+  color: var(--color-text-muted);
+}
 .method-validation__grid {
   display: grid;
   grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.35fr);
@@ -1975,6 +2059,215 @@
   align-content: start;
 }
 
+/* —— 可用性侧栏信息卡 —— */
+.usability-side-card {
+  padding: 14px 16px;
+}
+.usability-side-card__list {
+  margin: 0;
+  padding-left: 18px;
+  display: grid;
+  gap: 6px;
+  font-size: 0.85rem;
+  line-height: 1.6;
+  color: var(--color-text);
+}
+.usability-side-card p {
+  margin: 0 0 8px;
+  font-size: 0.85rem;
+  line-height: 1.7;
+  color: var(--color-text);
+}
+.usability-side-card small {
+  display: block;
+  color: var(--color-text-muted);
+  font-size: 0.75rem;
+  line-height: 1.6;
+}
+
+/* —— 问卷解读数字高亮 —— */
+.survey-insights__num {
+  padding: 0 2px;
+  background: none;
+  color: var(--color-brand);
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+}
+
+/* —— 康复师旅程故事板 —— */
+.journey-storyboard {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: minmax(180px, 1fr);
+  gap: 14px;
+  overflow-x: auto;
+  margin: 18px 0 6px;
+  padding: 6px 2px 12px;
+}
+.journey-storyboard__panel {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 14px 14px 16px;
+  background: #fff;
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+  animation: storyboard-spotlight 8.1s ease-in-out infinite;
+}
+@keyframes storyboard-spotlight {
+  0%,
+  16%,
+  100% {
+    border-color: var(--color-border);
+    box-shadow: 0 0 0 0 rgb(23 107 85 / 0%);
+  }
+  7% {
+    border-color: var(--color-brand);
+    box-shadow: 0 8px 22px rgb(23 107 85 / 18%);
+  }
+}
+.journey-storyboard__marker {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  padding: 2px 8px;
+  border-radius: 999px;
+  background: #eef6f3;
+  color: var(--color-brand);
+  font-size: 0.66rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+}
+.journey-storyboard__frame {
+  display: grid;
+  place-items: center;
+  height: 96px;
+  border-radius: 10px;
+  background: linear-gradient(135deg, #f7fbfa 0%, #eaf4ef 100%);
+  color: var(--color-brand);
+}
+.journey-storyboard__panel h5 {
+  margin: 2px 0 0;
+  font-size: 0.95rem;
+  color: var(--color-text);
+}
+.journey-storyboard__panel p {
+  margin: 0;
+  font-size: 0.78rem;
+  line-height: 1.6;
+  color: var(--color-text-muted);
+  flex: 1;
+}
+.journey-storyboard__mood {
+  align-self: flex-start;
+  padding: 2px 10px;
+  border-radius: 999px;
+  font-size: 0.7rem;
+  font-weight: 700;
+}
+.journey-storyboard__mood--low {
+  background: #fdeeee;
+  color: #b4544a;
+}
+.journey-storyboard__mood--mid {
+  background: #fdf5e7;
+  color: #b07f2e;
+}
+.journey-storyboard__mood--high {
+  background: #e8f4ee;
+  color: var(--color-brand);
+}
+
+/* —— 系统逻辑三图轮播 —— */
+.arch-carousel {
+  margin: 10px 0 26px;
+}
+.arch-carousel__viewport {
+  position: relative;
+  overflow: hidden;
+  border-radius: 14px;
+  background: #fff;
+  border: 1px solid var(--color-border);
+  box-shadow: 0 10px 30px rgb(15 52 42 / 6%);
+}
+.arch-carousel__track {
+  display: flex;
+  transition: transform 0.45s ease;
+}
+.arch-carousel__slide {
+  flex: 0 0 100%;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+.arch-carousel__slide img {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: 640px;
+  object-fit: contain;
+  background: #fff;
+}
+.arch-carousel__slide figcaption {
+  padding: 10px 16px 14px;
+  text-align: center;
+  font-size: 0.8rem;
+  color: var(--color-text-muted);
+  border-top: 1px solid var(--color-border);
+}
+.arch-carousel__btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  border: 1px solid var(--color-border);
+  border-radius: 50%;
+  background: rgb(255 255 255 / 92%);
+  color: var(--color-brand);
+  cursor: pointer;
+  box-shadow: 0 4px 14px rgb(15 52 42 / 14%);
+  transition:
+    background 0.2s ease,
+    transform 0.2s ease;
+}
+.arch-carousel__btn:hover {
+  background: #fff;
+  transform: translateY(-50%) scale(1.06);
+}
+.arch-carousel__btn--prev {
+  left: 12px;
+}
+.arch-carousel__btn--next {
+  right: 12px;
+}
+.arch-carousel__dots {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 12px;
+}
+.arch-carousel__dot {
+  width: 9px;
+  height: 9px;
+  padding: 0;
+  border: none;
+  border-radius: 50%;
+  background: #c9ddd5;
+  cursor: pointer;
+  transition:
+    background 0.2s ease,
+    transform 0.2s ease;
+}
+.arch-carousel__dot.is-active {
+  background: var(--color-brand);
+  transform: scale(1.25);
+}
+
 @media (max-width: 1024px) {
   .project-hero__inner,
   .ecosystem-card,
@@ -2042,6 +2335,16 @@
   }
   .competitor-cards {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .method-mix__layout {
+    grid-template-columns: 1fr;
+  }
+  .method-mix__legend {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .arch-carousel__btn {
+    width: 34px;
+    height: 34px;
   }
   .method-matrix__row > span,
   .heuristic-table__row > span,

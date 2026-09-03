@@ -3,7 +3,7 @@ import type { ReactNode } from "react";
 export type DemoBadgeVariant = "demo" | "original" | "public";
 
 interface DemoBadgeProps {
-  label: "[演示样例]" | "[课程原始数据]" | "[公开统计数据]";
+  label: "[演示样本]" | "[课程原始数据]" | "[公开统计数据]";
   variant: DemoBadgeVariant;
   hint?: string;
   children: ReactNode;

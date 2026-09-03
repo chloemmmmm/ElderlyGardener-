@@ -57,7 +57,7 @@ export function ProjectLayout() {
       <footer className="project-footer">
         <div className="project-footer__inner">
           <p>康护园 · 老年园艺上肢康复训练系统 — 实习作品集概念演示</p>
-          <p>所有对象、记录与数值均为演示样例数据。</p>
+          <p>所有对象、记录与数值均为演示样本数据。</p>
         </div>
       </footer>
     </div>
