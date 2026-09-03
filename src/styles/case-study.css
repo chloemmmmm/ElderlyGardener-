@@ -1302,20 +1302,6 @@
   font-weight: 800;
 }
 
-/* System flow */
-.system-flow {
-  margin-bottom: 36px;
-  background: white;
-  border: 1px solid var(--color-border);
-  border-radius: 16px;
-  padding: 20px;
-}
-.system-flow__svg {
-  display: block;
-  width: 100%;
-  height: auto;
-}
-
 /* Design principles */
 .design-principles {
   display: grid;
@@ -1781,12 +1767,6 @@
 .literature-review {
   margin: 30px 0 26px;
 }
-.literature-review__layout {
-  display: grid;
-  grid-template-columns: 0.9fr 1.1fr;
-  gap: 22px;
-  align-items: start;
-}
 .literature-review__image {
   display: block;
   width: 100%;
@@ -1843,44 +1823,6 @@
   display: grid;
   gap: 8px;
 }
-.interview-guide__item {
-  background: #fff;
-  border: 1px solid var(--color-border);
-  border-radius: 12px;
-  overflow: hidden;
-}
-.interview-guide__item summary {
-  list-style: none;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  padding: 13px 16px;
-  font-size: 0.95rem;
-  font-weight: 600;
-  line-height: 1.5;
-}
-.interview-guide__item summary::-webkit-details-marker {
-  display: none;
-}
-.interview-guide__item summary:hover {
-  background: #fbfdfc;
-}
-.interview-guide__item summary::after {
-  content: "+";
-  margin-left: auto;
-  flex: none;
-  color: var(--color-brand);
-  font-size: 1.1rem;
-  font-weight: 800;
-}
-.interview-guide__item[open] summary::after {
-  content: "−";
-}
-.interview-guide__item[open] summary {
-  border-bottom: 1px solid var(--color-border);
-  background: #fbfdfc;
-}
 .interview-guide__num {
   flex: none;
   width: 28px;
@@ -1892,13 +1834,6 @@
   color: var(--color-brand);
   font-size: 12px;
   font-weight: 800;
-}
-.interview-guide__item p {
-  margin: 0;
-  padding: 12px 16px 14px;
-  font-size: 0.875rem;
-  line-height: 1.65;
-  color: var(--color-text-muted);
 }
 
 /* —— 启发式评估表 —— */
@@ -1963,6 +1898,10 @@
   flex-direction: column;
   gap: 12px;
   min-width: 0;
+  height: 100%;
+}
+.method-validation__left .chart-card {
+  flex: 1;
 }
 .method-validation__intro {
   margin: 0;
@@ -1974,7 +1913,7 @@
   display: grid;
   grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.35fr);
   gap: 20px;
-  align-items: end;
+  align-items: stretch;
   margin: 10px 0 8px;
 }
 .method-validation__image {
@@ -1987,55 +1926,12 @@
   border: 1px solid var(--color-border);
   background: #fff;
 }
-.survey-section {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 0.9fr);
-  gap: 18px;
-  align-items: stretch;
-  margin-top: 6px;
-}
-.survey-section__note {
-  margin: 0;
-  padding: 16px 18px;
-  background: #f4f8f7;
-  border-left: 3px solid var(--color-brand);
-  border-radius: 0 12px 12px 0;
-  font-size: 0.9rem;
-  line-height: 1.7;
-  color: var(--color-text);
-}
 
 /* —— 设计决策区图 —— */
 .design-intervention {
   margin: 28px 0 8px;
 }
 .design-intervention__image {
-  display: block;
-  width: 100%;
-  height: auto;
-  aspect-ratio: 16 / 9;
-  object-fit: cover;
-  border-radius: 14px;
-  border: 1px solid var(--color-border);
-  box-shadow: 0 10px 30px rgb(15 52 42 / 6%);
-}
-.system-logic-layout {
-  display: grid;
-  grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
-  gap: 24px;
-  align-items: center;
-  margin: 4px 0 26px;
-}
-.system-logic-layout__image {
-  display: block;
-  width: 100%;
-  height: auto;
-  aspect-ratio: 16 / 9;
-  object-fit: cover;
-  border-radius: 14px;
-  border: 1px solid var(--color-border);
-}
-.action-judgment-image {
   display: block;
   width: 100%;
   height: auto;
@@ -2054,9 +1950,20 @@
   align-items: stretch;
 }
 .usability-layout__side {
-  display: grid;
+  display: flex;
+  flex-direction: column;
   gap: 16px;
-  align-content: start;
+}
+.usability-layout__side > .usability-side-card:last-child {
+  flex: 1;
+}
+.usability-layout__main {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+.usability-layout__main .demo-badge {
+  flex: 1;
 }
 
 /* —— 可用性侧栏信息卡 —— */
@@ -2286,10 +2193,8 @@
     grid-template-columns: repeat(2, 1fr);
   }
   .method-charts,
-  .literature-review__layout,
   .method-validation__grid,
   .survey-section,
-  .system-logic-layout,
   .usability-layout {
     grid-template-columns: 1fr;
   }
@@ -2399,7 +2304,7 @@
   display: grid;
   grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
   gap: 18px;
-  align-items: start;
+  align-items: stretch;
 }
 .competitor-matrix__quadrant {
   background: #fff;
@@ -2420,11 +2325,14 @@
   background: #fff;
   border: 1px solid var(--color-border);
   border-radius: 14px;
+  display: flex;
+  flex-direction: column;
 }
 .competitor-matrix__row {
   display: grid;
   grid-template-columns: 1.15fr 0.75fr 1.05fr 1.15fr;
   min-width: 640px;
+  flex: 1;
 }
 .competitor-matrix__row > span {
   padding: 11px 12px;
@@ -2465,10 +2373,7 @@
   text-align: right;
 }
 
-/* —— 循证依据 5 卡：左大右小 —— */
-.literature-review__layout {
-  grid-template-columns: 1.15fr 0.85fr;
-}
+/* —— 循证依据 5 卡 —— */
 .literature-review__figure {
   margin: 0;
 }
@@ -2687,23 +2592,6 @@
   }
 }
 
-/* —— 系统逻辑与反馈闭环：大图 —— */
-.system-logic-layout--large {
-  grid-template-columns: 1fr;
-  gap: 22px;
-}
-.system-logic-layout--large .system-flow__svg {
-  width: 100%;
-  height: auto;
-  max-height: 220px;
-}
-.system-logic-layout--large .system-logic-layout__image {
-  width: 100%;
-  max-width: 1100px;
-  margin: 0 auto;
-  display: block;
-}
-
 /* —— EMG 报告 —— */
 .emg-report {
   margin: 22px 0;
@@ -2905,9 +2793,6 @@
   }
 }
 @media (max-width: 640px) {
-  .literature-review__layout {
-    grid-template-columns: 1fr;
-  }
   .action-gardening__demo {
     grid-template-columns: repeat(2, 1fr);
   }
@@ -3618,32 +3503,6 @@
   }
 }
 
-/* —— 系统逻辑：双图等宽布局 —— */
-.system-logic-layout--large {
-  grid-template-columns: repeat(2, 1fr);
-  gap: 20px;
-  align-items: stretch;
-}
-.system-logic-layout__figure {
-  margin: 0;
-  display: grid;
-  gap: 10px;
-}
-.system-logic-layout__figure img {
-  width: 100%;
-  height: 100%;
-  aspect-ratio: 16 / 9;
-  object-fit: cover;
-  border-radius: 14px;
-  border: 1px solid var(--color-border);
-  box-shadow: 0 10px 30px rgb(15 52 42 / 6%);
-}
-.system-logic-layout__figure figcaption {
-  font-size: 0.78rem;
-  color: var(--color-text-muted);
-  text-align: center;
-}
-
 /* —— 可用性指标：不拥挤 + 关键发现底部对齐 —— */
 .metric-cards {
   grid-template-columns: repeat(3, 1fr);
@@ -3677,9 +3536,6 @@
 }
 
 @media (max-width: 1024px) {
-  .system-logic-layout--large {
-    grid-template-columns: 1fr;
-  }
   .metric-cards {
     grid-template-columns: repeat(3, 1fr);
   }
