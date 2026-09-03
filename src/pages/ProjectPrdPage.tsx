@@ -461,7 +461,7 @@ export function ProjectPrdPage() {
             <div className="prd-persona">
               <img
                 className="prd-persona__avatar prd-persona__avatar--img"
-                src={asset("assets/case-study/prd-avatar-therapist.png")}
+                src={asset("assets/case-study/prd-avatar-therapist.webp")}
                 alt="康复治疗师"
               />
               <div>
@@ -475,7 +475,7 @@ export function ProjectPrdPage() {
             <div className="prd-persona">
               <img
                 className="prd-persona__avatar prd-persona__avatar--img"
-                src={asset("assets/case-study/prd-avatar-elderly.png")}
+                src={asset("assets/case-study/prd-avatar-elderly.webp")}
                 alt="居家老人"
               />
               <div>
@@ -489,7 +489,7 @@ export function ProjectPrdPage() {
             <div className="prd-persona">
               <img
                 className="prd-persona__avatar prd-persona__avatar--img"
-                src={asset("assets/case-study/prd-avatar-caregiver.png")}
+                src={asset("assets/case-study/prd-avatar-caregiver.webp")}
                 alt="家属与照护者"
               />
               <div>

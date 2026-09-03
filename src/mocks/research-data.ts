@@ -21,7 +21,7 @@ export const researchQuestions = [
   {
     id: "RQ3",
     text: "多模态反馈（气动、震动、视觉）如何帮助老人建立正确动作感知？",
-    method: "硬件原型 + 用户测试",
+    method: "硬件原型 + 用户测试（进行中）",
   },
   {
     id: "RQ4",
@@ -95,7 +95,7 @@ export const competitors = [
     strengths: "心率带实时监测，医生定制运动处方",
     weakness: "以心肺与运动处方为主，缺少上肢动作质量与多模态反馈",
     decisionSupport: "中",
-    image: "assets/case-study/comp-shukang.png",
+    image: "assets/case-study/comp-shukang.webp",
     coords: { x: 2.5, y: 3, z: 2.5 },
   },
   {
@@ -107,7 +107,7 @@ export const competitors = [
     strengths: "一对一视频指导，衔接院内与居家场景",
     weakness: "以视频指导为主，缺乏传感器级动作数据与证据追溯",
     decisionSupport: "中",
-    image: "assets/case-study/comp-yudian.png",
+    image: "assets/case-study/comp-yudian.webp",
     coords: { x: 3, y: 2.5, z: 2 },
   },
   {
@@ -159,7 +159,7 @@ export const personas = [
     pain: "老人训练数据分散在微信、电话和纸质记录里，难以及时发现依从性下滑。",
     quote: "我最怕的不是数据少，而是不知道哪个数据真正需要我出手。",
     day: "08:30 查看今日待复核列表 → 09:00 电话随访 3 位老人 → 14:00 调整 2 份计划 → 17:00 写周报。",
-    avatar: "assets/case-study/therapist-female.jpg",
+    avatar: "assets/case-study/therapist-female.webp",
   },
   {
     id: "P2",

@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 
 import { getPublicAssetUrl } from "../config/public-path";
@@ -32,6 +32,11 @@ import {
   Wrench,
   ChevronLeft,
   ChevronRight,
+  Copy,
+  Check,
+  MessageSquarePlus,
+  Star,
+  X,
 } from "lucide-react";
 import {
   Area,
@@ -167,6 +172,64 @@ function ResearchTimeline() {
   );
 }
 
+const prefersReducedMotion = () =>
+  typeof window !== "undefined" &&
+  typeof window.matchMedia === "function" &&
+  window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+function LazyVideo({
+  src,
+  className,
+  label,
+}: {
+  src: string;
+  className: string;
+  label: string;
+}) {
+  const ref = useRef<HTMLVideoElement>(null);
+  const [loaded, setLoaded] = useState(false);
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    if (typeof IntersectionObserver === "undefined") {
+      setLoaded(true);
+      return;
+    }
+    const io = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          if (entry.isIntersecting) {
+            setLoaded(true);
+            if (!prefersReducedMotion()) {
+              el.play().catch(() => {});
+            }
+          } else {
+            el.pause();
+          }
+        }
+      },
+      { threshold: 0.25 },
+    );
+    io.observe(el);
+    return () => io.disconnect();
+  }, []);
+
+  return (
+    <video
+      ref={ref}
+      className={className}
+      src={loaded ? src : undefined}
+      muted
+      loop
+      playsInline
+      preload="metadata"
+      controls={prefersReducedMotion()}
+      aria-label={label}
+    />
+  );
+}
+
 function ExerciseMap() {
   const rows = [
     {
@@ -210,15 +273,10 @@ function ExerciseMap() {
       {rows.map((r) => (
         <div className="exercise-map__row" key={r.exercise}>
           <div className="exercise-map__cell exercise-map__cell--exercise">
-            <video
+            <LazyVideo
               className="exercise-map__video"
               src={asset(`/assets/case-study/${r.video}`)}
-              autoPlay
-              muted
-              loop
-              playsInline
-              preload="metadata"
-              aria-label={`${r.exercise} 动作演示动画（AI 生成）`}
+              label={`${r.exercise} 动作演示动画（AI 生成）`}
             />
             <span className="exercise-map__icon" aria-hidden="true">
               <r.Icon size={22} strokeWidth={1.8} />
@@ -748,16 +806,152 @@ function MethodMixChart() {
   );
 }
 
+function CopyEmailButton({ email }: { email: string }) {
+  const [copied, setCopied] = useState(false);
+  const copy = async () => {
+    try {
+      if (navigator.clipboard && window.isSecureContext) {
+        await navigator.clipboard.writeText(email);
+      } else {
+        const ta = document.createElement("textarea");
+        ta.value = email;
+        ta.style.position = "fixed";
+        ta.style.opacity = "0";
+        document.body.appendChild(ta);
+        ta.select();
+        document.execCommand("copy");
+        document.body.removeChild(ta);
+      }
+      setCopied(true);
+      window.setTimeout(() => setCopied(false), 2000);
+    } catch {
+      window.location.href = `mailto:${email}`;
+    }
+  };
+  return (
+    <button type="button" className="copy-email-btn" onClick={copy}>
+      {copied ? (
+        <Check size={14} aria-hidden="true" />
+      ) : (
+        <Copy size={14} aria-hidden="true" />
+      )}
+      {copied ? "已复制邮箱" : "复制邮箱"}
+    </button>
+  );
+}
+
+const FEEDBACK_STORAGE_KEY = "elderlygardener-visitor-feedback";
+
+function FeedbackWidget() {
+  const [open, setOpen] = useState(false);
+  const [rating, setRating] = useState(0);
+  const [comment, setComment] = useState("");
+  const [submitted, setSubmitted] = useState(false);
+  const submit = () => {
+    if (rating === 0) return;
+    const entry = {
+      rating,
+      comment: comment.trim(),
+      page: "project-showcase",
+      submittedAt: new Date().toISOString(),
+    };
+    try {
+      const raw = window.localStorage.getItem(FEEDBACK_STORAGE_KEY);
+      const list: unknown[] = raw ? JSON.parse(raw) : [];
+      list.push(entry);
+      window.localStorage.setItem(FEEDBACK_STORAGE_KEY, JSON.stringify(list));
+    } catch {
+      // localStorage 不可用时静默降级：仍显示已收到
+    }
+    setSubmitted(true);
+  };
+  return (
+    <div className="feedback-widget">
+      {open && (
+        <div
+          className="feedback-widget__panel"
+          role="dialog"
+          aria-label="页面反馈"
+        >
+          <div className="feedback-widget__header">
+            <span>这个案例研究对你有帮助吗？</span>
+            <button
+              type="button"
+              className="feedback-widget__close"
+              aria-label="关闭反馈面板"
+              onClick={() => setOpen(false)}
+            >
+              <X size={16} aria-hidden="true" />
+            </button>
+          </div>
+          {submitted ? (
+            <p className="feedback-widget__thanks">
+              感谢反馈！你的评分（{rating}/5）与留言已保存在本地浏览器。
+            </p>
+          ) : (
+            <>
+              <div
+                className="feedback-widget__stars"
+                role="radiogroup"
+                aria-label="评分"
+              >
+                {[1, 2, 3, 4, 5].map((n) => (
+                  <button
+                    key={n}
+                    type="button"
+                    role="radio"
+                    aria-checked={rating === n}
+                    aria-label={`${n} 星`}
+                    className={`feedback-widget__star ${n <= rating ? "is-active" : ""}`}
+                    onClick={() => setRating(n)}
+                  >
+                    <Star size={22} aria-hidden="true" />
+                  </button>
+                ))}
+              </div>
+              <textarea
+                className="feedback-widget__textarea"
+                placeholder="一句话建议（可选）"
+                value={comment}
+                maxLength={200}
+                onChange={(e) => setComment(e.target.value)}
+              />
+              <button
+                type="button"
+                className="feedback-widget__submit"
+                disabled={rating === 0}
+                onClick={submit}
+              >
+                提交反馈
+              </button>
+            </>
+          )}
+        </div>
+      )}
+      {!open && (
+        <button
+          type="button"
+          className="feedback-widget__fab"
+          onClick={() => setOpen(true)}
+        >
+          <MessageSquarePlus size={18} aria-hidden="true" />
+          反馈
+        </button>
+      )}
+    </div>
+  );
+}
+
 function ArchitectureCarousel() {
   const slides = [
     {
-      src: "assets/case-study/technical-architecture.jpg",
+      src: "assets/case-study/technical-architecture.webp",
       alt: "技术架构：传感器、Arduino、PC 与 VR 的多模态反馈链路",
       caption:
         "课程原始技术架构：多源传感器 → Arduino → PC 处理 → 气动/震动/VR 反馈",
     },
     {
-      src: "assets/case-study/system-logic-v2.jpg",
+      src: "assets/case-study/system-logic-v2.webp",
       alt: "系统逻辑与反馈闭环示意图",
       caption: "系统逻辑 V2：触发逻辑与反馈闭环",
     },
@@ -1170,6 +1364,7 @@ export function ProjectShowcasePage() {
 
   return (
     <div className="project-showcase">
+      <FeedbackWidget />
       {/* Hero */}
       <section className="project-hero">
         <div className="project-section__inner project-hero__inner">
@@ -1279,7 +1474,7 @@ export function ProjectShowcasePage() {
             </div>
             <div className="ecosystem-card__visual">
               <img
-                src={asset("assets/case-study/imu-module.jpg")}
+                src={asset("assets/case-study/imu-module.webp")}
                 alt="C 端可穿戴传感器模块与 Arduino 测试"
                 loading="lazy"
               />
@@ -1430,7 +1625,7 @@ export function ProjectShowcasePage() {
               <EMGChart />
             </div>
             <img
-              src={asset("assets/case-study/method-emg-mapping.jpg")}
+              src={asset("assets/case-study/method-emg-mapping.webp")}
               alt="EMG 动作映射：5 个标准上肢训练动作与目标肌群"
               loading="lazy"
               className="method-validation__image"
@@ -1639,7 +1834,7 @@ export function ProjectShowcasePage() {
         <div className="prototype-grid">
           <figure className="prototype-figure">
             <img
-              src={asset("assets/case-study/prototype-feedback.jpg")}
+              src={asset("assets/case-study/prototype-feedback.webp")}
               alt="第一代功能原型：传感器绑带、Arduino 调试与 VR 头显联调"
               loading="lazy"
             />
@@ -1897,6 +2092,7 @@ export function ProjectShowcasePage() {
             <p className="author-card__contact">
               {authorBio.email} · {authorBio.phone}
             </p>
+            <CopyEmailButton email={authorBio.email} />
           </div>
         </div>
       </Section>
