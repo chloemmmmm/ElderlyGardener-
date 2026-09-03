@@ -170,30 +170,35 @@ function ExerciseMap() {
       muscle: "背 / 肩后束",
       garden: "耙土整地",
       Icon: Shrub,
+      video: "exercise-row.mp4",
     },
     {
       exercise: "臂弯举 Arm Curl",
       muscle: "肱二头肌",
       garden: "移栽幼苗",
       Icon: Sprout,
+      video: "exercise-curl.mp4",
     },
     {
       exercise: "侧平举 Side Arm Raise",
       muscle: "三角肌",
       garden: "浇水施肥",
       Icon: Droplets,
+      video: "exercise-raise.mp4",
     },
     {
       exercise: "过头举 Overhead Raise",
       muscle: "肩 / 上背",
       garden: "修剪枝条",
       Icon: Scissors,
+      video: "exercise-prune.mp4",
     },
     {
       exercise: "握力训练 Hand Grip",
       muscle: "前臂 / 手部",
       garden: "采摘果实",
       Icon: Apple,
+      video: "exercise-grip.mp4",
     },
   ];
   return (
@@ -201,6 +206,16 @@ function ExerciseMap() {
       {rows.map((r) => (
         <div className="exercise-map__row" key={r.exercise}>
           <div className="exercise-map__cell exercise-map__cell--exercise">
+            <video
+              className="exercise-map__video"
+              src={asset(`/assets/case-study/${r.video}`)}
+              autoPlay
+              muted
+              loop
+              playsInline
+              preload="metadata"
+              aria-label={`${r.exercise} 动作演示动画（AI 生成）`}
+            />
             <span className="exercise-map__icon" aria-hidden="true">
               <r.Icon size={22} strokeWidth={1.8} />
             </span>

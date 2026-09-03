@@ -1285,6 +1285,15 @@
   font-size: 24px;
   line-height: 1;
 }
+.exercise-map__video {
+  flex: none;
+  width: 104px;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  border-radius: 10px;
+  border: 1px solid var(--color-border);
+  background: #e8f2ee;
+}
 .exercise-map__cell div {
   display: grid;
   gap: 2px;
@@ -2225,6 +2234,9 @@
   .prototype-grid,
   .exercise-map__row {
     grid-template-columns: 1fr;
+  }
+  .exercise-map__video {
+    width: 132px;
   }
   .exercise-map__arrow {
     transform: rotate(90deg);
