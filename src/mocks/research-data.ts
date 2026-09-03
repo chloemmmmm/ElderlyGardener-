@@ -88,6 +88,7 @@ export const interviewGuide = [
 export const competitors = [
   {
     name: "术康 Pro",
+    shortName: "术康",
     seller: "成都尚医信息科技",
     tagline: "居家运动康复 · 运动处方",
     audience: "术后 / 慢病患者",
@@ -99,6 +100,7 @@ export const competitors = [
   },
   {
     name: "云端康复",
+    shortName: "云端",
     seller: "北京智能康复科技",
     tagline: "线上康复指导平台",
     audience: "医院康复科 / 治疗师",
@@ -110,6 +112,7 @@ export const competitors = [
   },
   {
     name: "好大夫在线",
+    shortName: "好大夫",
     seller: "北京新医强国科技",
     tagline: "通用远程医疗平台",
     audience: "全科医生 / 患者",
@@ -121,6 +124,7 @@ export const competitors = [
   },
   {
     name: "简单心理",
+    shortName: "简单心理",
     seller: "北京竹间科技",
     tagline: "心理健康服务平台",
     audience: "心理咨询师 / 用户",
@@ -131,14 +135,15 @@ export const competitors = [
     coords: { x: 1, y: 1.5, z: 2 },
   },
   {
-    name: "ElderlyGardener（本方案）",
+    name: "ElderlyGardener",
+    shortName: "本方案",
     seller: "概念原型",
     tagline: "园艺化上肢康复训练系统",
     audience: "康复治疗师",
     strengths: "传感器证据可视化、计划版本对比、AI 建议需确认",
     weakness: "概念原型，尚未经过临床验证",
     decisionSupport: "高",
-    image: "assets/case-study/b-side-dashboard.jpg",
+    image: "assets/case-study/competitor-ours-vertical.jpg",
     coords: { x: 4.5, y: 4.5, z: 4 },
   },
 ];
@@ -243,7 +248,7 @@ export const designPrinciples = [
 
 export const usabilityProtocol = {
   purpose:
-    "验证康护园 B 端后台是否支持康复师高效完成「发现异常 → 复核证据 → 调整计划 → 记录判断」的核心闭环。",
+    "验证 ElderlyGardener B 端后台是否支持康复师高效完成「发现异常 → 复核证据 → 调整计划 → 记录判断」的核心闭环。",
   design:
     "混合型可用性测试：结构化任务 + 出声思考法（Think-aloud）+ 任务后简短访谈。",
   recruitment: {

@@ -192,7 +192,7 @@ function InformationArchitectureDiagram() {
     },
     {
       label: "数据看板",
-      children: ["KPI", "风险分层", "趋势图", "治疗师负载"],
+      children: ["KPI", "风险分层", "趋势图", "康复师负载"],
     },
   ];
   return (
@@ -430,7 +430,7 @@ export function ProjectPrdPage() {
               <tr>
                 <td>康复师效率</td>
                 <td>每日异常识别时间</td>
-                <td>≤ 15 分钟 / 26 位对象</td>
+                <td>≤ 15 分钟（按试点 26 位对象规模测算）</td>
                 <td>P0</td>
               </tr>
               <tr>
@@ -467,7 +467,7 @@ export function ProjectPrdPage() {
               <div>
                 <h4>康复治疗师（B 端核心用户）</h4>
                 <p>
-                  负责 15–30
+                  通常负责 15–30
                   位居家老人的随访与计划调整。核心诉求：在每日有限时间内，优先看到「需要我出手」的对象与证据，而不是被海量数据淹没。
                 </p>
               </div>
@@ -619,7 +619,7 @@ export function ProjectPrdPage() {
               <tr>
                 <td rowSpan={2}>数据看板</td>
                 <td>B-012</td>
-                <td>康复师视角 KPI、风险分层、阶段分布、治疗师负载</td>
+                <td>康复师视角 KPI、风险分层、阶段分布、康复师负载</td>
                 <td>P1</td>
               </tr>
               <tr>

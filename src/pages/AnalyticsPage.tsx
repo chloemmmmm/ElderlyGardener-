@@ -14,16 +14,8 @@ import {
   YAxis,
 } from "recharts";
 
-import {
-  ErrorState,
-  LoadingState,
-  PageHeader,
-  Panel,
-} from "../components/ui";
-import type {
-  AttentionSeverity,
-  TrainingStage,
-} from "../domain/models";
+import { ErrorState, LoadingState, PageHeader, Panel } from "../components/ui";
+import type { AttentionSeverity, TrainingStage } from "../domain/models";
 import { rehabilitationApi } from "../services/rehabilitation";
 
 const riskLabels: Record<AttentionSeverity, string> = {
@@ -269,7 +261,7 @@ export function AnalyticsPage() {
             幅度完成度为会话内各动作的均值（演示样例）。悬停可查看每次平均反馈次数。
           </p>
         </Panel>
-        <Panel title="治疗师负载" subtitle="负责对象数与平均完成率">
+        <Panel title="康复师负载" subtitle="负责对象数与平均完成率">
           <table className="data-table analytics-owner-table">
             <thead>
               <tr>
@@ -286,9 +278,7 @@ export function AnalyticsPage() {
                   <td>
                     <div className="completion-cell">
                       <div className="mini-progress" aria-hidden="true">
-                        <span
-                          style={{ width: `${row.avgCompletionRate}%` }}
-                        />
+                        <span style={{ width: `${row.avgCompletionRate}%` }} />
                       </div>
                       <strong>{row.avgCompletionRate}%</strong>
                     </div>

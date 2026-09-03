@@ -343,9 +343,6 @@ function LiteratureReviewCards() {
           loading="lazy"
           className="literature-review__image"
         />
-        <figcaption>
-          课程原始文献梳理：从老年运动、上肢功能、园艺转译到反馈闭环
-        </figcaption>
       </figure>
     </div>
   );
@@ -360,8 +357,8 @@ function CompetitorMatrix() {
     "功能覆盖：传感器数据、计划编辑、远程随访、证据追溯",
     "决策支持：1–3 分，综合数据深度、可视化与可干预性",
   ];
-  const xScale = (v: number) => 10 + ((v - 1) / 4) * 80;
-  const yScale = (v: number) => 90 - ((v - 1) / 4) * 80;
+  const xScale = (v: number) => 12 + ((v - 1) / 4) * 84;
+  const yScale = (v: number) => 92 - ((v - 1) / 4) * 84;
 
   return (
     <div className="competitor-matrix">
@@ -380,13 +377,10 @@ function CompetitorMatrix() {
       </div>
 
       <div className="competitor-cards">
-        {competitors.map((c) => {
-          const isOurs = c.name.startsWith("ElderlyGardener");
-          return (
-            <article
-              key={c.name}
-              className={`competitor-card ${isOurs ? "competitor-card--ours" : ""}`}
-            >
+        {competitors
+          .filter((c) => !c.name.startsWith("ElderlyGardener"))
+          .map((c) => (
+            <article key={c.name} className="competitor-card">
               <div className="competitor-card__shot">
                 <img
                   src={asset(c.image)}
@@ -419,78 +413,67 @@ function CompetitorMatrix() {
                 </div>
               </div>
             </article>
-          );
-        })}
+          ))}
       </div>
 
       <div className="competitor-matrix__analysis">
         <div className="competitor-matrix__quadrant">
           <svg
-            viewBox="0 0 100 100"
+            viewBox="0 0 108 110"
             role="img"
-            aria-label="竞品能力象限图：横轴为临床专业性，纵轴为数据决策支持"
+            aria-label="竞品能力象限图：横轴为临床专业性，纵轴为决策支持"
           >
-            <rect x="0" y="0" width="50" height="50" fill="#f7fbfa" />
-            <rect x="50" y="0" width="50" height="50" fill="#eef6f3" />
-            <rect x="0" y="50" width="50" height="50" fill="#eef6f3" />
-            <rect x="50" y="50" width="50" height="50" fill="#e8f2ee" />
-            <text x="25" y="8" textAnchor="middle" fontSize="4" fill="#7a9990">
-              高决策支持 / 低专业性
-            </text>
-            <text x="75" y="8" textAnchor="middle" fontSize="4" fill="#7a9990">
-              高决策支持 / 高专业性
-            </text>
-            <text x="25" y="96" textAnchor="middle" fontSize="4" fill="#7a9990">
-              低决策支持 / 低专业性
-            </text>
-            <text x="75" y="96" textAnchor="middle" fontSize="4" fill="#7a9990">
-              低决策支持 / 高专业性
-            </text>
+            <rect x="8" y="4" width="46" height="46" fill="#f7fbfa" />
+            <rect x="54" y="4" width="46" height="46" fill="#eef6f3" />
+            <rect x="8" y="50" width="46" height="46" fill="#eef6f3" />
+            <rect x="54" y="50" width="46" height="46" fill="#e8f2ee" />
             <line
-              x1="50"
+              x1="54"
               y1="4"
-              x2="50"
+              x2="54"
               y2="96"
               stroke="#bad0c8"
               strokeWidth="0.6"
               strokeDasharray="2 2"
             />
             <line
-              x1="4"
+              x1="8"
               y1="50"
-              x2="96"
+              x2="100"
               y2="50"
               stroke="#bad0c8"
               strokeWidth="0.6"
               strokeDasharray="2 2"
             />
             <text
-              x="50"
-              y="100"
+              x="54"
+              y="106"
               textAnchor="middle"
-              fontSize="4"
+              fontSize="4.2"
               fill="#557166"
             >
               临床专业性 →
             </text>
             <text
-              x="2"
+              x="3"
               y="50"
               textAnchor="middle"
-              fontSize="4"
+              fontSize="4.2"
               fill="#557166"
-              transform="rotate(-90 2 50)"
+              transform="rotate(-90 3 50)"
             >
-              数据决策支持 →
+              决策支持 →
             </text>
             {competitors.map((c) => {
               const { x, y } = c.coords;
               const ours = c.name.startsWith("ElderlyGardener");
+              const px = xScale(x);
+              const py = yScale(y);
+              const anchor = px < 22 ? "start" : px > 82 ? "end" : "middle";
+              const lx = anchor === "start" ? -3 : anchor === "end" ? 3 : 0;
+              const ly = c.shortName === "云端" ? 11 : -5;
               return (
-                <g
-                  key={c.name}
-                  transform={`translate(${xScale(x)},${yScale(y)})`}
-                >
+                <g key={c.name} transform={`translate(${px},${py})`}>
                   <circle
                     r="5"
                     fill={ours ? "#176b55" : "#88c4af"}
@@ -498,14 +481,14 @@ function CompetitorMatrix() {
                   />
                   <circle r="3" fill={ours ? "#176b55" : "#5aa98e"} />
                   <text
-                    x="0"
-                    y="-5"
-                    textAnchor="middle"
-                    fontSize="4"
+                    x={lx}
+                    y={ly}
+                    textAnchor={anchor}
+                    fontSize="4.2"
                     fill="#153c32"
                     fontWeight={ours ? "700" : "400"}
                   >
-                    {c.name.slice(0, 2)}
+                    {c.shortName}
                   </text>
                 </g>
               );
@@ -1087,7 +1070,7 @@ export function ProjectShowcasePage() {
             <div className="ecosystem-card__visual">
               <img
                 src={asset("assets/showcase/console-dashboard.png")}
-                alt="康护园 B 端工作台截图"
+                alt="ElderlyGardener B 端工作台截图"
                 loading="lazy"
               />
             </div>
@@ -1181,9 +1164,15 @@ export function ProjectShowcasePage() {
           </div>
         </div>
         <DemoBadge label="[公开统计数据]" variant="public">
-          <p style={{ margin: 0 }}>
-            数据来源：国家卫健委、老年康复领域公开统计。本作品引用数据仅用于说明问题背景。
-          </p>
+          <div className="stats-source">
+            <p>
+              数据来源：国家统计局第七次全国人口普查及年度统计公报（60
+              岁以上人口规模）；《中国脑卒中防治报告》（脑卒中后上肢功能障碍比例）；国家卫健委《老年人失能预防核心信息》与康复医学领域公开研究（规范居家康复的恢复率提升区间与长期依从性数据）。
+            </p>
+            <p>
+              以上数字为公开统计口径的约数。本作品为学术概念原型，引用数据仅用于说明问题背景，不构成临床结论。
+            </p>
+          </div>
         </DemoBadge>
       </Section>
 
@@ -1390,18 +1379,6 @@ export function ProjectShowcasePage() {
           基于文献与动作分析，选取五种标准上肢训练动作，并将它们映射到老人熟悉、具身、可叙事的园艺任务，每个任务对应明确的肌肉群与传感器判定规则。
         </p>
         <div className="action-gardening">
-          <figure className="action-gardening__figure">
-            <img
-              src={asset("assets/case-study/exercise-gardening-mapping.png")}
-              alt="标准上肢训练动作与园艺任务的映射关系"
-              loading="lazy"
-              className="action-gardening__image action-gardening__image--animated"
-            />
-            <figcaption>
-              课程原始动作映射：坐姿划船、臂弯举、侧平举、过头举、握力训练 →
-              耙土、移栽、浇水、修剪、摘果
-            </figcaption>
-          </figure>
           <div className="action-gardening__demo" aria-label="园艺动作演示">
             {[
               { label: "耙土", Icon: Shrub, muscle: "背 / 肩后束" },
@@ -1456,7 +1433,7 @@ export function ProjectShowcasePage() {
           <figure className="system-logic-layout__figure">
             <img
               src={asset("assets/case-study/system-logic-v2.jpg")}
-              alt="系统逻辑 V2：触发逻辑与反馈闭环"
+              alt="系统逻辑与反馈闭环示意图"
               loading="lazy"
               className="system-logic-layout__image"
             />
@@ -1465,7 +1442,7 @@ export function ProjectShowcasePage() {
           <figure className="system-logic-layout__figure">
             <img
               src={asset("assets/case-study/method-action-judgment.jpg")}
-              alt="动作判断：5 个标准上肢训练动作的判定规则"
+              alt="动作判定规则示意图"
               loading="lazy"
               className="system-logic-layout__image"
             />
@@ -1561,7 +1538,7 @@ export function ProjectShowcasePage() {
               alt="数据看板"
               loading="lazy"
             />
-            <figcaption>数据看板 · KPI、风险分层与治疗师负载</figcaption>
+            <figcaption>数据看板 · KPI、风险分层与康复师负载</figcaption>
           </figure>
         </div>
         <div
@@ -1704,11 +1681,6 @@ export function ProjectShowcasePage() {
             </DemoBadge>
           </div>
           <div className="usability-layout__side">
-            <img
-              src={asset("assets/case-study/usability-user-test.jpg")}
-              alt="用户测试：真实使用者佩戴原型设备完成训练任务并给出反馈"
-              loading="lazy"
-            />
             <UsabilityChart />
           </div>
         </div>
