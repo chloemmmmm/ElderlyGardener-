@@ -44,6 +44,7 @@ import {
 
 import {
   authorBio,
+  competitors,
   designPrinciples,
   emgValidation,
   heuristicEvaluation,
@@ -351,24 +352,203 @@ function LiteratureReviewCards() {
 }
 
 function CompetitorMatrix() {
+  const levels: Record<string, number> = { 高: 3, 中: 2, 低: 1 };
+  const total = 3;
+  const criteria = [
+    "信息架构：核心模块与康复师工作流的匹配度",
+    "启发式评估：系统状态可见性、识别而非回忆等维度打分",
+    "功能覆盖：传感器数据、计划编辑、远程随访、证据追溯",
+    "决策支持：1–3 分，综合数据深度、可视化与可干预性",
+  ];
+  const xScale = (v: number) => 10 + ((v - 1) / 4) * 80;
+  const yScale = (v: number) => 90 - ((v - 1) / 4) * 80;
+
   return (
     <div className="competitor-matrix">
       <h3 className="project-section__h3">
         <Search size={20} className="inline-icon" aria-hidden="true" />
         竞品对比：判定标准与能力象限
       </h3>
-      <figure className="competitor-matrix__figure">
-        <img
-          src={asset("assets/case-study/competitor-matrix-v2.png")}
-          alt="竞品对比：判定标准、能力象限与产品能力表格"
-          loading="lazy"
-          className="competitor-matrix__image"
-        />
-        <figcaption>
-          基于信息架构、启发式评估、功能覆盖与决策支持四个维度，对比 4
-          款竞品与本方案
-        </figcaption>
-      </figure>
+
+      <div className="competitor-matrix__criteria">
+        <strong>判定标准</strong>
+        <ul>
+          {criteria.map((c) => (
+            <li key={c}>{c}</li>
+          ))}
+        </ul>
+      </div>
+
+      <div className="competitor-cards">
+        {competitors.map((c) => {
+          const isOurs = c.name.startsWith("ElderlyGardener");
+          return (
+            <article
+              key={c.name}
+              className={`competitor-card ${isOurs ? "competitor-card--ours" : ""}`}
+            >
+              <div className="competitor-card__shot">
+                <img
+                  src={asset(c.image)}
+                  alt={`${c.name} 产品界面截图`}
+                  loading="lazy"
+                />
+              </div>
+              <div className="competitor-card__body">
+                <h4>{c.name}</h4>
+                <span className="competitor-card__tagline">{c.tagline}</span>
+                <p className="competitor-card__audience">{c.audience}</p>
+                <div
+                  className="competitor-card__support"
+                  aria-label={`决策支持 ${c.decisionSupport}`}
+                >
+                  <span className="competitor-card__support-label">
+                    决策支持
+                  </span>
+                  <span className="support-bar">
+                    {Array.from({ length: total }).map((_, i) => (
+                      <span
+                        key={i}
+                        className={`support-bar__dot ${i < levels[c.decisionSupport] ? "is-on" : ""}`}
+                      />
+                    ))}
+                  </span>
+                  <span className="competitor-card__support-value">
+                    {c.decisionSupport}
+                  </span>
+                </div>
+              </div>
+            </article>
+          );
+        })}
+      </div>
+
+      <div className="competitor-matrix__analysis">
+        <div className="competitor-matrix__quadrant">
+          <svg
+            viewBox="0 0 100 100"
+            role="img"
+            aria-label="竞品能力象限图：横轴为临床专业性，纵轴为数据决策支持"
+          >
+            <rect x="0" y="0" width="50" height="50" fill="#f7fbfa" />
+            <rect x="50" y="0" width="50" height="50" fill="#eef6f3" />
+            <rect x="0" y="50" width="50" height="50" fill="#eef6f3" />
+            <rect x="50" y="50" width="50" height="50" fill="#e8f2ee" />
+            <text x="25" y="8" textAnchor="middle" fontSize="4" fill="#7a9990">
+              高决策支持 / 低专业性
+            </text>
+            <text x="75" y="8" textAnchor="middle" fontSize="4" fill="#7a9990">
+              高决策支持 / 高专业性
+            </text>
+            <text x="25" y="96" textAnchor="middle" fontSize="4" fill="#7a9990">
+              低决策支持 / 低专业性
+            </text>
+            <text x="75" y="96" textAnchor="middle" fontSize="4" fill="#7a9990">
+              低决策支持 / 高专业性
+            </text>
+            <line
+              x1="50"
+              y1="4"
+              x2="50"
+              y2="96"
+              stroke="#bad0c8"
+              strokeWidth="0.6"
+              strokeDasharray="2 2"
+            />
+            <line
+              x1="4"
+              y1="50"
+              x2="96"
+              y2="50"
+              stroke="#bad0c8"
+              strokeWidth="0.6"
+              strokeDasharray="2 2"
+            />
+            <text
+              x="50"
+              y="100"
+              textAnchor="middle"
+              fontSize="4"
+              fill="#557166"
+            >
+              临床专业性 →
+            </text>
+            <text
+              x="2"
+              y="50"
+              textAnchor="middle"
+              fontSize="4"
+              fill="#557166"
+              transform="rotate(-90 2 50)"
+            >
+              数据决策支持 →
+            </text>
+            {competitors.map((c) => {
+              const { x, y } = c.coords;
+              const ours = c.name.startsWith("ElderlyGardener");
+              return (
+                <g
+                  key={c.name}
+                  transform={`translate(${xScale(x)},${yScale(y)})`}
+                >
+                  <circle
+                    r="5"
+                    fill={ours ? "#176b55" : "#88c4af"}
+                    opacity="0.2"
+                  />
+                  <circle r="3" fill={ours ? "#176b55" : "#5aa98e"} />
+                  <text
+                    x="0"
+                    y="-5"
+                    textAnchor="middle"
+                    fontSize="4"
+                    fill="#153c32"
+                    fontWeight={ours ? "700" : "400"}
+                  >
+                    {c.name.slice(0, 2)}
+                  </text>
+                </g>
+              );
+            })}
+          </svg>
+        </div>
+        <div
+          className="competitor-matrix__table"
+          role="table"
+          aria-label="竞品决策支持能力对比"
+        >
+          <div
+            className="competitor-matrix__row competitor-matrix__row--head"
+            role="row"
+          >
+            <span role="columnheader">产品</span>
+            <span role="columnheader">目标用户</span>
+            <span role="columnheader">核心优势</span>
+            <span role="columnheader">关键短板</span>
+          </div>
+          {competitors.map((c) => {
+            const ours = c.name.startsWith("ElderlyGardener");
+            return (
+              <div
+                className={`competitor-matrix__row ${ours ? "competitor-matrix__row--ours" : ""}`}
+                role="row"
+                key={c.name}
+              >
+                <span role="cell">
+                  <strong>{c.name}</strong>
+                  <small>{c.seller}</small>
+                </span>
+                <span role="cell">{c.audience}</span>
+                <span role="cell">{c.strengths}</span>
+                <span role="cell">{c.weakness}</span>
+              </div>
+            );
+          })}
+        </div>
+      </div>
+      <p className="competitor-matrix__note">
+        竞品截图来源于各产品 App Store 公开页面，仅用于学术对比分析。
+      </p>
     </div>
   );
 }
@@ -1021,8 +1201,8 @@ export function ProjectShowcasePage() {
         <MethodMatrix />
         <div className="method-charts">
           <MethodMixChart />
-          <CompetitorMatrix />
         </div>
+        <CompetitorMatrix />
         <LiteratureReviewCards />
         <InterviewGuide />
         <DemoBadge

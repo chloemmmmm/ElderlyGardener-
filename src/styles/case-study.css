@@ -1505,7 +1505,8 @@
 /* —— 研究方法构成 + 竞品对比 —— */
 .method-charts {
   display: grid;
-  grid-template-columns: minmax(0, 300px) minmax(0, 1fr);
+  grid-template-columns: minmax(0, 400px);
+  justify-content: start;
   gap: 20px;
   align-items: stretch;
   margin: 6px 0 8px;
@@ -1565,40 +1566,121 @@
   border-radius: 14px;
   padding: 16px;
 }
-.competitor-matrix__table {
-  overflow-x: auto;
+.competitor-matrix__criteria {
+  margin-bottom: 16px;
+  padding: 14px 16px;
+  background: #f7fbf9;
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
 }
-.competitor-matrix__row {
-  display: grid;
-  grid-template-columns: 130px 1.1fr 0.8fr 1.3fr;
-  min-width: 640px;
-}
-.competitor-matrix__row > span {
-  padding: 11px 12px;
-  border-top: 1px solid var(--color-border);
-  font-size: 0.875rem;
-  line-height: 1.55;
-}
-.competitor-matrix__row--head {
-  background: #f4f8f7;
-}
-.competitor-matrix__row--head > span {
-  border-top: 0;
+.competitor-matrix__criteria strong {
+  display: block;
+  margin-bottom: 8px;
+  font-size: 0.9rem;
   color: var(--color-brand);
-  font-size: 12px;
-  font-weight: 700;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
 }
+.competitor-matrix__criteria ul {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 6px 18px;
+  margin: 0;
+  padding-left: 18px;
+  font-size: 0.82rem;
+  line-height: 1.6;
+  color: var(--color-text-muted);
+}
+
+/* 竞品卡片 */
+.competitor-cards {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 14px;
+  margin-bottom: 18px;
+}
+.competitor-card {
+  display: flex;
+  flex-direction: column;
+  background: #fff;
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+  overflow: hidden;
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+.competitor-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 28px rgb(15 52 42 / 8%);
+}
+.competitor-card--ours {
+  border-color: var(--color-brand);
+  background: linear-gradient(180deg, #f9fcfb 0%, #fff 100%);
+  box-shadow: 0 4px 14px rgb(23 107 85 / 10%);
+}
+.competitor-card__shot {
+  aspect-ratio: 9 / 19;
+  background: #f4f8f7;
+  overflow: hidden;
+  border-bottom: 1px solid var(--color-border);
+}
+.competitor-card__shot img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+}
+.competitor-card__body {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  padding: 12px;
+  flex: 1;
+}
+.competitor-card__body h4 {
+  margin: 0;
+  font-size: 0.95rem;
+  font-weight: 700;
+  line-height: 1.3;
+  color: var(--color-text);
+}
+.competitor-card__tagline {
+  font-size: 0.75rem;
+  color: var(--color-brand);
+  line-height: 1.4;
+}
+.competitor-card__audience {
+  margin: 0;
+  font-size: 0.78rem;
+  color: var(--color-text-muted);
+  line-height: 1.45;
+}
+.competitor-card__support {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: auto;
+  padding-top: 8px;
+  border-top: 1px solid var(--color-border);
+}
+.competitor-card__support-label {
+  font-size: 0.72rem;
+  color: var(--color-text-muted);
+}
+.competitor-card__support-value {
+  margin-left: auto;
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--color-brand);
+}
+
 .support-bar {
   display: inline-flex;
   gap: 4px;
-  margin-right: 8px;
   vertical-align: middle;
 }
 .support-bar__dot {
-  width: 11px;
-  height: 11px;
+  width: 10px;
+  height: 10px;
   border-radius: 50%;
   background: #dfe9e4;
 }
@@ -1952,6 +2034,9 @@
     grid-template-columns: 1fr;
     min-width: 0;
   }
+  .competitor-cards {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
   .method-matrix__row > span,
   .heuristic-table__row > span,
   .competitor-matrix__row > span {
@@ -2000,30 +2085,12 @@
   color: var(--color-text-muted);
 }
 
-/* —— 竞品矩阵：判定标准 + 象限图 —— */
-.competitor-matrix__header {
+/* —— 竞品矩阵：象限图 + 明细表 —— */
+.competitor-matrix__analysis {
   display: grid;
-  grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+  grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
   gap: 18px;
-  margin-bottom: 18px;
-}
-.competitor-matrix__criteria {
-  padding: 16px 18px;
-  background: #f7fbf9;
-  border: 1px solid var(--color-border);
-  border-radius: 14px;
-}
-.competitor-matrix__criteria strong {
-  display: block;
-  margin-bottom: 10px;
-  font-size: 0.9rem;
-}
-.competitor-matrix__criteria ul {
-  margin: 0;
-  padding-left: 18px;
-  font-size: 0.82rem;
-  line-height: 1.65;
-  color: var(--color-text-muted);
+  align-items: start;
 }
 .competitor-matrix__quadrant {
   background: #fff;
@@ -2039,38 +2106,54 @@
   height: auto;
   border-radius: 10px;
 }
-.competitor-matrix__quadrant-legend {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px 14px;
-  font-size: 0.72rem;
-  color: var(--color-text-muted);
+.competitor-matrix__table {
+  overflow-x: auto;
+  background: #fff;
+  border: 1px solid var(--color-border);
+  border-radius: 14px;
 }
-.competitor-matrix__legend-dot {
-  display: inline-flex;
-  align-items: center;
-  gap: 5px;
+.competitor-matrix__row {
+  display: grid;
+  grid-template-columns: 1.15fr 0.75fr 1.05fr 1.15fr;
+  min-width: 640px;
 }
-.competitor-matrix__legend-dot i {
-  display: inline-block;
-  width: 9px;
-  height: 9px;
-  border-radius: 50%;
-}
-.competitor-matrix__brand {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 28px;
-  height: 28px;
-  border-radius: 8px;
-  color: #fff;
-  margin-right: 10px;
-  vertical-align: middle;
+.competitor-matrix__row > span {
+  padding: 11px 12px;
+  border-top: 1px solid var(--color-border);
+  font-size: 0.85rem;
+  line-height: 1.55;
 }
 .competitor-matrix__row > span:first-child {
   display: flex;
-  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  gap: 2px;
+}
+.competitor-matrix__row > span:first-child small {
+  font-size: 0.72rem;
+  color: var(--color-text-muted);
+}
+.competitor-matrix__row--head {
+  background: #f4f8f7;
+}
+.competitor-matrix__row--head > span {
+  border-top: 0;
+  color: var(--color-brand);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+}
+.competitor-matrix__row--ours {
+  background: #f2f9f6;
+}
+.competitor-matrix__row--ours > span:first-child strong {
+  color: var(--color-brand);
+}
+.competitor-matrix__note {
+  margin: 12px 0 0;
+  font-size: 0.75rem;
+  color: var(--color-text-muted);
+  text-align: right;
 }
 
 /* —— 循证依据 5 卡：左大右小 —— */
@@ -2496,11 +2579,14 @@
 
 /* 响应式 */
 @media (max-width: 1024px) {
-  .competitor-matrix__header,
+  .competitor-matrix__analysis,
   .interview-guide__layout,
   .survey-section,
   .usability-detail {
     grid-template-columns: 1fr;
+  }
+  .competitor-cards {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
   }
   .action-gardening__demo {
     grid-template-columns: repeat(3, 1fr);
@@ -3116,28 +3202,6 @@
   aspect-ratio: auto;
   object-fit: contain;
   background: #fff;
-}
-
-/* —— 竞品对比：使用用户大图 —— */
-.competitor-matrix__figure {
-  margin: 0;
-  background: #fff;
-  border: 1px solid var(--color-border);
-  border-radius: 14px;
-  padding: 14px;
-  box-shadow: 0 10px 30px rgb(15 52 42 / 5%);
-}
-.competitor-matrix__image {
-  display: block;
-  width: 100%;
-  height: auto;
-  border-radius: 10px;
-}
-.competitor-matrix__figure figcaption {
-  margin-top: 10px;
-  font-size: 0.78rem;
-  color: var(--color-text-muted);
-  text-align: center;
 }
 
 /* —— 动作-园艺映射：带动效的大图 —— */
