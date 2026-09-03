@@ -66,7 +66,11 @@ import {
   usabilityFindings,
   usabilityProtocol,
 } from "../mocks/research-data";
-import { emgReport, surveyInsights } from "../mocks/research-methods";
+import {
+  emgReport,
+  surveyInsights,
+  surveyMethod,
+} from "../mocks/research-methods";
 import { DemoBadge } from "./case-study/shared/DemoBadge";
 
 function asset(path: string) {
@@ -882,6 +886,14 @@ function EMGReport() {
           <strong>协议</strong>
           {emgReport.protocol}
         </li>
+        <li>
+          <strong>被试</strong>
+          {emgReport.participants}
+        </li>
+        <li>
+          <strong>变异控制</strong>
+          {emgReport.variability}
+        </li>
       </ul>
       <p className="emg-report__note">{emgReport.note}</p>
     </div>
@@ -953,6 +965,14 @@ function SurveyInsights() {
           <li key={i}>{highlightNums(s)}</li>
         ))}
       </ul>
+      <div className="survey-method">
+        <strong>研究设定（演示样本）</strong>
+        <span>
+          {surveyMethod.sample}；{surveyMethod.profiles}
+        </span>
+        <span>{surveyMethod.instrument}</span>
+        <span>{surveyMethod.baseline}</span>
+      </div>
     </div>
   );
 }
@@ -995,6 +1015,12 @@ function JourneyEmotionChart() {
             />
           </AreaChart>
         </ResponsiveContainer>
+      </div>
+      <div className="chart-card__footer">
+        <small>
+          情绪得分（1 = 沮挫，5 =
+          顺利）基于康复师访谈的演示样本重构，非实测评分；仅用于定位体验低谷与设计机会。
+        </small>
       </div>
     </div>
   );

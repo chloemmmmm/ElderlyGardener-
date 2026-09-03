@@ -2656,6 +2656,20 @@
   font-size: 0.8rem;
   color: var(--color-text-muted);
 }
+.survey-method {
+  margin-top: 12px;
+  padding: 10px 12px;
+  border-top: 1px dashed var(--color-border);
+  display: grid;
+  gap: 4px;
+  font-size: 0.75rem;
+  line-height: 1.6;
+  color: var(--color-text-muted);
+}
+.survey-method strong {
+  font-size: 0.78rem;
+  color: var(--color-text);
+}
 .emg-report__badge {
   flex: none;
   padding: 2px 8px;
