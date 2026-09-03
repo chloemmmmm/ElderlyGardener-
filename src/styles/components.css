@@ -1048,6 +1048,15 @@
   color: var(--color-brand);
   background: #dff0e6;
 }
+.suggestion-note {
+  margin: 2px 0 4px;
+  padding: 8px 10px;
+  color: var(--color-text-muted);
+  background: #f7faf8;
+  border-radius: 6px;
+  font-size: 10px;
+  line-height: 1.6;
+}
 .ai-summary-panel > footer {
   padding: 13px 16px;
   border-top: 1px solid rgb(255 255 255 / 10%);

@@ -174,7 +174,9 @@ export function ClientDetailPage() {
                       <div>
                         <strong>
                           {session.durationMinutes} 分钟 ·{" "}
-                          {session.status === "completed" ? "已完成" : "已中断"}
+                          {session.status === "completed"
+                            ? "已完成"
+                            : "中途中断"}
                         </strong>
                         <span>
                           数据完整度{" "}

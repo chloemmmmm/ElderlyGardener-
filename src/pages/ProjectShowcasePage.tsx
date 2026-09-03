@@ -1375,7 +1375,7 @@ export function ProjectShowcasePage() {
             <h1 className="project-hero__title">
               ElderlyGardener
               <br />
-              Upper Limb Rehabilitation via Gardening
+              Upper Limb Rehabilitation Through Gardening
             </h1>
             <p className="project-hero__lead">
               面向认知障碍与高龄老人的上肢康复训练方案：C 端可穿戴园艺套件 + VR

@@ -224,7 +224,11 @@ function ProblemStatement() {
   const stats = [
     { value: "2.8 亿", label: "中国 60 岁以上人口", tone: "brand" },
     { value: "< 30%", label: "居家康复长期坚持率", tone: "danger" },
-    { value: "0", label: "即时多模态反馈的现有方案", tone: "neutral" },
+    {
+      value: "极少",
+      label: "面向居家园艺任务的即时多模态反馈方案",
+      tone: "neutral",
+    },
   ];
   return (
     <div className="problem-statement">
@@ -240,6 +244,13 @@ function ProblemStatement() {
           </div>
         ))}
       </div>
+      <p className="prd-data-note">
+        数据口径：60 岁以上人口引自国家统计局历年公报（2022 年末约 2.8
+        亿）；居家康复长期坚持率「约
+        30%」为文献综述口径的估计值，非同条件直接对比，详见展示页「研究方法」章节。振动、AR
+        反馈等康复方案已有先例，本方案的差异点在于「园艺任务化 ×
+        居家即时多模态反馈」的组合。
+      </p>
       <div className="problem-statement__arrow" aria-hidden="true">
         ↓
       </div>
@@ -353,7 +364,7 @@ export function ProjectPrdPage() {
             端可穿戴园艺套件 + VR 沉浸式训练场景。
           </p>
           <div className="project-prd__meta">
-            <span>版本：v1.0</span>
+            <span>版本：v1.3 · 网页版随原型迭代更新</span>
             <span>更新：2026.09</span>
             <span>作者：徐伊宁</span>
             <span>状态：概念原型 · 作品集</span>
@@ -381,6 +392,8 @@ export function ProjectPrdPage() {
           </p>
           <ProblemStatement />
           <ProductArchitectureDiagram />
+          <h3 className="prd-h3">康复师核心闭环</h3>
+          <UserFlowDiagram />
           <div className="prd-cards">
             <div className="prd-card">
               <h4>对老人</h4>
@@ -453,10 +466,14 @@ export function ProjectPrdPage() {
               </tr>
             </tbody>
           </table>
+          <p className="prd-table-note">
+            测量说明：SUS 目标 ≥ 70 高于行业均值 68（Bangor et al.,
+            2008）；其余指标不预设虚构基线，将在 Phase 2
+            试点中实测建立基线后再校准目标值。
+          </p>
         </Section>
 
         <Section id="personas" eyebrow="03 用户与角色" title="核心用户画像">
-          <UserFlowDiagram />
           <div className="prd-personas">
             <div className="prd-persona">
               <img
@@ -546,6 +563,11 @@ export function ProjectPrdPage() {
           title="三端功能需求清单"
         >
           <InformationArchitectureDiagram />
+          <p className="prd-table-note">
+            原型状态：✅ 已在演示原型中实现；◐ 部分实现（缺口随迭代补齐）；🔜
+            规划中，待后续迭代；「一代原型 / MVP 演示」指 C 端硬件与 VR
+            端的概念验证。
+          </p>
           <h3 className="prd-h3">B 端 · 康复师管理后台</h3>
           <table className="prd-table">
             <thead>
@@ -554,6 +576,7 @@ export function ProjectPrdPage() {
                 <th>需求 ID</th>
                 <th>需求描述</th>
                 <th>优先级</th>
+                <th>原型状态</th>
               </tr>
             </thead>
             <tbody>
@@ -562,70 +585,85 @@ export function ProjectPrdPage() {
                 <td>B-001</td>
                 <td>首页展示「需要判断」优先级列表，按风险与异常程度排序</td>
                 <td>P0</td>
+                <td>✅ 已实现</td>
               </tr>
               <tr>
                 <td>B-002</td>
                 <td>今日安排、7 日完成趋势、最新动态卡片</td>
                 <td>P0</td>
+                <td>✅ 已实现</td>
               </tr>
               <tr>
                 <td>B-003</td>
                 <td>关键指标（待关注数、计划训练数、完成率、执行中计划）</td>
                 <td>P1</td>
+                <td>✅ 已实现</td>
               </tr>
               <tr>
                 <td rowSpan={3}>康复对象</td>
                 <td>B-004</td>
                 <td>对象列表：多维筛选、搜索、分页、风险标签</td>
                 <td>P0</td>
+                <td>✅ 已实现</td>
               </tr>
               <tr>
                 <td>B-005</td>
                 <td>对象 360° 档案：基本信息、阶段、训练计划、历史记录</td>
                 <td>P0</td>
+                <td>✅ 已实现</td>
               </tr>
               <tr>
                 <td>B-006</td>
                 <td>对象画像卡片：目标、痛点、典型一天、原话引用</td>
                 <td>P1</td>
+                <td>🔜 后续迭代</td>
               </tr>
               <tr>
                 <td rowSpan={3}>训练计划</td>
                 <td>B-007</td>
                 <td>计划库：按对象/状态筛选，查看计划概览</td>
                 <td>P0</td>
+                <td>✅ 已实现</td>
               </tr>
               <tr>
                 <td>B-008</td>
-                <td>计划编辑器：添加/删除/启用动作，配置角度、次数、阻力</td>
+                <td>
+                  计划编辑器：启用/停用动作，配置目标次数、保持时长与反馈方式
+                </td>
                 <td>P0</td>
+                <td>◐ 部分实现（角度与阻力配置待后续迭代）</td>
               </tr>
               <tr>
                 <td>B-009</td>
-                <td>变更摘要：高亮修改字段，展示变更人与变更原因</td>
+                <td>变更摘要：逐项高亮修改字段，保存前弹窗二次确认</td>
                 <td>P1</td>
+                <td>◐ 部分实现（变更人/原因留痕待后续迭代）</td>
               </tr>
               <tr>
                 <td rowSpan={2}>训练记录</td>
                 <td>B-010</td>
                 <td>训练记录列表：状态筛选、搜索、复盘入口</td>
                 <td>P0</td>
+                <td>✅ 已实现</td>
               </tr>
               <tr>
                 <td>B-011</td>
                 <td>训练复盘页：系统事实 + 用户自述 + AI 建议 + 人工备注</td>
                 <td>P0</td>
+                <td>✅ 已实现</td>
               </tr>
               <tr>
                 <td rowSpan={2}>数据看板</td>
                 <td>B-012</td>
                 <td>康复师视角 KPI、风险分层、阶段分布、康复师负载</td>
                 <td>P1</td>
+                <td>✅ 已实现</td>
               </tr>
               <tr>
                 <td>B-013</td>
                 <td>7 日趋势、动作幅度分布、关键指标下钻</td>
                 <td>P1</td>
+                <td>◐ 部分实现（关键指标下钻待后续迭代）</td>
               </tr>
               <tr>
                 <td rowSpan={2}>系统</td>
@@ -634,11 +672,13 @@ export function ProjectPrdPage() {
                   通知中心：AI 待确认、计划到期、依从性、数据质量、系统提醒
                 </td>
                 <td>P1</td>
+                <td>✅ 已实现</td>
               </tr>
               <tr>
                 <td>B-015</td>
                 <td>全局搜索：康复对象 / 训练计划 / 训练记录即时检索</td>
                 <td>P1</td>
+                <td>✅ 已实现</td>
               </tr>
             </tbody>
           </table>
@@ -651,6 +691,7 @@ export function ProjectPrdPage() {
                 <th>需求 ID</th>
                 <th>需求描述</th>
                 <th>优先级</th>
+                <th>原型状态</th>
               </tr>
             </thead>
             <tbody>
@@ -659,39 +700,46 @@ export function ProjectPrdPage() {
                 <td>C-001</td>
                 <td>前臂 IMU 采集姿态与角速度</td>
                 <td>P0</td>
+                <td>一代原型</td>
               </tr>
               <tr>
                 <td>C-002</td>
                 <td>弯曲传感器 + 压力传感器采集关节角度与握力</td>
                 <td>P0</td>
+                <td>一代原型</td>
               </tr>
               <tr>
                 <td rowSpan={2}>动作判定</td>
                 <td>C-003</td>
                 <td>组合阈值判定：角度 + 力度 + 时序</td>
                 <td>P0</td>
+                <td>一代原型</td>
               </tr>
               <tr>
                 <td>C-004</td>
                 <td>区分「未完成 / 部分完成 / 达标 / 超额」</td>
                 <td>P1</td>
+                <td>🔜 后续迭代</td>
               </tr>
               <tr>
                 <td rowSpan={2}>反馈</td>
                 <td>C-005</td>
                 <td>气动气囊提供温和阻力/助力反馈</td>
                 <td>P0</td>
+                <td>一代原型</td>
               </tr>
               <tr>
                 <td>C-006</td>
                 <td>震动马达提示动作起始与纠偏</td>
                 <td>P1</td>
+                <td>一代原型</td>
               </tr>
               <tr>
                 <td>连接</td>
                 <td>C-007</td>
                 <td>通过蓝牙/Wi-Fi 将数据同步至后端</td>
                 <td>P0</td>
+                <td>一代原型</td>
               </tr>
             </tbody>
           </table>
@@ -704,6 +752,7 @@ export function ProjectPrdPage() {
                 <th>需求 ID</th>
                 <th>需求描述</th>
                 <th>优先级</th>
+                <th>原型状态</th>
               </tr>
             </thead>
             <tbody>
@@ -712,17 +761,20 @@ export function ProjectPrdPage() {
                 <td>V-001</td>
                 <td>「银龄园艺小站」主场景：花园、菜地、果树区</td>
                 <td>P0</td>
+                <td>MVP 演示</td>
               </tr>
               <tr>
                 <td>V-002</td>
                 <td>三段式任务：浇水 → 松土 → 摘果，对应不同上肢动作</td>
                 <td>P0</td>
+                <td>MVP 演示</td>
               </tr>
               <tr>
                 <td rowSpan={2}>交互</td>
                 <td>V-003</td>
                 <td>低晕动设计：定点注视 + 手势/控制器触发，避免高速移动</td>
                 <td>P0</td>
+                <td>MVP 演示</td>
               </tr>
               <tr>
                 <td>V-004</td>
@@ -730,17 +782,20 @@ export function ProjectPrdPage() {
                   即时视觉反馈：动作达标触发水花、落叶、果实掉落等正向动画
                 </td>
                 <td>P1</td>
+                <td>🔜 后续迭代</td>
               </tr>
               <tr>
                 <td rowSpan={2}>训练管理</td>
                 <td>V-005</td>
                 <td>训练前简短校准与引导</td>
                 <td>P1</td>
+                <td>🔜 后续迭代</td>
               </tr>
               <tr>
                 <td>V-006</td>
                 <td>训练结束展示完成度、疲劳度自评与下次训练预告</td>
                 <td>P1</td>
+                <td>🔜 后续迭代</td>
               </tr>
             </tbody>
           </table>
@@ -824,7 +879,7 @@ export function ProjectPrdPage() {
               loading="lazy"
             />
             <figcaption>
-              B 端后台工作台： Evidence First
+              B 端后台工作台：Evidence First
               理念落地——优先展示需要康复师行动的异常信号
             </figcaption>
           </figure>

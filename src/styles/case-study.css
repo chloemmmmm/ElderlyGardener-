@@ -3739,3 +3739,11 @@
   color: var(--color-brand);
   font-weight: 600;
 }
+
+.prd-data-note,
+.prd-table-note {
+  margin: 10px 0 0;
+  font-size: 0.75rem;
+  line-height: 1.6;
+  color: var(--color-text-muted);
+}

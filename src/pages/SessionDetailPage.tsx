@@ -204,9 +204,7 @@ export function SessionDetailPage() {
                         )
                       }
                     >
-                      {confirmed.includes(item.id)
-                        ? "✓ 已确认并记录"
-                        : "确认采用"}
+                      {confirmed.includes(item.id) ? "✓ 已确认" : "确认采用"}
                     </button>
                   </article>
                 ))
