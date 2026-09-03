@@ -7,7 +7,6 @@ import {
   Apple,
   BookOpen,
   BrainCircuit,
-  Building2,
   ClipboardList,
   Droplets,
   Dumbbell,
@@ -45,13 +44,11 @@ import {
 
 import {
   authorBio,
-  competitors,
   designPrinciples,
   emgValidation,
   heuristicEvaluation,
   interviewGuide,
   journeyStages,
-  literatureModules,
   methodMatrix,
   personas,
   reflections,
@@ -217,6 +214,84 @@ function ExerciseMap() {
   );
 }
 
+function PilotStoryboard() {
+  const panels = [
+    {
+      n: "00",
+      title: "基线 IMU 评估",
+      date: "Day 1",
+      desc: "个性化动作基线标定 + 安全包络校准",
+    },
+    {
+      n: "01",
+      title: "第 1 周",
+      date: "Jul 9",
+      desc: "初始适应期：熟悉 VR 场景与园艺任务",
+    },
+    {
+      n: "02",
+      title: "第 2 周",
+      date: "Jul 16",
+      desc: "初始适应期：建立每日训练节奏",
+    },
+    {
+      n: "03",
+      title: "第 3 周",
+      date: "Jul 23",
+      desc: "表现巩固期：动作完成度逐步提升",
+    },
+    {
+      n: "04",
+      title: "第 4 周",
+      date: "Jul 30",
+      desc: "表现巩固期：增加任务复杂度",
+    },
+    {
+      n: "05",
+      title: "第 5 周",
+      date: "Aug 6",
+      desc: "持续参与期：保持动机与依从性",
+    },
+    {
+      n: "06",
+      title: "第 6 周",
+      date: "Aug 13",
+      desc: "持续参与期：数据趋势稳定",
+    },
+    {
+      n: "07",
+      title: "最终访谈",
+      date: "Aug 15",
+      desc: "整体反思与训练效果评估",
+    },
+  ];
+  return (
+    <div className="pilot-storyboard">
+      <h3 className="project-section__h3">
+        <ClipboardList size={20} className="inline-icon" aria-hidden="true" />8
+        周居家训练试点：从基线到访谈
+      </h3>
+      <div className="pilot-storyboard__track" aria-label="8 周试点时间线">
+        {panels.map((p, i) => (
+          <div
+            className="pilot-storyboard__panel"
+            key={p.n}
+            style={{ animationDelay: `${i * 120}ms` }}
+          >
+            <span className="pilot-storyboard__num">{p.n}</span>
+            <strong>{p.title}</strong>
+            <span className="pilot-storyboard__date">{p.date}</span>
+            <span className="pilot-storyboard__desc">{p.desc}</span>
+          </div>
+        ))}
+      </div>
+      <p className="pilot-storyboard__note">
+        基线评估 → 6 周渐进式训练 → 最终访谈，覆盖动作表现、依从性与主观反馈。
+      </p>
+    </div>
+  );
+}
+
 function MethodMatrix() {
   return (
     <div className="method-matrix">
@@ -260,220 +335,40 @@ function LiteratureReviewCards() {
         <BookOpen size={20} className="inline-icon" aria-hidden="true" />
         循证依据：5 条关键证据链
       </h3>
-      <div className="literature-review__layout">
-        <figure className="literature-review__figure">
-          <img
-            src={asset("assets/case-study/method-literature-review.jpg")}
-            alt="从老年运动有效性到园艺化上肢运动系统的设计机会"
-            loading="lazy"
-            className="literature-review__image"
-          />
-          <figcaption>
-            课程原始文献梳理：从老年运动、上肢功能、园艺转译到反馈闭环
-          </figcaption>
-        </figure>
-        <div className="literature-cards">
-          {literatureModules.map((item, i) => (
-            <div className="literature-card" key={item.title}>
-              <span className="literature-card__num">
-                {String(i + 1).padStart(2, "0")}
-              </span>
-              <div>
-                <strong>{item.title}</strong>
-                <p>{item.shortFinding ?? item.finding}</p>
-                <span className="literature-card__implication">
-                  {item.implication}
-                </span>
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
+      <figure className="literature-review__figure literature-review__figure--full">
+        <img
+          src={asset("assets/case-study/literature-evidence-chain.png")}
+          alt="从老年运动有效性、上肢功能、园艺转译到反馈闭环的 5 条关键证据链"
+          loading="lazy"
+          className="literature-review__image"
+        />
+        <figcaption>
+          课程原始文献梳理：从老年运动、上肢功能、园艺转译到反馈闭环
+        </figcaption>
+      </figure>
     </div>
   );
 }
 
 function CompetitorMatrix() {
-  const levels: Record<string, number> = { 高: 3, 中: 2, 低: 1 };
-  const total = 3;
-  const meta: Record<
-    string,
-    { Icon: typeof Building2; color: string; abbr: string }
-  > = {
-    康复之家: { Icon: Building2, color: "#3b8c72", abbr: "康" },
-    医瑞云康复: { Icon: Stethoscope, color: "#5aa98e", abbr: "医" },
-    "简单心理 · 康复模块": { Icon: HeartPulse, color: "#88c4af", abbr: "简" },
-    通用远程医疗平台: { Icon: Monitor, color: "#b5dece", abbr: "通" },
-    "ElderlyGardener（本方案）": { Icon: Shrub, color: "#176b55", abbr: "园" },
-  };
-  const criteria = [
-    "信息架构分析：梳理各产品核心模块与康复师工作流的匹配度",
-    "启发式评估：从「系统状态可见性」「识别而非回忆」等维度打分",
-    "功能覆盖度：传感器数据、计划编辑、远程随访、证据追溯四项能力",
-    "决策支持评分：1–3 分，综合数据深度、可视化、可干预性",
-  ];
-
-  const xScale = (v: number) => 10 + ((v - 1) / 4) * 80;
-  const yScale = (v: number) => 90 - ((v - 1) / 4) * 80;
-
   return (
     <div className="competitor-matrix">
       <h3 className="project-section__h3">
         <Search size={20} className="inline-icon" aria-hidden="true" />
         竞品对比：判定标准与能力象限
       </h3>
-      <div className="competitor-matrix__header">
-        <div className="competitor-matrix__criteria">
-          <strong>判定标准</strong>
-          <ul>
-            {criteria.map((c) => (
-              <li key={c}>{c}</li>
-            ))}
-          </ul>
-        </div>
-        <div className="competitor-matrix__quadrant">
-          <svg
-            viewBox="0 0 100 100"
-            role="img"
-            aria-label="竞品能力象限图：横轴为临床专业性，纵轴为数据决策支持"
-          >
-            <rect x="0" y="0" width="50" height="50" fill="#f7fbfa" />
-            <rect x="50" y="0" width="50" height="50" fill="#eef6f3" />
-            <rect x="0" y="50" width="50" height="50" fill="#eef6f3" />
-            <rect x="50" y="50" width="50" height="50" fill="#e8f2ee" />
-            <text x="25" y="8" textAnchor="middle" fontSize="4" fill="#7a9990">
-              高决策支持 / 低专业性
-            </text>
-            <text x="75" y="8" textAnchor="middle" fontSize="4" fill="#7a9990">
-              高决策支持 / 高专业性
-            </text>
-            <text x="25" y="96" textAnchor="middle" fontSize="4" fill="#7a9990">
-              低决策支持 / 低专业性
-            </text>
-            <text x="75" y="96" textAnchor="middle" fontSize="4" fill="#7a9990">
-              低决策支持 / 高专业性
-            </text>
-            <line
-              x1="50"
-              y1="4"
-              x2="50"
-              y2="96"
-              stroke="#bad0c8"
-              strokeWidth="0.6"
-              strokeDasharray="2 2"
-            />
-            <line
-              x1="4"
-              y1="50"
-              x2="96"
-              y2="50"
-              stroke="#bad0c8"
-              strokeWidth="0.6"
-              strokeDasharray="2 2"
-            />
-            <text
-              x="50"
-              y="100"
-              textAnchor="middle"
-              fontSize="4"
-              fill="#557166"
-            >
-              临床专业性 →
-            </text>
-            <text
-              x="2"
-              y="50"
-              textAnchor="middle"
-              fontSize="4"
-              fill="#557166"
-              transform="rotate(-90 2 50)"
-            >
-              数据决策支持 →
-            </text>
-            {competitors.map((c) => {
-              const { x, y } = c.coords;
-              const m = meta[c.name];
-              return (
-                <g
-                  key={c.name}
-                  transform={`translate(${xScale(x)},${yScale(y)})`}
-                >
-                  <circle r="5" fill={m.color} opacity="0.18" />
-                  <circle r="3" fill={m.color} />
-                  <text
-                    x="0"
-                    y="-5"
-                    textAnchor="middle"
-                    fontSize="4"
-                    fill="#153c32"
-                    fontWeight="700"
-                  >
-                    {m.abbr}
-                  </text>
-                </g>
-              );
-            })}
-          </svg>
-          <div className="competitor-matrix__quadrant-legend">
-            {competitors.map((c) => {
-              const m = meta[c.name];
-              return (
-                <span key={c.name} className="competitor-matrix__legend-dot">
-                  <i style={{ background: m.color }} aria-hidden="true" />
-                  {c.name}
-                </span>
-              );
-            })}
-          </div>
-        </div>
-      </div>
-      <div
-        className="competitor-matrix__table"
-        role="table"
-        aria-label="竞品决策支持能力对比"
-      >
-        <div
-          className="competitor-matrix__row competitor-matrix__row--head"
-          role="row"
-        >
-          <span role="columnheader">产品</span>
-          <span role="columnheader">目标用户</span>
-          <span role="columnheader">决策支持能力</span>
-          <span role="columnheader">关键短板</span>
-        </div>
-        {competitors.map((c) => {
-          const { Icon, color } = meta[c.name];
-          return (
-            <div className="competitor-matrix__row" role="row" key={c.name}>
-              <span role="cell">
-                <span
-                  className="competitor-matrix__brand"
-                  style={{ background: color }}
-                >
-                  <Icon size={16} aria-hidden="true" />
-                </span>
-                <strong>{c.name}</strong>
-              </span>
-              <span role="cell">{c.audience}</span>
-              <span role="cell">
-                <span
-                  className="support-bar"
-                  aria-label={`决策支持 ${c.decisionSupport}`}
-                >
-                  {Array.from({ length: total }).map((_, i) => (
-                    <span
-                      key={i}
-                      className={`support-bar__dot ${i < levels[c.decisionSupport] ? "is-on" : ""}`}
-                    />
-                  ))}
-                </span>
-                <span className="support-bar__label">{c.decisionSupport}</span>
-              </span>
-              <span role="cell">{c.weakness}</span>
-            </div>
-          );
-        })}
-      </div>
+      <figure className="competitor-matrix__figure">
+        <img
+          src={asset("assets/case-study/competitor-matrix-v2.png")}
+          alt="竞品对比：判定标准、能力象限与产品能力表格"
+          loading="lazy"
+          className="competitor-matrix__image"
+        />
+        <figcaption>
+          基于信息架构、启发式评估、功能覆盖与决策支持四个维度，对比 4
+          款竞品与本方案
+        </figcaption>
+      </figure>
     </div>
   );
 }
@@ -513,8 +408,8 @@ function InterviewGuide() {
               <Stethoscope size={18} />
             </span>
             <div>
-              <strong>模拟康复师</strong>
-              <span>不同康复师的典型回答</span>
+              <strong>不同康复师的回答</strong>
+              <span>基于 4 位康复治疗师访谈整理</span>
             </div>
           </div>
           <div className="interview-guide__bubbles">
@@ -1064,8 +959,8 @@ export function ProjectShowcasePage() {
             </div>
             <div className="ecosystem-card__visual">
               <img
-                src={asset("assets/case-study/vr-prototype.jpg")}
-                alt="VR 训练场景：银龄园艺小站、AI 小助手与三阶段任务"
+                src={asset("assets/case-study/vr-garden-scenes.jpg")}
+                alt="VR 园艺训练场景：银龄园艺小站、浇水、松土与摘果任务"
                 loading="lazy"
               />
             </div>
@@ -1080,16 +975,6 @@ export function ProjectShowcasePage() {
         eyebrow="02 背景与问题"
         title="为什么用园艺做上肢康复？"
       >
-        <figure className="problem-banner">
-          <img
-            src={asset("assets/case-study/technical-architecture.jpg")}
-            alt="技术架构：传感器、Arduino、PC 与 VR 的多模态反馈链路"
-            loading="lazy"
-          />
-          <figcaption>
-            课程原始技术架构：多源传感器 → Arduino → PC 处理 → 气动/震动/VR 反馈
-          </figcaption>
-        </figure>
         <p className="project-section__lead">
           中国 60 岁以上人口已突破 2.8
           亿，脑卒中、骨折术后与慢性病导致的上肢功能障碍严重影响老人独立生活能力。居家康复可及性高，但长期依从性不足
@@ -1133,17 +1018,6 @@ export function ProjectShowcasePage() {
           验证、用户研究与可用性测试方案设计。
         </p>
         <ResearchTimeline />
-        <figure className="pilot-timeline">
-          <img
-            src={asset("assets/case-study/246.png")}
-            alt="8 周居家训练试点时间线：基线 IMU 评估、第 1–6 周训练阶段与最终访谈"
-            loading="lazy"
-            className="pilot-timeline__image"
-          />
-          <figcaption>
-            8 周居家训练试点时间线：基线评估 → 6 周渐进式训练 → 最终访谈
-          </figcaption>
-        </figure>
         <MethodMatrix />
         <div className="method-charts">
           <MethodMixChart />
@@ -1338,10 +1212,10 @@ export function ProjectShowcasePage() {
         <div className="action-gardening">
           <figure className="action-gardening__figure">
             <img
-              src={asset("assets/case-study/action-gardening-p4.jpg")}
+              src={asset("assets/case-study/exercise-gardening-mapping.png")}
               alt="标准上肢训练动作与园艺任务的映射关系"
               loading="lazy"
-              className="action-gardening__image"
+              className="action-gardening__image action-gardening__image--animated"
             />
             <figcaption>
               课程原始动作映射：坐姿划船、臂弯举、侧平举、过头举、握力训练 →
@@ -1387,6 +1261,17 @@ export function ProjectShowcasePage() {
           <BrainCircuit size={20} className="inline-icon" aria-hidden="true" />
           系统逻辑与反馈闭环
         </h3>
+        <figure className="technical-architecture">
+          <img
+            src={asset("assets/case-study/technical-architecture.jpg")}
+            alt="技术架构：传感器、Arduino、PC 与 VR 的多模态反馈链路"
+            loading="lazy"
+            className="technical-architecture__image"
+          />
+          <figcaption>
+            课程原始技术架构：多源传感器 → Arduino → PC 处理 → 气动/震动/VR 反馈
+          </figcaption>
+        </figure>
         <div className="system-logic-layout system-logic-layout--large">
           <figure className="system-logic-layout__figure">
             <img
@@ -1452,6 +1337,7 @@ export function ProjectShowcasePage() {
             <figcaption>用户测试：真实使用者完成训练任务并给出反馈</figcaption>
           </figure>
         </div>
+        <PilotStoryboard />
         <DemoBadge label="[课程原始数据]" variant="original">
           <p style={{ margin: 0 }}>
             来自课程汇报 p.24

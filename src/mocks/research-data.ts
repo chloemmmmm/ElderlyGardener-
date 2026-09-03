@@ -139,7 +139,7 @@ export const personas = [
     pain: "老人训练数据分散在微信、电话和纸质记录里，难以及时发现依从性下滑。",
     quote: "我最怕的不是数据少，而是不知道哪个数据真正需要我出手。",
     day: "08:30 查看今日待复核列表 → 09:00 电话随访 3 位老人 → 14:00 调整 2 份计划 → 17:00 写周报。",
-    avatar: "assets/case-study/persona-chenmin.png",
+    avatar: "assets/case-study/therapist-female.jpg",
   },
   {
     id: "P2",
@@ -151,7 +151,7 @@ export const personas = [
     pain: "系统给出的「完成率」不能区分是老人没做，还是传感器脱落。",
     quote: "我需要看到原始数据和不确定性的标记，而不是一个漂亮的总分。",
     day: "08:00 查房 → 10:00 门诊评估 → 14:00 登录后台复核居家数据 → 16:00 整理科研数据集。",
-    avatar: "assets/case-study/persona-wanghaoran.png",
+    avatar: "assets/case-study/therapist-male.jpg",
   },
 ];
 

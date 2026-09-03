@@ -1795,7 +1795,7 @@
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
   gap: 20px;
-  align-items: start;
+  align-items: end;
   margin: 10px 0 8px;
 }
 .method-validation__image {
@@ -2998,6 +2998,169 @@
   .problem-statement__cards,
   .ia-diagram__branches {
     grid-template-columns: 1fr;
+  }
+}
+
+/* ============================================================
+   用户本轮追加：图片替换、架构图位置、时间线动画、竞品与证据链大图
+   ============================================================ */
+
+/* —— 简历弹窗：实习经历周期 —— */
+.resume-modal__list li {
+  gap: 4px;
+}
+.resume-modal__period {
+  font-size: 11px;
+  color: var(--color-brand);
+  font-weight: 600;
+}
+
+/* —— 技术架构图：放在系统逻辑区 —— */
+.technical-architecture {
+  margin: 4px 0 24px;
+}
+.technical-architecture__image {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 14px;
+  border: 1px solid var(--color-border);
+  box-shadow: 0 10px 30px rgb(15 52 42 / 6%);
+}
+.technical-architecture figcaption {
+  margin-top: 8px;
+  font-size: 0.78rem;
+  color: var(--color-text-muted);
+  text-align: center;
+}
+
+/* —— 8 周试点故事板动画 —— */
+.pilot-storyboard {
+  margin: 28px 0 8px;
+}
+.pilot-storyboard__track {
+  display: grid;
+  grid-template-columns: repeat(8, minmax(124px, 1fr));
+  gap: 10px;
+  overflow-x: auto;
+  padding: 4px 2px 14px;
+}
+.pilot-storyboard__panel {
+  display: grid;
+  gap: 6px;
+  padding: 14px 12px;
+  background: #fff;
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+  box-shadow: 0 6px 18px rgb(15 52 42 / 5%);
+  animation: storyboard-in 520ms ease both;
+  min-height: 130px;
+}
+.pilot-storyboard__panel:nth-child(1) {
+  border-color: var(--color-brand);
+  background: #f4faf7;
+}
+.pilot-storyboard__panel:nth-last-child(1) {
+  border-color: #153c32;
+  background: #153c32;
+  color: #f7fbf9;
+}
+.pilot-storyboard__panel:nth-last-child(1) .pilot-storyboard__desc,
+.pilot-storyboard__panel:nth-last-child(1) .pilot-storyboard__date {
+  color: #cfe0db;
+}
+.pilot-storyboard__num {
+  font-family: var(--font-data);
+  font-size: 18px;
+  font-weight: 800;
+  color: var(--color-brand);
+}
+.pilot-storyboard__panel:nth-last-child(1) .pilot-storyboard__num {
+  color: #f7fbf9;
+}
+.pilot-storyboard__panel strong {
+  font-size: 0.9rem;
+}
+.pilot-storyboard__date {
+  font-size: 11px;
+  color: var(--color-text-muted);
+  font-weight: 600;
+}
+.pilot-storyboard__desc {
+  font-size: 11px;
+  line-height: 1.5;
+  color: var(--color-text-muted);
+}
+.pilot-storyboard__note {
+  margin: 6px 0 0;
+  font-size: 0.8rem;
+  color: var(--color-text-muted);
+  text-align: center;
+}
+@keyframes storyboard-in {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* —— 文献综述：大图全宽 —— */
+.literature-review__figure--full {
+  margin: 0;
+}
+.literature-review__figure--full .literature-review__image {
+  aspect-ratio: auto;
+  object-fit: contain;
+  background: #fff;
+}
+
+/* —— 竞品对比：使用用户大图 —— */
+.competitor-matrix__figure {
+  margin: 0;
+  background: #fff;
+  border: 1px solid var(--color-border);
+  border-radius: 14px;
+  padding: 14px;
+  box-shadow: 0 10px 30px rgb(15 52 42 / 5%);
+}
+.competitor-matrix__image {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
+}
+.competitor-matrix__figure figcaption {
+  margin-top: 10px;
+  font-size: 0.78rem;
+  color: var(--color-text-muted);
+  text-align: center;
+}
+
+/* —— 动作-园艺映射：带动效的大图 —— */
+.action-gardening__image--animated {
+  animation: mapping-pan 16s ease-in-out infinite alternate;
+}
+@keyframes mapping-pan {
+  0% {
+    transform: scale(1) translateY(0);
+  }
+  100% {
+    transform: scale(1.03) translateY(-6px);
+  }
+}
+
+@media (max-width: 1024px) {
+  .pilot-storyboard__track {
+    grid-template-columns: repeat(4, minmax(140px, 1fr));
+  }
+}
+@media (max-width: 640px) {
+  .pilot-storyboard__track {
+    grid-template-columns: repeat(2, minmax(140px, 1fr));
   }
 }
 
