@@ -83,7 +83,7 @@ export function LoadingState({ label = "正在整理数据…" }: { label?: stri
     <div className="state-box" role="status">
       <span className="loader" aria-hidden="true" />
       <strong>{label}</strong>
-      <span>请稍候，演示数据正在同步。</span>
+      <span>请稍候，数据正在同步。</span>
     </div>
   );
 }
@@ -124,7 +124,7 @@ export function EmptyState({
 }
 
 /**
- * 演示版中暂未开放的功能，点击后给出与「新增康复对象」一致的解释提示，
+ * 当前版本暂未开放的功能，点击后给出解释提示，
  * 而不是无响应的假按钮。
  */
 export function useDemoNotice(message: string) {

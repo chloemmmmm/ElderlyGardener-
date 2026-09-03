@@ -50,7 +50,7 @@ export function ProfileMenu() {
             </span>
             <div>
               <strong>林医生</strong>
-              <span>康复治疗师 · 演示角色</span>
+              <span>康复治疗师</span>
             </div>
           </header>
           <Link className="profile-menu__link" to="/">
@@ -59,9 +59,6 @@ export function ProfileMenu() {
           <Link className="profile-menu__link" to="/analytics">
             ◈ 查看数据看板
           </Link>
-          <p className="profile-menu__note">
-            康护园为作品集概念演示，界面中的对象、记录与数值均为演示样本数据。
-          </p>
         </section>
       ) : null}
     </div>

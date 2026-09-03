@@ -24,7 +24,7 @@ export function ClientDetailPage() {
   const { clientId = "" } = useParams();
   const [activeTab, setActiveTab] = useState("overview");
   const followUp = useDemoNotice(
-    "随访记录写入需接入语音转写与结构化模板，暂未在演示版开放；可在下方查看已留痕的干预记录。",
+    "随访记录写入需接入语音转写与结构化模板，暂未在当前版本开放；可在下方查看已留痕的干预记录。",
   );
   const detail = useQuery({
     queryKey: ["client", clientId],

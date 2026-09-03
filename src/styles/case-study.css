@@ -187,16 +187,12 @@
   background: var(--color-surface-subtle);
 }
 
-/* 演示样本标注 */
+/* 数据来源标注 */
 .demo-badge {
   border-radius: var(--radius-lg);
   margin: 1.25rem 0;
   background: var(--color-surface);
   border: 1px solid var(--color-border);
-}
-
-.demo-badge--demo {
-  border-left: 4px solid var(--color-attention);
 }
 
 .demo-badge--original {

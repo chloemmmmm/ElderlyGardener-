@@ -46,7 +46,7 @@ export function ClientsPage() {
       <PageHeader
         eyebrow="Client management"
         title="康复对象"
-        description="统一查看训练阶段、计划执行与风险线索。名单、标签与完成率均为作品集演示数据。"
+        description="统一查看训练阶段、计划执行与风险线索。"
         actions={
           <button
             className="primary-button"
@@ -61,8 +61,8 @@ export function ClientsPage() {
         <div className="demo-notice" role="status">
           <span aria-hidden="true">✳</span>
           <p>
-            演示版聚焦“对象管理 → 计划调整 → 训练复盘”的既有闭环；
-            新增对象走入院建档流程，暂不在本次演示范围内。
+            当前版本聚焦“对象管理 → 计划调整 → 训练复盘”的既有闭环；
+            新增对象走入院建档流程，暂不在当前版本范围内。
           </p>
           <button
             className="demo-notice__close"

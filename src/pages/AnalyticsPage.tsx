@@ -73,12 +73,7 @@ export function AnalyticsPage() {
       <PageHeader
         eyebrow="Program analytics"
         title="数据看板"
-        description="跨对象的训练进展与质量洞察，帮助康复师在复核与排期前掌握全局。图表数据为作品集演示样本。"
-        actions={
-          <span className="demo-data-chip" title="演示样本数据">
-            演示样本数据
-          </span>
-        }
+        description="跨对象的训练进展与质量洞察，帮助康复师在复核与排期前掌握全局。"
       />
       <div className="metric-grid">
         <article className="metric-card">
@@ -262,7 +257,7 @@ export function AnalyticsPage() {
             </ResponsiveContainer>
           </div>
           <p className="chart-footnote">
-            幅度完成度为会话内各动作的均值（演示样本）。悬停可查看每次平均反馈次数。
+            幅度完成度为会话内各动作的均值。悬停可查看每次平均反馈次数。
           </p>
         </Panel>
         <Panel title="康复师负载" subtitle="负责对象数与平均完成率">

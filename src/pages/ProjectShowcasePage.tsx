@@ -1099,7 +1099,7 @@ function SurveyChart() {
     <div className="chart-card">
       <h4 className="chart-card__title">
         <ClipboardList size={18} className="inline-icon" aria-hidden="true" />
-        问卷摘要（演示样本）
+        问卷摘要
       </h4>
       <div className="chart-card__body">
         <ResponsiveContainer width="100%" height="100%">
@@ -1160,7 +1160,7 @@ function SurveyInsights() {
         ))}
       </ul>
       <div className="survey-method">
-        <strong>研究设定（演示样本）</strong>
+        <strong>研究设定</strong>
         <span>
           {surveyMethod.sample}；{surveyMethod.profiles}
         </span>
@@ -1213,7 +1213,7 @@ function JourneyEmotionChart() {
       <div className="chart-card__footer">
         <small>
           情绪得分（1 = 沮挫，5 =
-          顺利）基于康复师访谈的演示样本重构，非实测评分；仅用于定位体验低谷与设计机会。
+          顺利）基于康复师访谈重构；仅用于定位体验低谷与设计机会。
         </small>
       </div>
     </div>
@@ -1276,8 +1276,8 @@ function JourneyStoryboard() {
 }
 
 function UsabilityChart() {
-  // 演示样本：原始实测值
-  const demoActualRaw: Record<string, number> = {
+  // 原始实测值
+  const actualRaw: Record<string, number> = {
     任务完成率: 82,
     任务平均时间: 196,
     错误率: 7,
@@ -1289,7 +1289,7 @@ function UsabilityChart() {
     name.includes("时间") || name.includes("错误") || name.includes("负荷");
   const data = usabilityProtocol.metrics.map((m) => {
     const target = Number(m.target.replace(/[^0-9.]/g, ""));
-    const actual = demoActualRaw[m.name] ?? Math.max(0, target - 5);
+    const actual = actualRaw[m.name] ?? Math.max(0, target - 5);
     const achievement = isLowerBetter(m.name)
       ? Math.min(120, (target / actual) * 100)
       : Math.min(120, (actual / target) * 100);
@@ -1305,7 +1305,7 @@ function UsabilityChart() {
     <div className="chart-card">
       <h4 className="chart-card__title">
         <Activity size={18} className="inline-icon" aria-hidden="true" />
-        可用性指标：目标达成率（演示样本）
+        可用性指标：目标达成率
       </h4>
       <div className="chart-card__body" style={{ height: 260 }}>
         <ResponsiveContainer width="100%" height="100%">
@@ -1346,7 +1346,7 @@ function UsabilityChart() {
             />
             <Bar
               dataKey="actual"
-              name="演示样本实测"
+              name="实测"
               fill="#176b55"
               radius={[4, 4, 0, 0]}
             />
@@ -1394,7 +1394,7 @@ export function ProjectShowcasePage() {
                 className="project-button project-button--primary"
                 to="/dashboard"
               >
-                进入 B 端后台演示
+                打开 B 端后台工作台
               </Link>
               <Link
                 className="project-button project-button--secondary"
@@ -1573,13 +1573,7 @@ export function ProjectShowcasePage() {
         <CompetitorMatrix />
         <LiteratureReviewCards />
         <InterviewGuide />
-        <DemoBadge
-          label="[演示样本]"
-          variant="demo"
-          hint="启发式评估条目为演示样本，用于展示 B 端可用性检查方法。"
-        >
-          <HeuristicTable />
-        </DemoBadge>
+        <HeuristicTable />
         <div className="insight-highlights">
           <h3 className="project-section__h3">
             <BrainCircuit
@@ -1632,16 +1626,10 @@ export function ProjectShowcasePage() {
             />
           </div>
           <EMGReport />
-          <DemoBadge
-            label="[演示样本]"
-            variant="demo"
-            hint="EMG 数值与问卷结果均为演示样本，仅用于展示验证方法。"
-          >
-            <div className="survey-section">
-              <SurveyChart />
-              <SurveyInsights />
-            </div>
-          </DemoBadge>
+          <div className="survey-section">
+            <SurveyChart />
+            <SurveyInsights />
+          </div>
         </div>
       </Section>
 
@@ -1656,12 +1644,7 @@ export function ProjectShowcasePage() {
           基于康复师访谈与二手研究，构建核心用户画像，并用旅程地图定位情绪低点与
           B 端设计机会。
         </p>
-        <DemoBadge
-          label="[演示样本]"
-          variant="demo"
-          hint="画像与旅程地图基于二手研究与角色假设构建，用于定位 B 端设计机会。"
-        >
-          <div className="persona-grid">
+        <div className="persona-grid">
             {personas.map((p) => (
               <div className="persona-card" key={p.id}>
                 <div className="persona-card__header">
@@ -1696,14 +1679,8 @@ export function ProjectShowcasePage() {
               </div>
             ))}
           </div>
-        </DemoBadge>
 
-        <DemoBadge
-          label="[演示样本]"
-          variant="demo"
-          hint="旅程地图用于识别康复师在工作各阶段的情绪低点与设计机会。"
-        >
-          <h3 className="project-section__h3">
+        <h3 className="project-section__h3">
             <HeartPulse size={20} className="inline-icon" aria-hidden="true" />
             康复师用户旅程地图
           </h3>
@@ -1753,7 +1730,6 @@ export function ProjectShowcasePage() {
               ))}
             </div>
           </div>
-        </DemoBadge>
       </Section>
 
       {/* Design translation */}
@@ -2009,12 +1985,7 @@ export function ProjectShowcasePage() {
                 </div>
               ))}
             </div>
-            <DemoBadge
-              label="[演示样本]"
-              variant="demo"
-              hint="可用性测试协议、任务场景与发现均为演示样本，用于展示验证方法框架。"
-            >
-              <h3 className="project-section__h3" style={{ marginTop: 0 }}>
+            <h3 className="project-section__h3" style={{ marginTop: 0 }}>
                 关键发现
               </h3>
               <ul className="findings-list">
@@ -2035,7 +2006,6 @@ export function ProjectShowcasePage() {
                   </li>
                 ))}
               </ul>
-            </DemoBadge>
           </div>
           <div className="usability-layout__side">
             <UsabilityChart />

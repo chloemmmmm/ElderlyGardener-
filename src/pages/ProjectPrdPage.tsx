@@ -564,9 +564,8 @@ export function ProjectPrdPage() {
         >
           <InformationArchitectureDiagram />
           <p className="prd-table-note">
-            原型状态：✅ 已在演示原型中实现；◐ 部分实现（缺口随迭代补齐）；🔜
-            规划中，待后续迭代；「一代原型 / MVP 演示」指 C 端硬件与 VR
-            端的概念验证。
+            原型状态：✅ 已在当前原型中实现；◐ 部分实现（缺口随迭代补齐）；🔜
+            规划中，待后续迭代；「一代原型」指 C 端硬件与 VR 端的概念验证。
           </p>
           <h3 className="prd-h3">B 端 · 康复师管理后台</h3>
           <table className="prd-table">
@@ -761,20 +760,20 @@ export function ProjectPrdPage() {
                 <td>V-001</td>
                 <td>「银龄园艺小站」主场景：花园、菜地、果树区</td>
                 <td>P0</td>
-                <td>MVP 演示</td>
+                <td>一代原型</td>
               </tr>
               <tr>
                 <td>V-002</td>
                 <td>三段式任务：浇水 → 松土 → 摘果，对应不同上肢动作</td>
                 <td>P0</td>
-                <td>MVP 演示</td>
+                <td>一代原型</td>
               </tr>
               <tr>
                 <td rowSpan={2}>交互</td>
                 <td>V-003</td>
                 <td>低晕动设计：定点注视 + 手势/控制器触发，避免高速移动</td>
                 <td>P0</td>
-                <td>MVP 演示</td>
+                <td>一代原型</td>
               </tr>
               <tr>
                 <td>V-004</td>
@@ -942,8 +941,8 @@ export function ProjectPrdPage() {
         >
           <ul className="prd-risks">
             <li>
-              <strong>研究真实性：</strong>
-              当前用户画像、可用性测试与部分数据为演示样本，需补充一手访谈与试点数据。
+              <strong>研究推进：</strong>
+              用户画像与可用性测试结论将持续扩充样本，并补充一手访谈与试点数据。
             </li>
             <li>
               <strong>硬件工程：</strong>传感器与 VR

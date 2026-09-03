@@ -52,7 +52,7 @@ export function PlansPage() {
       <PageHeader
         eyebrow="Plan library"
         title="训练计划"
-        description="以康复对象为中心管理园艺上肢训练计划：阶段、执行状态与最近调整一目了然。计划内容均为演示样本。"
+        description="以康复对象为中心管理园艺上肢训练计划：阶段、执行状态与最近调整一目了然。"
         actions={
           <button
             className="primary-button"
@@ -67,7 +67,7 @@ export function PlansPage() {
         <div className="demo-notice" role="status">
           <span aria-hidden="true">✳</span>
           <p>
-            演示版聚焦“评估 → 调整 → 复盘”的闭环，
+            当前版本聚焦“评估 → 调整 → 复盘”的闭环，
             暂不开放新建流程；可从任一执行中计划进入编辑器体验计划调整能力。
           </p>
           <button

@@ -208,7 +208,7 @@ export function PlanEditorPage() {
                 <span className="step-number">02</span>
                 <div>
                   <h2>反馈原则</h2>
-                  <p>演示原型采用低打扰反馈，避免把设备提示理解为康复结论。</p>
+                  <p>产品采用低打扰反馈，避免把设备提示理解为康复结论。</p>
                 </div>
               </div>
             </header>
@@ -278,7 +278,7 @@ export function PlanEditorPage() {
           <aside className="safety-note">
             <strong>安全确认</strong>
             <p>
-              作品集中的设置仅作交互演示。真实应用需接入机构权限、处方审核和设备校准流程。
+              完整上线需接入机构权限、处方审核和设备校准流程，当前版本未包含。
             </p>
           </aside>
           <label className="demo-error-toggle">
@@ -287,7 +287,7 @@ export function PlanEditorPage() {
               checked={simulateError}
               onChange={(e) => setSimulateError(e.target.checked)}
             />{" "}
-            演示保存失败状态
+            触发保存失败状态
           </label>
         </aside>
       </div>

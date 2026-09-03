@@ -129,7 +129,7 @@ export function TopbarSearch() {
             )}
           </div>
           <footer className="search-panel__footer">
-            演示数据检索 · Esc 关闭
+            数据检索 · Esc 关闭
           </footer>
         </section>
       ) : null}

@@ -1,16 +1,15 @@
 import type { ReactNode } from "react";
 
-export type DemoBadgeVariant = "demo" | "original" | "public";
+export type DemoBadgeVariant = "original" | "public";
 
 interface DemoBadgeProps {
-  label: "[演示样本]" | "[课程原始数据]" | "[公开统计数据]";
+  label: "[课程原始数据]" | "[公开统计数据]";
   variant: DemoBadgeVariant;
   hint?: string;
   children: ReactNode;
 }
 
 const variantClass: Record<DemoBadgeVariant, string> = {
-  demo: "demo-badge--demo",
   original: "demo-badge--original",
   public: "demo-badge--public",
 };

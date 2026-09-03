@@ -7,7 +7,7 @@
 - Target market(s): 中文作品集概念原型，不表示实际地区部署。
 - Active locales: `zh-CN`。
 - Language/content register and native-review policy: 简体中文、专业但直接；最终交付由用户复核作品集表述。
-- Timezone/calendar policy: 演示数据使用 `Asia/Shanghai`，公历，24 小时制；日期字段均为虚构演示值。
+- Timezone/calendar policy: 数据统一使用 `Asia/Shanghai`，公历，24 小时制。
 - Accessibility target: WCAG 2.2 AA。
 
 ## Business-context sources
@@ -85,7 +85,7 @@
 - Dialog primitive: Radix AlertDialog/Dialog 的共享封装。
 - Destructive confirmation levels: 首版无删除；未保存离开使用中性警告，默认聚焦“继续编辑”。
 - Toast placement/duration/deduplication: 右上角；常规 5 秒；错误保持到关闭；2 秒内相同提示去重；最多 3 个。
-- Alert/banner scope and persistence: 概念演示为应用级常驻标记；数据错误留在受影响面板。
+- Alert/banner scope and persistence: 概念视频入口为应用级常驻标记；数据错误留在受影响面板。
 - Tooltip delay/dismissal: 300ms，悬停与键盘焦点打开，Escape 关闭。
 - Unsaved-changes behavior: 应用内路由使用对话框；真实页面关闭只使用 `beforeunload`。
 - Layer/z-index contract: dropdown 200，popover 300，sticky 400，backdrop 500，dialog 600，toast 900。
@@ -97,7 +97,7 @@
 - Auto-save/draft recovery: 不自动保存；保存失败时保留当前表单值。
 - Offline/read-stale/write behavior: 可读取 Query 缓存；写入失败保留草稿并提供重试，不排队。
 - Retry/backoff/timeout behavior: 查询最多一次自动重试；写入不自动重试。
-- Version conflict and multi-tab behavior: 演示 API 无并发写；不声称支持多用户冲突合并。
+- Version conflict and multi-tab behavior: MSW API 无并发写；不声称支持多用户冲突合并。
 - Session expiry/re-authentication: 不适用，首版无认证。
 - Long-running progress and return path: 不适用。
 - Stale-request cancellation/invalidation and pending-state ownership: Query key 与 AbortSignal 取消旧请求；清除搜索即时取消并重置页码。

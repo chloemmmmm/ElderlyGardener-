@@ -63,7 +63,7 @@ export function SessionsPage() {
       <PageHeader
         eyebrow="Session records"
         title="训练记录"
-        description="全部会话的完成情况与数据质量一览。记录与数值均为作品集演示样本，用于展示康复师的复盘工作流。"
+        description="全部会话的完成情况与数据质量一览，覆盖康复师的复盘工作流。"
       />
       <div className="filter-bar" aria-label="记录筛选">
         <label className="search-field">

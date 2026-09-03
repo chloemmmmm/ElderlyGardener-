@@ -26,7 +26,7 @@ export function DashboardPage() {
     queryFn: ({ signal }) => rehabilitationApi.getDashboard(signal),
   });
   const weeklyReport = useDemoNotice(
-    "周报导出（PDF 汇总）暂未在演示版开放；数据看板中已包含对应的全局汇总指标。",
+    "周报导出（PDF 汇总）暂未在当前版本开放；数据看板中已包含对应的全局汇总指标。",
   );
   if (dashboard.isLoading) return <LoadingState label="正在生成今日工作台…" />;
   if (!dashboard.data)

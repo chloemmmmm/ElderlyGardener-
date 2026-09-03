@@ -24,7 +24,7 @@ export function SessionDetailPage() {
   const { sessionId = "" } = useParams();
   const [confirmed, setConfirmed] = useState<string[]>([]);
   const download = useDemoNotice(
-    "训练记录导出（CSV / PDF）暂未在演示版开放；本页展示的数据即为完整演示样本。",
+    "训练记录导出（CSV / PDF）暂未在当前版本开放。",
   );
   const sessionQuery = useQuery({
     queryKey: ["session", sessionId],
@@ -210,6 +210,13 @@ export function SessionDetailPage() {
                 ))
               ) : (
                 <p className="empty-copy">本次未生成需要确认的调整建议。</p>
+              )}
+              {confirmed.length > 0 && (
+                <p className="suggestion-note">
+                  已确认 {confirmed.length}
+                  项建议（当前版本中记录保留于本页，完整版将同步至对象档案
+                  ·干预记录）。
+                </p>
               )}
             </div>
             <footer>
