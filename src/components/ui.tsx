@@ -1,4 +1,4 @@
-import type { ReactNode } from "react";
+import { useState, type ReactNode } from "react";
 
 import type {
   AttentionSeverity,
@@ -121,4 +121,28 @@ export function EmptyState({
       <span>{detail}</span>
     </div>
   );
+}
+
+/**
+ * 演示版中暂未开放的功能，点击后给出与「新增康复对象」一致的解释提示，
+ * 而不是无响应的假按钮。
+ */
+export function useDemoNotice(message: string) {
+  const [visible, setVisible] = useState(false);
+  const show = () => setVisible(true);
+  const notice = visible ? (
+    <div className="demo-notice" role="status">
+      <span aria-hidden="true">✳</span>
+      <p>{message}</p>
+      <button
+        className="demo-notice__close"
+        type="button"
+        aria-label="关闭提示"
+        onClick={() => setVisible(false)}
+      >
+        ×
+      </button>
+    </div>
+  ) : null;
+  return { notice, show };
 }

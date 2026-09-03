@@ -30,10 +30,11 @@ const stageLabels: Record<TrainingStage, string> = {
   sustaining: "维持期",
 };
 
+// 与 StatusTag 语义色保持同源（components.css .status-high/medium/low）
 const RISK_COLORS: Record<AttentionSeverity, string> = {
-  high: "#b3403a",
-  medium: "#dda94f",
-  low: "#6d63b0",
+  high: "#b42318",
+  medium: "#92580d",
+  low: "#5c519c",
 };
 
 const STAGE_COLORS: Record<TrainingStage, string> = {
@@ -246,7 +247,10 @@ export function AnalyticsPage() {
                 <Tooltip
                   contentStyle={tooltipStyle}
                   cursor={{ fill: "#eef4f1" }}
-                  formatter={(value) => [`${value}%`, "平均完成幅度"]}
+                  formatter={(value, _name, item) => [
+                    `${value}% · 反馈 ${item?.payload?.avgFeedbackPerSession ?? "—"} 次/次`,
+                    "平均完成幅度",
+                  ]}
                 />
                 <Bar
                   dataKey="avgRangeCompletion"

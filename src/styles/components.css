@@ -1177,7 +1177,7 @@
 }
 .drag-handle {
   color: #9eada7;
-  cursor: grab;
+  cursor: default;
 }
 .switch input {
   position: absolute;
@@ -1493,4 +1493,136 @@
   color: var(--color-text-muted);
   font-size: 12px;
   line-height: 1.6;
+}
+
+/* ============================================================
+   响应式适配：B 端工作台窄屏 / 移动端
+   ============================================================ */
+
+/* —— 平板：双栏布局降级为单栏 —— */
+@media (max-width: 1024px) {
+  .metric-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .dashboard-grid,
+  .two-column-detail,
+  .session-layout,
+  .editor-layout {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* —— 窄屏：侧栏顶置 + 表格横向滚动 —— */
+@media (max-width: 900px) {
+  .app-shell {
+    grid-template-columns: 1fr;
+  }
+  .sidebar {
+    position: static;
+    height: auto;
+    gap: 12px;
+    padding: 14px 18px;
+  }
+  .primary-nav {
+    display: flex;
+    flex-direction: row;
+    gap: 6px;
+    overflow-x: auto;
+    padding-bottom: 4px;
+  }
+  .nav-group {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    flex: none;
+  }
+  .nav-group + .nav-group {
+    margin: 0 0 0 10px;
+    padding: 0 0 0 14px;
+    border-top: 0;
+    border-left: 1px solid rgb(255 255 255 / 10%);
+  }
+  .nav-group-title {
+    margin: 0 4px 0 0;
+  }
+  .sidebar .primary-nav a {
+    white-space: nowrap;
+  }
+  .sidebar-note {
+    display: none;
+  }
+  .topbar {
+    padding: 0 18px;
+  }
+  .topbar .system-status {
+    display: none;
+  }
+  .filter-bar {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .search-field {
+    grid-column: 1 / -1;
+  }
+  .client-table-wrap {
+    overflow-x: auto;
+  }
+  .data-table {
+    min-width: 680px;
+  }
+  .exercise-editor-list {
+    overflow-x: auto;
+  }
+  .exercise-editor-list article {
+    min-width: 560px;
+  }
+  .editor-savebar {
+    left: 0;
+  }
+}
+
+/* —— 手机：进一步收拢 —— */
+@media (max-width: 640px) {
+  .main-content {
+    padding: 20px 16px 44px;
+  }
+  .page-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 14px;
+  }
+  .page-actions {
+    flex-wrap: wrap;
+  }
+  .metric-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 9px;
+  }
+  .metric-card {
+    min-height: 0;
+    padding: 13px;
+  }
+  .current-date {
+    display: none;
+  }
+  .profile-summary-strip {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .editor-savebar {
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  .editor-savebar > div:last-child {
+    display: flex;
+    gap: 9px;
+    width: 100%;
+  }
+  .editor-savebar > div:last-child > * {
+    flex: 1;
+  }
+}
+
+/* 顺手的可访问性修正：分页与触控目标 */
+.pagination button {
+  min-width: 38px;
+  height: 38px;
 }

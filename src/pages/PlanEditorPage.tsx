@@ -130,7 +130,11 @@ export function PlanEditorPage() {
                     .filter(Boolean)
                     .join(" ")}
                 >
-                  <div className="drag-handle" aria-hidden="true">
+                  <div
+                    className="drag-handle"
+                    aria-hidden="true"
+                    title="动作按训练顺序固定，排序调整将在完整版中支持"
+                  >
                     ⠿
                   </div>
                   <label className="switch">
@@ -234,8 +238,8 @@ export function PlanEditorPage() {
               <div className="change-overview">
                 <span aria-hidden="true">●</span>
                 <span>
-                  变更概览：{changedExerciseIds.size} 个动作，共 {changes.length}{" "}
-                  项参数已修改
+                  变更概览：{changedExerciseIds.size} 个动作，共{" "}
+                  {changes.length} 项参数已修改
                 </span>
               </div>
             )}
@@ -302,12 +306,45 @@ export function PlanEditorPage() {
           )}
         </div>
         <div>
-          <Link
-            className="secondary-button link-button"
-            to={`/clients/${draft.clientId}`}
-          >
-            取消
-          </Link>
+          {changes.length > 0 ? (
+            <AlertDialog.Root>
+              <AlertDialog.Trigger asChild>
+                <button className="secondary-button" type="button">
+                  取消
+                </button>
+              </AlertDialog.Trigger>
+              <AlertDialog.Portal>
+                <AlertDialog.Overlay className="dialog-overlay" />
+                <AlertDialog.Content className="dialog-content">
+                  <AlertDialog.Title>放弃未保存的修改？</AlertDialog.Title>
+                  <AlertDialog.Description>
+                    当前有 {changes.length}{" "}
+                    项修改尚未保存，返回对象档案后将丢失这些改动。
+                  </AlertDialog.Description>
+                  <div className="dialog-actions">
+                    <AlertDialog.Cancel asChild>
+                      <button className="secondary-button">继续编辑</button>
+                    </AlertDialog.Cancel>
+                    <AlertDialog.Action asChild>
+                      <Link
+                        className="primary-button link-button"
+                        to={`/clients/${draft.clientId}`}
+                      >
+                        放弃修改
+                      </Link>
+                    </AlertDialog.Action>
+                  </div>
+                </AlertDialog.Content>
+              </AlertDialog.Portal>
+            </AlertDialog.Root>
+          ) : (
+            <Link
+              className="secondary-button link-button"
+              to={`/clients/${draft.clientId}`}
+            >
+              取消
+            </Link>
+          )}
           <AlertDialog.Root>
             <AlertDialog.Trigger asChild>
               <button

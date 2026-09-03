@@ -2,7 +2,13 @@ import { useQuery } from "@tanstack/react-query";
 import { useMemo, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 
-import { ErrorState, LoadingState, PageHeader, Panel } from "../components/ui";
+import {
+  ErrorState,
+  LoadingState,
+  PageHeader,
+  Panel,
+  useDemoNotice,
+} from "../components/ui";
 import { generateAiSummary } from "../domain/ai-summary";
 import { rehabilitationApi } from "../services/rehabilitation";
 
@@ -17,6 +23,9 @@ const dateTime = new Intl.DateTimeFormat("zh-CN", {
 export function SessionDetailPage() {
   const { sessionId = "" } = useParams();
   const [confirmed, setConfirmed] = useState<string[]>([]);
+  const download = useDemoNotice(
+    "训练记录导出（CSV / PDF）暂未在演示版开放；本页展示的数据即为完整演示样本。",
+  );
   const sessionQuery = useQuery({
     queryKey: ["session", sessionId],
     queryFn: ({ signal }) => rehabilitationApi.getSession(sessionId, signal),
@@ -55,7 +64,11 @@ export function SessionDetailPage() {
         description={`${client?.name ?? "康复对象"} · ${dateTime.format(new Date(session.startedAt))} · ${session.durationMinutes} 分钟`}
         actions={
           <>
-            <button className="secondary-button" type="button">
+            <button
+              className="secondary-button"
+              type="button"
+              onClick={download.show}
+            >
               下载记录
             </button>
             <Link
@@ -67,6 +80,7 @@ export function SessionDetailPage() {
           </>
         }
       />
+      {download.notice}
       <aside className="context-hint" role="note">
         <span aria-hidden="true">◎</span>
         <div>
@@ -80,7 +94,9 @@ export function SessionDetailPage() {
           </strong>
           <p>
             最近反馈：{session.subjectiveFeedback}
-            {client?.attentionReason ? `；系统关注：${client.attentionReason}` : ""}
+            {client?.attentionReason
+              ? `；系统关注：${client.attentionReason}`
+              : ""}
           </p>
         </div>
       </aside>

@@ -16,6 +16,7 @@ import {
   PageHeader,
   Panel,
   StatusTag,
+  useDemoNotice,
 } from "../components/ui";
 import { rehabilitationApi } from "../services/rehabilitation";
 
@@ -24,6 +25,9 @@ export function DashboardPage() {
     queryKey: ["dashboard"],
     queryFn: ({ signal }) => rehabilitationApi.getDashboard(signal),
   });
+  const weeklyReport = useDemoNotice(
+    "周报导出（PDF 汇总）暂未在演示版开放；数据看板中已包含对应的全局汇总指标。",
+  );
   if (dashboard.isLoading) return <LoadingState label="正在生成今日工作台…" />;
   if (!dashboard.data)
     return <ErrorState onRetry={() => void dashboard.refetch()} />;
@@ -36,7 +40,11 @@ export function DashboardPage() {
         description="从需要判断的事项开始，再处理今天的复核与随访。系统提示仅作为线索，最终决策由康复师确认。"
         actions={
           <>
-            <button className="secondary-button" type="button">
+            <button
+              className="secondary-button"
+              type="button"
+              onClick={weeklyReport.show}
+            >
               导出周报
             </button>
             <Link className="primary-button link-button" to="/clients">
@@ -45,6 +53,7 @@ export function DashboardPage() {
           </>
         }
       />
+      {weeklyReport.notice}
       <div className="metric-grid">
         <article className="metric-card attention">
           <span className="metric-label">需要优先关注</span>
@@ -213,7 +222,10 @@ export function DashboardPage() {
               ))}
             </div>
           </Panel>
-          <Panel title="今日证据链" subtitle="按时间线聚合传感器、AI 与人工判断">
+          <Panel
+            title="今日证据链"
+            subtitle="按时间线聚合传感器、AI 与人工判断"
+          >
             <div className="evidence-chain">
               {[
                 {

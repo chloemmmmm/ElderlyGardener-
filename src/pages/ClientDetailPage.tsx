@@ -9,6 +9,7 @@ import {
   PageHeader,
   Panel,
   StatusTag,
+  useDemoNotice,
 } from "../components/ui";
 import { rehabilitationApi } from "../services/rehabilitation";
 
@@ -22,6 +23,9 @@ const dateTime = new Intl.DateTimeFormat("zh-CN", {
 export function ClientDetailPage() {
   const { clientId = "" } = useParams();
   const [activeTab, setActiveTab] = useState("overview");
+  const followUp = useDemoNotice(
+    "随访记录写入需接入语音转写与结构化模板，暂未在演示版开放；可在下方查看已留痕的干预记录。",
+  );
   const detail = useQuery({
     queryKey: ["client", clientId],
     queryFn: ({ signal }) => rehabilitationApi.getClient(clientId, signal),
@@ -48,12 +52,17 @@ export function ClientDetailPage() {
             >
               编辑训练计划
             </Link>
-            <button className="primary-button" type="button">
+            <button
+              className="primary-button"
+              type="button"
+              onClick={followUp.show}
+            >
               记录随访
             </button>
           </>
         }
       />
+      {followUp.notice}
       <div className="profile-summary-strip">
         <div>
           <span>训练阶段</span>
