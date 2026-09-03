@@ -1287,12 +1287,23 @@
 }
 .exercise-map__video {
   flex: none;
-  width: 104px;
+  width: 148px;
   aspect-ratio: 16 / 9;
   object-fit: cover;
   border-radius: 10px;
   border: 1px solid var(--color-border);
   background: #e8f2ee;
+  cursor: zoom-in;
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease;
+}
+.exercise-map__video:hover {
+  transform: scale(1.6);
+  transform-origin: left center;
+  position: relative;
+  z-index: 5;
+  box-shadow: 0 12px 32px rgb(15 52 42 / 22%);
 }
 .exercise-map__cell div {
   display: grid;
@@ -2238,7 +2249,10 @@
     grid-template-columns: 1fr;
   }
   .exercise-map__video {
-    width: 132px;
+    width: 168px;
+  }
+  .exercise-map__video:hover {
+    transform: none;
   }
   .exercise-map__arrow {
     transform: rotate(90deg);
