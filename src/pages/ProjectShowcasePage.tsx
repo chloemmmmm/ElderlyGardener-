@@ -1925,7 +1925,7 @@ export function ProjectShowcasePage() {
           <LazyVideo
             className="prototype-figure__video"
             src={asset("assets/case-study/hardware-demo.mp4")}
-            label="硬件实机演示：第一阶段「浇水」VR 园艺任务——抬手前伸动作识别、倒计时引导与 PERFECT 即时判定"
+            label="硬件实机演示：真人穿戴设备示范「浇水」动作，再进入 VR 园艺任务——抬手倒水、倒计时引导与 PERFECT 即时判定"
           />
           <figcaption>
             <span>
