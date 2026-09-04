@@ -799,10 +799,22 @@ function MethodMixChart() {
       desc: "确立「园艺动作可转译为标准化上肢训练」假设",
     },
     { name: "用户访谈", value: 18, desc: "4 位康复师访谈，构建画像与旅程地图" },
-    { name: "竞品分析", value: 14, desc: "对比 4 款同类产品，输出判定标准与象限" },
-    { name: "动作分析", value: 16, desc: "5 个标准上肢动作映射为园艺任务与判定规则" },
+    {
+      name: "竞品分析",
+      value: 14,
+      desc: "对比 4 款同类产品，输出判定标准与象限",
+    },
+    {
+      name: "动作分析",
+      value: 16,
+      desc: "5 个标准上肢动作映射为园艺任务与判定规则",
+    },
     { name: "EMG 验证", value: 12, desc: "N=8 预实验，各动作激活均 ≥70% MVIC" },
-    { name: "可用性测试", value: 18, desc: "B 端后台混合型测试方案与达成率指标" },
+    {
+      name: "可用性测试",
+      value: 18,
+      desc: "B 端后台混合型测试方案与达成率指标",
+    },
   ];
   const colors = [
     "#176b55",
@@ -1909,10 +1921,13 @@ export function ProjectShowcasePage() {
           <LazyVideo
             className="prototype-figure__video"
             src={asset("assets/case-study/hardware-demo.mp4")}
-            label="硬件实机演示：前臂绑带特写、真人佩戴训练与 VR 园艺任务即时反馈"
+            label="硬件实机演示：第一阶段「浇水」VR 园艺任务——抬手前伸动作识别、倒计时引导与 PERFECT 即时判定"
           />
           <figcaption>
-            <span>硬件实机演示：绑带特写 · 真人佩戴训练 · VR 任务即时反馈</span>
+            <span>
+              硬件实机演示：第一阶段「浇水」任务 · 动作识别引导 · PERFECT
+              即时判定
+            </span>
             <Dialog.Root>
               <Dialog.Trigger asChild>
                 <button type="button" className="prototype-video-full-btn">
