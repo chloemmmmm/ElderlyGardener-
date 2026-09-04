@@ -2186,7 +2186,7 @@ export function ProjectShowcasePage() {
         id="author"
         variant="subtle"
         eyebrow="10 关于作者"
-        title={authorBio.name}
+        title="作者简介"
       >
         <div className="author-card">
           <div className="author-card__avatar" aria-hidden="true">

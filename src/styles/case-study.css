@@ -870,6 +870,10 @@
   background: linear-gradient(135deg, #153c32 0%, #1e5244 55%, #2a6b58 100%);
   color: #f7fbf9;
 }
+/* 品牌绿 eyebrow 在深绿渐变上对比度仅 1.0-1.9:1，hero 内覆盖为浅绿（4.66-9.04:1 AA） */
+.project-hero .project-section__eyebrow {
+  color: #c2e6d6;
+}
 .project-hero__inner {
   max-width: var(--project-max);
   margin: 0 auto;

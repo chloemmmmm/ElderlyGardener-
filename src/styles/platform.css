@@ -634,6 +634,25 @@
 .project-footer__inner p {
   margin: 0;
 }
+.project-footer__links {
+  margin-top: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px 24px;
+}
+.project-footer__link {
+  border: none;
+  background: none;
+  padding: 0;
+  color: var(--color-brand);
+  font-size: 12px;
+  font-weight: 600;
+  text-decoration: none;
+}
+.project-footer__link:hover {
+  text-decoration: underline;
+}
 
 /* ---------- 9. 简历弹窗 ---------- */
 .project-header__actions {

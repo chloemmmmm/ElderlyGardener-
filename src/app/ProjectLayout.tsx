@@ -58,6 +58,29 @@ export function ProjectLayout() {
         <div className="project-footer__inner">
           <p>康护园 · 老年园艺上肢康复训练系统 — 实习作品集项目</p>
           <p>文中人物均为化名。</p>
+          <nav className="project-footer__links" aria-label="页脚导航">
+            <NavLink className="project-footer__link" to="/prd">
+              查看产品 PRD →
+            </NavLink>
+            <NavLink className="project-footer__link" to="/dashboard">
+              进入 B 端后台 →
+            </NavLink>
+            <button
+              type="button"
+              className="project-footer__link"
+              onClick={() => {
+                const reduceMotion = window.matchMedia(
+                  "(prefers-reduced-motion: reduce)",
+                ).matches;
+                window.scrollTo({
+                  top: 0,
+                  behavior: reduceMotion ? "auto" : "smooth",
+                });
+              }}
+            >
+              回到顶部 ↑
+            </button>
+          </nav>
         </div>
       </footer>
     </div>
