@@ -10,6 +10,7 @@
 html {
   min-width: 1180px;
   background: var(--color-background);
+  scroll-behavior: smooth; /* prefers-reduced-motion: reduce 时由全局 reduce 块禁用 */
 }
 body {
   margin: 0;

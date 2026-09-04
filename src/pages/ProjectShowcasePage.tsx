@@ -115,6 +115,65 @@ function Section({
   );
 }
 
+const SECTION_NAV_ITEMS = [
+  { id: "ecosystem", label: "产品生态" },
+  { id: "problem", label: "背景问题" },
+  { id: "research", label: "研究方法" },
+  { id: "users", label: "用户洞察" },
+  { id: "design", label: "设计决策" },
+  { id: "prototype", label: "C 端原型" },
+  { id: "b-side", label: "B 端落地" },
+  { id: "usability", label: "可用性" },
+  { id: "reflection", label: "反思迭代" },
+  { id: "author", label: "关于作者" },
+];
+
+function SectionNav() {
+  const [activeId, setActiveId] = useState(SECTION_NAV_ITEMS[0].id);
+
+  useEffect(() => {
+    const onScroll = () => {
+      const probe = 120;
+      let current = SECTION_NAV_ITEMS[0].id;
+      for (const { id } of SECTION_NAV_ITEMS) {
+        const el = document.getElementById(id);
+        if (el && el.getBoundingClientRect().top <= probe) {
+          current = id;
+        }
+      }
+      setActiveId(current);
+    };
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onScroll);
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", onScroll);
+    };
+  }, []);
+
+  return (
+    <nav className="section-nav" aria-label="章节导航">
+      <div className="section-nav__inner">
+        {SECTION_NAV_ITEMS.map(({ id, label }) => (
+          <a
+            key={id}
+            href={`#${id}`}
+            aria-current={activeId === id ? "true" : undefined}
+            className={
+              activeId === id
+                ? "section-nav__link section-nav__link--active"
+                : "section-nav__link"
+            }
+          >
+            {label}
+          </a>
+        ))}
+      </div>
+    </nav>
+  );
+}
+
 function ResearchTimeline() {
   const steps = [
     {
@@ -1493,7 +1552,10 @@ export function ProjectShowcasePage() {
               </Link>
             </div>
             <p className="project-hero__note" role="note">
-              CHI 在投（第一作者）
+              <span className="project-hero__note-badge">
+                CHI 在投 · 第一作者
+              </span>
+              <span>北京理工大学 · 工业设计硕士在读</span>
             </p>
           </div>
           <div className="project-hero__media">
@@ -1509,6 +1571,7 @@ export function ProjectShowcasePage() {
           </div>
         </div>
       </section>
+      <SectionNav />
 
       {/* Ecosystem */}
       <Section
