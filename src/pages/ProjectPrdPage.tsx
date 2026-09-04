@@ -873,7 +873,7 @@ export function ProjectPrdPage() {
         <Section id="ux" eyebrow="08 体验原则" title="设计原则与交互约束">
           <figure className="prd-preview">
             <img
-              src={asset("assets/case-study/design-principles.jpg")}
+              src={asset("assets/case-study/design-principles.webp")}
               alt="B 端后台工作台界面：需要判断、今日安排、7 日完成趋势与今日证据链"
               loading="lazy"
             />

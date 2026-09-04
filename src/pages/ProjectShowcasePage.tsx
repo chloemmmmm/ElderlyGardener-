@@ -482,7 +482,7 @@ function LiteratureReviewCards() {
       </h3>
       <figure className="literature-review__figure literature-review__figure--full">
         <img
-          src={asset("assets/case-study/literature-evidence-chain.png")}
+          src={asset("assets/case-study/literature-evidence-chain.webp")}
           alt="从老年运动有效性、上肢功能、园艺转译到反馈闭环的 5 条关键证据链"
           loading="lazy"
           className="literature-review__image"
@@ -1045,7 +1045,7 @@ function ArchitectureCarousel() {
       caption: "系统逻辑 V2：触发逻辑与反馈闭环",
     },
     {
-      src: "assets/case-study/method-action-judgment.jpg",
+      src: "assets/case-study/method-action-judgment.webp",
       alt: "动作判定规则示意图",
       caption: "动作判定规则：5 个标准上肢训练动作",
     },
@@ -1498,9 +1498,13 @@ export function ProjectShowcasePage() {
           </div>
           <div className="project-hero__media">
             <img
-              src={asset("assets/case-study/cover-demo.jpg")}
+              src={asset("assets/case-study/cover-demo.webp")}
               alt="ElderlyGardener 第一代功能原型：可穿戴臂带、VR 头显与 PC 调试场景"
+              width={1920}
+              height={1080}
               loading="eager"
+              fetchPriority="high"
+              decoding="async"
             />
           </div>
         </div>
@@ -1537,7 +1541,7 @@ export function ProjectShowcasePage() {
             </div>
             <div className="ecosystem-card__visual">
               <img
-                src={asset("assets/showcase/console-dashboard.png")}
+                src={asset("assets/showcase/console-dashboard.webp")}
                 alt="ElderlyGardener B 端工作台截图"
                 loading="lazy"
               />
@@ -1590,7 +1594,7 @@ export function ProjectShowcasePage() {
             </div>
             <div className="ecosystem-card__visual">
               <img
-                src={asset("assets/case-study/vr-garden-scenes.jpg")}
+                src={asset("assets/case-study/vr-garden-scenes.webp")}
                 alt="VR 园艺训练场景：银龄园艺小站、浇水、松土与摘果任务"
                 loading="lazy"
               />
@@ -1860,7 +1864,7 @@ export function ProjectShowcasePage() {
             设计介入策略
           </h3>
           <img
-            src={asset("assets/case-study/method-design-intervention.jpg")}
+            src={asset("assets/case-study/method-design-intervention.webp")}
             alt="设计介入三阶段：进入训练、参与训练、坚持训练"
             loading="lazy"
             className="design-intervention__image"
@@ -1909,7 +1913,7 @@ export function ProjectShowcasePage() {
           </figure>
           <figure className="prototype-figure">
             <img
-              src={asset("assets/case-study/usability-user-test.jpg")}
+              src={asset("assets/case-study/usability-user-test.webp")}
               alt="用户测试：真实使用者佩戴原型设备完成训练任务"
               loading="lazy"
             />
@@ -1984,7 +1988,7 @@ export function ProjectShowcasePage() {
         <div className="console-gallery">
           <figure className="console-gallery__item">
             <img
-              src={asset("assets/showcase/console-clients.png")}
+              src={asset("assets/showcase/console-clients.webp")}
               alt="康复对象管理页"
               loading="lazy"
             />
@@ -1992,7 +1996,7 @@ export function ProjectShowcasePage() {
           </figure>
           <figure className="console-gallery__item">
             <img
-              src={asset("assets/showcase/console-sessions.png")}
+              src={asset("assets/showcase/console-sessions.webp")}
               alt="训练记录列表"
               loading="lazy"
             />
@@ -2000,7 +2004,7 @@ export function ProjectShowcasePage() {
           </figure>
           <figure className="console-gallery__item">
             <img
-              src={asset("assets/showcase/console-analytics.png")}
+              src={asset("assets/showcase/console-analytics.webp")}
               alt="数据看板"
               loading="lazy"
             />

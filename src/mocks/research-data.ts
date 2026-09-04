@@ -119,7 +119,7 @@ export const competitors = [
     strengths: "图文、电话、视频问诊成熟，医生资源覆盖广",
     weakness: "无康复计划编辑能力，不采集动作数据",
     decisionSupport: "低",
-    image: "assets/case-study/comp-haodf.jpg",
+    image: "assets/case-study/comp-haodf.webp",
     coords: { x: 2.5, y: 1, z: 2 },
   },
   {
@@ -131,7 +131,7 @@ export const competitors = [
     strengths: "首次评估流程结构化，咨询随访体系完善",
     weakness: "面向心理服务，不覆盖运动康复与传感器数据",
     decisionSupport: "低",
-    image: "assets/case-study/comp-jdxl.jpg",
+    image: "assets/case-study/comp-jdxl.webp",
     coords: { x: 1, y: 1.5, z: 2 },
   },
   {
@@ -143,7 +143,7 @@ export const competitors = [
     strengths: "传感器证据可视化、计划版本对比、AI 建议需确认",
     weakness: "概念原型，尚未经过临床验证",
     decisionSupport: "高",
-    image: "assets/case-study/competitor-ours-vertical.jpg",
+    image: "assets/case-study/competitor-ours-vertical.webp",
     coords: { x: 4.5, y: 4.5, z: 4 },
   },
 ];
@@ -171,7 +171,7 @@ export const personas = [
     pain: "系统给出的「完成率」不能区分是老人没做，还是传感器脱落。",
     quote: "我需要看到原始数据和不确定性的标记，而不是一个漂亮的总分。",
     day: "08:00 查房 → 10:00 门诊评估 → 14:00 登录后台复核居家数据 → 16:00 整理科研数据集。",
-    avatar: "assets/case-study/therapist-male.jpg",
+    avatar: "assets/case-study/therapist-male.webp",
   },
 ];
 
