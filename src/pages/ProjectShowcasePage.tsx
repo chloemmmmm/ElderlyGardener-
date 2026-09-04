@@ -1929,8 +1929,8 @@ export function ProjectShowcasePage() {
           />
           <figcaption>
             <span>
-              硬件实机演示：第一阶段「浇水」任务 · 动作识别引导 · PERFECT
-              即时判定
+              硬件实机演示：真人「浇水」动作示范 → VR 任务 · 倒计时引导 ·
+              PERFECT 即时判定
             </span>
             <Dialog.Root>
               <Dialog.Trigger asChild>
