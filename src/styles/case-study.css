@@ -1616,18 +1616,50 @@
   height: 200px;
   position: relative;
 }
-.method-mix__legend {
+.method-mix__cards {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 12px 20px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px 20px;
+  align-content: center;
   margin: 0;
 }
-.method-mix__legend .chart-card__legend-item em {
+.method-mix-card {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+.method-mix-card__head {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  font-size: 12px;
+  line-height: 1.4;
+}
+.method-mix-card__head em {
   margin-left: auto;
   font-style: normal;
   font-weight: 700;
   color: var(--color-brand);
   font-variant-numeric: tabular-nums;
+}
+.method-mix-card__bar {
+  display: block;
+  height: 4px;
+  border-radius: 999px;
+  background: #eef4f1;
+  overflow: hidden;
+}
+.method-mix-card__bar i {
+  display: block;
+  height: 100%;
+  border-radius: 999px;
+  transition: width 0.9s ease;
+}
+.method-mix-card p {
+  margin: 0;
+  font-size: 11px;
+  line-height: 1.55;
+  color: var(--color-text-muted);
 }
 .chart-card {
   display: flex;
@@ -2300,8 +2332,8 @@
   .method-mix__layout {
     grid-template-columns: 1fr;
   }
-  .method-mix__legend {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+  .method-mix__cards {
+    grid-template-columns: 1fr;
   }
   .arch-carousel__btn {
     width: 34px;

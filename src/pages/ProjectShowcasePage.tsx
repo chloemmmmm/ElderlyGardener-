@@ -793,12 +793,16 @@ function HeuristicTable() {
 
 function MethodMixChart() {
   const data = [
-    { name: "文献调研", value: 22 },
-    { name: "用户访谈", value: 18 },
-    { name: "竞品分析", value: 14 },
-    { name: "动作分析", value: 16 },
-    { name: "EMG 验证", value: 12 },
-    { name: "可用性测试", value: 18 },
+    {
+      name: "文献调研",
+      value: 22,
+      desc: "确立「园艺动作可转译为标准化上肢训练」假设",
+    },
+    { name: "用户访谈", value: 18, desc: "4 位康复师访谈，构建画像与旅程地图" },
+    { name: "竞品分析", value: 14, desc: "对比 4 款同类产品，输出判定标准与象限" },
+    { name: "动作分析", value: 16, desc: "5 个标准上肢动作映射为园艺任务与判定规则" },
+    { name: "EMG 验证", value: 12, desc: "N=8 预实验，各动作激活均 ≥70% MVIC" },
+    { name: "可用性测试", value: 18, desc: "B 端后台混合型测试方案与达成率指标" },
   ];
   const colors = [
     "#176b55",
@@ -849,16 +853,29 @@ function MethodMixChart() {
             <small>研究单位</small>
           </span>
         </div>
-        <div className="chart-card__legend method-mix__legend">
+        <div className="method-mix__cards">
           {data.map((d, i) => (
-            <span className="chart-card__legend-item" key={d.name}>
-              <i
-                style={{ background: colors[i % colors.length] }}
-                aria-hidden="true"
-              />
-              {d.name}
-              <em>{d.value}</em>
-            </span>
+            <div className="method-mix-card" key={d.name}>
+              <span className="method-mix-card__head">
+                <span className="chart-card__legend-item">
+                  <i
+                    style={{ background: colors[i % colors.length] }}
+                    aria-hidden="true"
+                  />
+                  {d.name}
+                </span>
+                <em>{d.value}</em>
+              </span>
+              <span className="method-mix-card__bar" aria-hidden="true">
+                <i
+                  style={{
+                    width: `${(d.value / total) * 100}%`,
+                    background: colors[i % colors.length],
+                  }}
+                />
+              </span>
+              <p>{d.desc}</p>
+            </div>
           ))}
         </div>
       </div>
