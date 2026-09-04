@@ -206,7 +206,8 @@ a {
   aspect-ratio: 16 / 9;
   background: #071511;
 }
-.demo-video-frame iframe {
+.demo-video-frame iframe,
+.demo-video-frame video {
   position: absolute;
   inset: 0;
   width: 100%;

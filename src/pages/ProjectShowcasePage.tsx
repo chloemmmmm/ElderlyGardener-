@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
+import * as Dialog from "@radix-ui/react-dialog";
 
 import { getPublicAssetUrl } from "../config/public-path";
 import {
@@ -1645,91 +1646,91 @@ export function ProjectShowcasePage() {
           B 端设计机会。
         </p>
         <div className="persona-grid">
-            {personas.map((p) => (
-              <div className="persona-card" key={p.id}>
-                <div className="persona-card__header">
-                  <img
-                    src={asset(p.avatar)}
-                    alt={p.name}
-                    className="persona-card__avatar persona-card__avatar--img"
-                    loading="lazy"
-                  />
-                  <div>
-                    <strong>{p.name}</strong>
-                    <span>
-                      {p.role} · {p.age}
-                    </span>
-                  </div>
+          {personas.map((p) => (
+            <div className="persona-card" key={p.id}>
+              <div className="persona-card__header">
+                <img
+                  src={asset(p.avatar)}
+                  alt={p.name}
+                  className="persona-card__avatar persona-card__avatar--img"
+                  loading="lazy"
+                />
+                <div>
+                  <strong>{p.name}</strong>
+                  <span>
+                    {p.role} · {p.age}
+                  </span>
                 </div>
-                <p className="persona-card__goal">
-                  <strong>目标：</strong>
-                  {p.goal}
-                </p>
-                <p className="persona-card__pain">
-                  <strong>痛点：</strong>
-                  {p.pain}
-                </p>
-                <p className="persona-card__day">
-                  <strong>典型一天：</strong>
-                  {p.day}
-                </p>
-                <blockquote className="persona-card__quote">
-                  「{p.quote}」
-                </blockquote>
+              </div>
+              <p className="persona-card__goal">
+                <strong>目标：</strong>
+                {p.goal}
+              </p>
+              <p className="persona-card__pain">
+                <strong>痛点：</strong>
+                {p.pain}
+              </p>
+              <p className="persona-card__day">
+                <strong>典型一天：</strong>
+                {p.day}
+              </p>
+              <blockquote className="persona-card__quote">
+                「{p.quote}」
+              </blockquote>
+            </div>
+          ))}
+        </div>
+
+        <h3 className="project-section__h3">
+          <HeartPulse size={20} className="inline-icon" aria-hidden="true" />
+          康复师用户旅程地图
+        </h3>
+        <JourneyEmotionChart />
+        <JourneyStoryboard />
+        <div className="journey-map">
+          <div className="journey-map__track">
+            {journeyStages.map((s) => (
+              <div className="journey-map__stage" key={s.stage}>
+                <h5>{s.stage}</h5>
+                <div
+                  className="journey-map__emotion"
+                  aria-label={`情绪得分 ${s.emotion} / 5`}
+                >
+                  {Array.from({ length: 5 }).map((_, i) => {
+                    const filled = i < s.emotion;
+                    const tone =
+                      s.emotion <= 2
+                        ? "low"
+                        : s.emotion === 3
+                          ? "medium"
+                          : "high";
+                    return (
+                      <span
+                        key={i}
+                        className={`journey-map__dot ${filled ? `journey-map__dot--${tone}` : "journey-map__dot--off"}`}
+                        aria-hidden="true"
+                      >
+                        ●
+                      </span>
+                    );
+                  })}
+                </div>
+                <div>
+                  <div className="journey-map__label">触点</div>
+                  <div className="journey-map__value">{s.touchpoint}</div>
+                </div>
+                <div>
+                  <div className="journey-map__label">痛点</div>
+                  <div className="journey-map__value">{s.pain}</div>
+                </div>
+                <div>
+                  <div className="journey-map__label">机会</div>
+                  <div className="journey-map__value">{s.opportunity}</div>
+                </div>
               </div>
             ))}
           </div>
-
-        <h3 className="project-section__h3">
-            <HeartPulse size={20} className="inline-icon" aria-hidden="true" />
-            康复师用户旅程地图
-          </h3>
-          <JourneyEmotionChart />
-          <JourneyStoryboard />
-          <div className="journey-map">
-            <div className="journey-map__track">
-              {journeyStages.map((s) => (
-                <div className="journey-map__stage" key={s.stage}>
-                  <h5>{s.stage}</h5>
-                  <div
-                    className="journey-map__emotion"
-                    aria-label={`情绪得分 ${s.emotion} / 5`}
-                  >
-                    {Array.from({ length: 5 }).map((_, i) => {
-                      const filled = i < s.emotion;
-                      const tone =
-                        s.emotion <= 2
-                          ? "low"
-                          : s.emotion === 3
-                            ? "medium"
-                            : "high";
-                      return (
-                        <span
-                          key={i}
-                          className={`journey-map__dot ${filled ? `journey-map__dot--${tone}` : "journey-map__dot--off"}`}
-                          aria-hidden="true"
-                        >
-                          ●
-                        </span>
-                      );
-                    })}
-                  </div>
-                  <div>
-                    <div className="journey-map__label">触点</div>
-                    <div className="journey-map__value">{s.touchpoint}</div>
-                  </div>
-                  <div>
-                    <div className="journey-map__label">痛点</div>
-                    <div className="journey-map__value">{s.pain}</div>
-                  </div>
-                  <div>
-                    <div className="journey-map__label">机会</div>
-                    <div className="journey-map__value">{s.opportunity}</div>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
+        </div>
       </Section>
 
       {/* Design translation */}
@@ -1827,6 +1828,56 @@ export function ProjectShowcasePage() {
             <figcaption>用户测试：真实使用者完成训练任务并给出反馈</figcaption>
           </figure>
         </div>
+        {/* 硬件实机演示：短循环（hardware-demo.mp4）+ 完整介绍片弹层（intro-full-720p.mp4） */}
+        <figure className="prototype-figure prototype-figure--video">
+          <LazyVideo
+            className="prototype-figure__video"
+            src={asset("assets/case-study/hardware-demo.mp4")}
+            label="硬件实机演示：前臂绑带特写、真人佩戴训练与 VR 园艺任务即时反馈"
+          />
+          <figcaption>
+            <span>硬件实机演示：绑带特写 · 真人佩戴训练 · VR 任务即时反馈</span>
+            <Dialog.Root>
+              <Dialog.Trigger asChild>
+                <button type="button" className="prototype-video-full-btn">
+                  观看完整介绍片
+                </button>
+              </Dialog.Trigger>
+              <Dialog.Portal>
+                <Dialog.Overlay className="demo-video-overlay" />
+                <Dialog.Content
+                  className="demo-video-dialog"
+                  aria-describedby={undefined}
+                >
+                  <div className="demo-video-header">
+                    <div>
+                      <span className="demo-video-kicker">FULL DEMO REEL</span>
+                      <Dialog.Title>
+                        ElderlyGardener · 完整介绍片（3′34″）
+                      </Dialog.Title>
+                    </div>
+                    <Dialog.Close
+                      className="demo-video-close"
+                      aria-label="关闭完整介绍片"
+                    >
+                      ×
+                    </Dialog.Close>
+                  </div>
+                  <div className="demo-video-frame">
+                    <video
+                      src={asset("assets/case-study/intro-full-720p.mp4")}
+                      controls
+                      autoPlay
+                      playsInline
+                      preload="none"
+                      aria-label="ElderlyGardener 完整介绍片"
+                    />
+                  </div>
+                </Dialog.Content>
+              </Dialog.Portal>
+            </Dialog.Root>
+          </figcaption>
+        </figure>
         <PilotStoryboard />
         <DemoBadge label="[课程原始数据]" variant="original">
           <p style={{ margin: 0 }}>
@@ -1986,26 +2037,26 @@ export function ProjectShowcasePage() {
               ))}
             </div>
             <h3 className="project-section__h3" style={{ marginTop: 0 }}>
-                关键发现
-              </h3>
-              <ul className="findings-list">
-                {usabilityFindings.map((f, i) => (
-                  <li key={i}>
-                    <span
-                      className={`findings-list__badge findings-list__badge--${
-                        f.severity === "正向"
-                          ? "positive"
-                          : f.severity === "高"
-                            ? "high"
-                            : "medium"
-                      }`}
-                    >
-                      {f.severity}
-                    </span>
-                    <span>{f.finding}</span>
-                  </li>
-                ))}
-              </ul>
+              关键发现
+            </h3>
+            <ul className="findings-list">
+              {usabilityFindings.map((f, i) => (
+                <li key={i}>
+                  <span
+                    className={`findings-list__badge findings-list__badge--${
+                      f.severity === "正向"
+                        ? "positive"
+                        : f.severity === "高"
+                          ? "high"
+                          : "medium"
+                    }`}
+                  >
+                    {f.severity}
+                  </span>
+                  <span>{f.finding}</span>
+                </li>
+              ))}
+            </ul>
           </div>
           <div className="usability-layout__side">
             <UsabilityChart />

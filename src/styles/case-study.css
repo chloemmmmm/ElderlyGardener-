@@ -1371,6 +1371,38 @@
   border-top: 1px solid var(--color-border);
 }
 
+/* Prototype demo video */
+.prototype-figure--video {
+  margin-bottom: 28px;
+}
+.prototype-figure--video figcaption {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+.prototype-figure__video {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  background: #e8f2ee; /* 加载前占位底色，防黑屏 */
+}
+.prototype-video-full-btn {
+  flex: 0 0 auto;
+  padding: 4px 12px;
+  border: 1px solid var(--color-border);
+  border-radius: 999px;
+  background: white;
+  color: var(--color-brand);
+  font-size: 12px;
+  line-height: 1.4;
+  cursor: pointer;
+}
+.prototype-video-full-btn:hover {
+  background: #eef5f1;
+}
+
 /* Console gallery */
 .console-gallery {
   display: grid;
