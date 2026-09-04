@@ -222,6 +222,38 @@ a {
   background: rgb(0 0 0 / 68%);
   text-shadow: 0 1px 2px rgb(0 0 0 / 55%);
 }
+.demo-video-lang {
+  position: absolute;
+  z-index: 2;
+  top: 12px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 4px;
+  padding: 4px;
+  border: 1px solid rgb(255 255 255 / 16%);
+  border-radius: 999px;
+  background: rgb(7 21 17 / 62%);
+  backdrop-filter: blur(6px);
+}
+.demo-video-lang button {
+  appearance: none;
+  border: 0;
+  padding: 6px 14px;
+  border-radius: 999px;
+  color: #d8e6e1;
+  background: transparent;
+  font: 500 13px var(--font-ui);
+  cursor: pointer;
+}
+.demo-video-lang button:hover {
+  color: #fff;
+  background: rgb(255 255 255 / 10%);
+}
+.demo-video-lang button.is-active {
+  color: #0c241d;
+  background: #a9d9ae;
+}
 @keyframes demo-overlay-in {
   from {
     opacity: 0;

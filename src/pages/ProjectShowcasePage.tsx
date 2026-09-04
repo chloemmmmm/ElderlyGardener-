@@ -231,6 +231,65 @@ function LazyVideo({
   );
 }
 
+type ReelLanguage = "zh" | "en";
+
+function IntroReelVideo() {
+  const [lang, setLang] = useState<ReelLanguage>("zh");
+  const [session, setSession] = useState(0);
+  const switchTo = (next: ReelLanguage) => {
+    if (next === lang) return;
+    setLang(next);
+    setSession((s) => s + 1);
+  };
+  const src =
+    lang === "zh"
+      ? asset("assets/case-study/intro-full-zh-720p.mp4")
+      : asset("assets/case-study/intro-full-720p.mp4");
+  const label =
+    lang === "zh"
+      ? "ElderlyGardener 完整介绍片（中文配音 · 中文字幕）"
+      : "ElderlyGardener 完整介绍片（英文原声 · 中文字幕）";
+  return (
+    <div className="demo-video-frame">
+      <div className="demo-video-lang" role="group" aria-label="旁白语言">
+        <button
+          type="button"
+          className={lang === "zh" ? "is-active" : undefined}
+          aria-pressed={lang === "zh"}
+          onClick={() => switchTo("zh")}
+        >
+          中文配音
+        </button>
+        <button
+          type="button"
+          className={lang === "en" ? "is-active" : undefined}
+          aria-pressed={lang === "en"}
+          onClick={() => switchTo("en")}
+        >
+          英文原声
+        </button>
+      </div>
+      <video
+        key={session}
+        src={src}
+        controls
+        autoPlay
+        playsInline
+        preload="none"
+        aria-label={label}
+      >
+        <track
+          kind="subtitles"
+          srcLang="zh"
+          label="中文"
+          default
+          src={asset("assets/case-study/intro-zh.vtt")}
+        />
+      </video>
+    </div>
+  );
+}
+
 function ExerciseMap() {
   const rows = [
     {
@@ -1863,24 +1922,7 @@ export function ProjectShowcasePage() {
                       ×
                     </Dialog.Close>
                   </div>
-                  <div className="demo-video-frame">
-                    <video
-                      src={asset("assets/case-study/intro-full-720p.mp4")}
-                      controls
-                      autoPlay
-                      playsInline
-                      preload="none"
-                      aria-label="ElderlyGardener 完整介绍片（中文字幕）"
-                    >
-                      <track
-                        kind="subtitles"
-                        srcLang="zh"
-                        label="中文"
-                        default
-                        src={asset("assets/case-study/intro-zh.vtt")}
-                      />
-                    </video>
-                  </div>
+                  <IntroReelVideo />
                 </Dialog.Content>
               </Dialog.Portal>
             </Dialog.Root>
