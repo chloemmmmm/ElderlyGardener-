@@ -174,6 +174,15 @@ function SectionNav() {
   );
 }
 
+const USER_TEST_QUOTES = [
+  "我喜欢有反馈这件事，尤其是动作做对之后能立刻得到回应。",
+  "有时候我不太确定现在该做修剪还是摘果子，步骤切换没有那么清楚。",
+  "如果只是让我反复抬手，我可能做两轮就烦了，但换成这种园艺任务会好很多。",
+  "我能接受它提醒我，但如果震动太频繁，就会有点打断节奏。",
+  "它让我比较愿意重复做，因为每一步都有点像在过关。",
+  "我知道它在提醒我，但我当下不一定知道是角度不对，还是力度不够。",
+];
+
 function ResearchTimeline() {
   const steps = [
     {
@@ -1972,21 +1981,66 @@ export function ProjectShowcasePage() {
         </p>
         <div className="prototype-grid">
           <figure className="prototype-figure">
-            <img
-              src={asset("assets/case-study/prototype-feedback.webp")}
-              alt="第一代功能原型：传感器绑带、Arduino 调试与 VR 头显联调"
-              loading="lazy"
-            />
+            <div className="prototype-demo__layout">
+              <img
+                className="prototype-demo__main"
+                src={asset("assets/case-study/prototype-demo-main.webp")}
+                alt="第一代功能原型：使用者佩戴传感器绑带与气动/震动反馈模块进行调试"
+                loading="lazy"
+              />
+              <div className="prototype-demo__debug">
+                <img
+                  src={asset("assets/case-study/prototype-debug-1.webp")}
+                  alt="调试过程：团队协作佩戴并检查传感器接线"
+                  loading="lazy"
+                />
+                <img
+                  src={asset("assets/case-study/prototype-debug-2.webp")}
+                  alt="调试过程：前臂模块接线与佩戴检查"
+                  loading="lazy"
+                />
+                <img
+                  src={asset("assets/case-study/prototype-debug-3.webp")}
+                  alt="调试过程：桌面联调 Arduino 与传感器读数"
+                  loading="lazy"
+                />
+              </div>
+            </div>
             <figcaption>
               第一代功能原型：传感器绑带 + Arduino 调试 + VR 头显联调
             </figcaption>
           </figure>
           <figure className="prototype-figure">
-            <img
-              src={asset("assets/case-study/usability-user-test.webp")}
-              alt="用户测试：真实使用者佩戴原型设备完成训练任务"
-              loading="lazy"
-            />
+            <div className="usertest__layout">
+              <div className="usertest__photos">
+                <img
+                  src={asset("assets/case-study/usertest-pose-1.webp")}
+                  alt="穿戴原型：静息准备姿态"
+                  loading="lazy"
+                />
+                <img
+                  src={asset("assets/case-study/usertest-pose-2.webp")}
+                  alt="抬臂动作中途：前臂约与地面平行"
+                  loading="lazy"
+                />
+                <img
+                  src={asset("assets/case-study/usertest-pose-3.webp")}
+                  alt="完整上举动作：手臂举过头顶"
+                  loading="lazy"
+                />
+              </div>
+              <div className="usertest__quotes">
+                <span className="usertest__quotes-title">使用者反馈摘录</span>
+                {USER_TEST_QUOTES.map((q) => (
+                  <blockquote className="usertest-quote" key={q}>
+                    {q}
+                  </blockquote>
+                ))}
+                <small className="usertest__quotes-note">
+                  来自首轮用户测试（要点整理，非逐字）
+                </small>
+              </div>
+            </div>
             <figcaption>用户测试：真实使用者完成训练任务并给出反馈</figcaption>
           </figure>
         </div>

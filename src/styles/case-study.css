@@ -1435,6 +1435,69 @@
   border-top: 1px solid var(--color-border);
 }
 
+/* 拼版图重排：原生网格（P1-3） */
+.prototype-demo__layout {
+  display: grid;
+  grid-template-columns: 1.05fr 1fr;
+  gap: 12px;
+  align-items: start;
+  padding: 12px;
+}
+.prototype-demo__main {
+  width: 100%;
+  border-radius: 10px;
+  border: 1px solid var(--color-border);
+}
+.prototype-demo__debug {
+  display: grid;
+  gap: 12px;
+}
+.prototype-demo__debug img {
+  width: 100%;
+  border-radius: 10px;
+  border: 1px solid var(--color-border);
+}
+.usertest__layout {
+  display: grid;
+  grid-template-columns: 1fr 1.05fr;
+  gap: 14px;
+  align-items: start;
+  padding: 12px;
+}
+.usertest__photos {
+  display: grid;
+  gap: 12px;
+}
+.usertest__photos img {
+  width: 100%;
+  border-radius: 10px;
+  border: 1px solid var(--color-border);
+}
+.usertest__quotes {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+}
+.usertest__quotes-title {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--color-text);
+}
+.usertest-quote {
+  margin: 0;
+  padding: 9px 13px;
+  border-left: 3px solid var(--color-brand);
+  border-radius: 0 10px 10px 0;
+  background: #fff;
+  color: var(--color-text);
+  font-size: 0.82rem;
+  line-height: 1.7;
+}
+.usertest__quotes-note {
+  color: var(--color-text-muted);
+  font-size: 0.75rem;
+}
+
 /* Prototype demo video */
 .prototype-figure--video {
   margin-bottom: 28px;
