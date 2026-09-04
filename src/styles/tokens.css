@@ -8,7 +8,7 @@
   --color-signal: #5c519c;
   --color-attention: #92580d;
   --color-border: #c9d6d0;
-  --color-text-muted: #5d6b66;
+  --color-text-muted: #546259; /* 原 #5d6b66；surface-subtle 上 4.51→5.19:1（审计 P2-5） */
   --color-danger: #b42318;
   --color-danger-soft: #fce8e6;
   --color-signal-soft: #efecfd;
