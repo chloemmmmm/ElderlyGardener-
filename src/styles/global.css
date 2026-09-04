@@ -214,6 +214,14 @@ a {
   height: 100%;
   border: 0;
 }
+.demo-video-frame video::cue {
+  font-family: var(--font-ui, -apple-system, "Microsoft YaHei", sans-serif);
+  font-size: clamp(16px, 2.4vmin, 24px);
+  line-height: 1.5;
+  color: #fff;
+  background: rgb(0 0 0 / 68%);
+  text-shadow: 0 1px 2px rgb(0 0 0 / 55%);
+}
 @keyframes demo-overlay-in {
   from {
     opacity: 0;

@@ -1870,8 +1870,16 @@ export function ProjectShowcasePage() {
                       autoPlay
                       playsInline
                       preload="none"
-                      aria-label="ElderlyGardener 完整介绍片"
-                    />
+                      aria-label="ElderlyGardener 完整介绍片（中文字幕）"
+                    >
+                      <track
+                        kind="subtitles"
+                        srcLang="zh"
+                        label="中文"
+                        default
+                        src={asset("assets/case-study/intro-zh.vtt")}
+                      />
+                    </video>
                   </div>
                 </Dialog.Content>
               </Dialog.Portal>
