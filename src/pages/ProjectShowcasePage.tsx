@@ -775,7 +775,7 @@ function InterviewGuide() {
             </span>
             <div>
               <strong>不同康复师的回答</strong>
-              <span>基于 4 位康复治疗师访谈整理</span>
+              <span>基于 4 位康复治疗师访谈要点整理（非逐字）</span>
             </div>
           </div>
           <div className="interview-guide__bubbles">
@@ -872,7 +872,7 @@ function MethodMixChart() {
     {
       name: "可用性测试",
       value: 18,
-      desc: "B 端后台混合型测试方案与达成率指标",
+      desc: "B 端后台首轮混合型测试（N=6）与达成率指标",
     },
   ];
   const colors = [
@@ -888,7 +888,7 @@ function MethodMixChart() {
     <div className="chart-card method-mix">
       <h4 className="chart-card__title">
         <LineChart size={18} className="inline-icon" aria-hidden="true" />
-        研究方法构成
+        研究方法构成（投入占比 %）
       </h4>
       <div className="method-mix__layout">
         <div className="chart-card__body method-mix__body">
@@ -1501,6 +1501,12 @@ function UsabilityChart() {
           </BarChart>
         </ResponsiveContainer>
       </div>
+      <div className="chart-card__footer">
+        <small>
+          注：首轮实测
+          N=6，各指标为小样本参考值，用于定位问题与迭代方向，不作统计推断依据。
+        </small>
+      </div>
     </div>
   );
 }
@@ -1719,7 +1725,7 @@ export function ProjectShowcasePage() {
       >
         <p className="project-section__lead">
           围绕「动作有效性—转译可行性—康复师决策支持」三个层次，依次完成文献调研、竞品分析、康复师访谈、动作分析、EMG
-          验证、用户研究与可用性测试方案设计。
+          验证、用户调研与首轮可用性测试。
         </p>
         <ResearchTimeline />
         <MethodMatrix />
@@ -1797,7 +1803,8 @@ export function ProjectShowcasePage() {
         title="康复师画像与旅程地图"
       >
         <p className="project-section__lead">
-          基于康复师访谈与二手研究，构建核心用户画像，并用旅程地图定位情绪低点与
+          基于 4 名康复师访谈、1
+          名可用性专家评审与二手研究，构建核心用户画像，并用旅程地图定位情绪低点与
           B 端设计机会。
         </p>
         <div className="persona-grid">
@@ -2095,12 +2102,13 @@ export function ProjectShowcasePage() {
         id="usability"
         variant="subtle"
         eyebrow="08 可用性验证"
-        title="B 端后台可用性测试方案"
+        title="B 端后台可用性测试：方案与首轮结果（N=6）"
       >
         <p className="project-section__lead">
           基于用户旅程地图中的关键痛点，为 ElderlyGardener B
-          端后台设计了混合型可用性测试方案，聚焦「发现异常 → 复核证据 → 调整计划
-          → 记录判断」的核心闭环。
+          端后台设计了混合型可用性测试并完成首轮执行（N=6），聚焦「发现异常 →
+          复核证据 → 调整计划 →
+          记录判断」的核心闭环；本节同时呈现测试方案与首轮结果。
         </p>
         <div className="usability-detail">
           <div className="usability-detail__section">
