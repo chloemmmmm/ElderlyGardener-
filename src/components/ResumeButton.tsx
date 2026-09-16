@@ -334,7 +334,7 @@ export function ResumeButton() {
         aria-expanded={open}
         aria-haspopup="dialog"
       >
-        产品经理 · 点击查看简历
+        点击查看简历
       </button>
       {createPortal(modal, document.body)}
     </div>
