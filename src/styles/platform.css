@@ -777,6 +777,25 @@
   line-height: 1.55;
   color: var(--color-text-muted);
 }
+.resume-modal__intro {
+  margin: 0;
+  font-size: 12px;
+  line-height: 1.75;
+  color: var(--color-text-muted);
+}
+.resume-modal__skills {
+  display: grid;
+  gap: 12px;
+}
+.resume-modal__skill-group {
+  display: grid;
+  gap: 6px;
+}
+.resume-modal__skill-label {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--color-text);
+}
 .resume-modal__tags {
   display: flex;
   flex-wrap: wrap;

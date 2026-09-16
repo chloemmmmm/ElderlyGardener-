@@ -407,9 +407,9 @@ export const reflections = [
 
 export const authorBio = {
   name: "徐伊宁",
-  title: "Product Manager · Industrial Designer",
+  title: "Product Manager · UX/UI Designer",
   intro:
-    "北京理工大学工业设计硕士在读，兼具策略产品与工业设计实习经验。关注可穿戴硬件、康复科技与 B 端 SaaS 的交叉领域，擅长用用户研究、数据驱动决策与 AI 辅助设计方法推进产品从 0 到 1。",
+    "北京理工大学工业设计硕士在读，兼具产品经理、用户体验设计与工业设计经验，研一担任本科生《智能硬件》课程助教。关注可穿戴硬件、康复科技与 B 端 SaaS 的交叉领域，擅长用户研究、数据驱动决策与 AI 辅助设计方法推进产品从 0 到 1；参与教育产品 0 → 1 落地（谈单成功率 30% → 50%），获 HCII Best Paper 及多项国际设计奖，并有海外双学位经历。",
   email: "1710756188@qq.com",
   phone: "15562692993",
 };
