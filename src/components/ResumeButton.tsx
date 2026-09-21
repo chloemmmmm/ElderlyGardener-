@@ -311,7 +311,7 @@ export function ResumeButton() {
           <a
             className="project-button project-button--primary"
             href={asset("assets/徐伊宁_通用简历.pdf")}
-            download
+            download="徐伊宁_设计实习生简历.pdf"
           >
             下载完整简历 PDF
           </a>
