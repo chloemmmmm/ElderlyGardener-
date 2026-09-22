@@ -25,8 +25,111 @@
     <meta property="og:image" content="/og-kanghuyuan.png" />
     <meta name="twitter:card" content="summary_large_image" />
     <title>康护园｜老年园艺上肢康复训练系统作品集</title>
+    <style>
+      #splash {
+        position: fixed;
+        inset: 0;
+        z-index: 9999;
+        display: grid;
+        place-items: center;
+        background: linear-gradient(165deg, #176b55 0%, #0f4a3b 100%);
+        color: #fff;
+        opacity: 1;
+        transition: opacity 0.45s ease;
+      }
+      #splash.is-done {
+        opacity: 0;
+        pointer-events: none;
+      }
+      .splash__inner {
+        display: grid;
+        justify-items: center;
+        gap: 14px;
+        text-align: center;
+      }
+      .splash__logo {
+        width: 64px;
+        height: 64px;
+        border-radius: 16px;
+        background: rgb(255 255 255 / 12%);
+        display: grid;
+        place-items: center;
+        animation: splash-breathe 2.2s ease-in-out infinite;
+      }
+      .splash__title {
+        font-size: 22px;
+        letter-spacing: 0.35em;
+        text-indent: 0.35em;
+        font-weight: 600;
+      }
+      .splash__sub {
+        font-size: 12px;
+        letter-spacing: 0.12em;
+        color: rgb(255 255 255 / 62%);
+      }
+      .splash__bar {
+        width: 168px;
+        height: 3px;
+        border-radius: 2px;
+        background: rgb(255 255 255 / 18%);
+        overflow: hidden;
+      }
+      .splash__bar span {
+        display: block;
+        width: 40%;
+        height: 100%;
+        border-radius: 2px;
+        background: #ffffff;
+        animation: splash-slide 1.4s ease-in-out infinite;
+      }
+      @keyframes splash-breathe {
+        0%,
+        100% {
+          transform: scale(1);
+          opacity: 1;
+        }
+        50% {
+          transform: scale(0.94);
+          opacity: 0.85;
+        }
+      }
+      @keyframes splash-slide {
+        0% {
+          transform: translateX(-120%);
+        }
+        100% {
+          transform: translateX(320%);
+        }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        .splash__logo,
+        .splash__bar span {
+          animation: none;
+        }
+      }
+    </style>
   </head>
   <body>
+    <div id="splash" aria-hidden="true">
+      <div class="splash__inner">
+        <div class="splash__logo">
+          <svg
+            width="36"
+            height="36"
+            viewBox="0 0 64 64"
+            xmlns="http://www.w3.org/2000/svg"
+            aria-hidden="true"
+          >
+            <path d="M32 50c0-15 7-24 18-28-1 13-7 22-18 28z" fill="#ffffff" />
+            <path d="M32 50c0-15-7-24-18-28 1 13 7 22 18 28z" fill="#a9d9c4" />
+            <rect x="30" y="46" width="4" height="9" rx="2" fill="#ffffff" />
+          </svg>
+        </div>
+        <div class="splash__title">康护园</div>
+        <div class="splash__sub">ELDERLYGARDENER · 正在加载</div>
+        <div class="splash__bar"><span></span></div>
+      </div>
+    </div>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
   </body>

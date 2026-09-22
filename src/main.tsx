@@ -16,6 +16,13 @@ if (!root) {
   throw new Error("应用根节点不存在");
 }
 
+function dismissSplash() {
+  const splash = document.getElementById("splash");
+  if (!splash) return;
+  splash.classList.add("is-done");
+  window.setTimeout(() => splash.remove(), 500);
+}
+
 async function startApplication() {
   if (isDemoModeEnabled(import.meta.env.VITE_DEMO_MODE)) {
     const { worker } = await import("./mocks/browser");
@@ -35,6 +42,8 @@ async function startApplication() {
       <App />
     </StrictMode>,
   );
+
+  window.setTimeout(dismissSplash, 250);
 }
 
 void startApplication();
