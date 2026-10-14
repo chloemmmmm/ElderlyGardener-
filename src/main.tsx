@@ -25,16 +25,22 @@ function dismissSplash() {
 
 async function startApplication() {
   if (isDemoModeEnabled(import.meta.env.VITE_DEMO_MODE)) {
-    const { worker } = await import("./mocks/browser");
-    await worker.start({
-      onUnhandledRequest: "bypass",
-      serviceWorker: {
-        url: getPublicAssetUrl(
-          import.meta.env.BASE_URL,
-          "mockServiceWorker.js",
-        ),
-      },
-    });
+    try {
+      const { worker } = await import("./mocks/browser");
+      await worker.start({
+        onUnhandledRequest: "bypass",
+        serviceWorker: {
+          url: getPublicAssetUrl(
+            import.meta.env.BASE_URL,
+            "mockServiceWorker.js",
+          ),
+        },
+      });
+    } catch (error) {
+      // 跨境弱网下 mock worker 可能注册失败：降级继续渲染，
+      // 避免应用卡在启动画面无法显示任何内容。
+      console.warn("[demo] 模拟服务层启动失败，降级渲染：", error);
+    }
   }
 
   createRoot(root as HTMLElement).render(
