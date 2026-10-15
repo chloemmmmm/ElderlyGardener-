@@ -23,26 +23,9 @@ function dismissSplash() {
   window.setTimeout(() => splash.remove(), 500);
 }
 
-async function startApplication() {
-  if (isDemoModeEnabled(import.meta.env.VITE_DEMO_MODE)) {
-    try {
-      const { worker } = await import("./mocks/browser");
-      await worker.start({
-        onUnhandledRequest: "bypass",
-        serviceWorker: {
-          url: getPublicAssetUrl(
-            import.meta.env.BASE_URL,
-            "mockServiceWorker.js",
-          ),
-        },
-      });
-    } catch (error) {
-      // 跨境弱网下 mock worker 可能注册失败：降级继续渲染，
-      // 避免应用卡在启动画面无法显示任何内容。
-      console.warn("[demo] 模拟服务层启动失败，降级渲染：", error);
-    }
-  }
-
+function startApplication() {
+  // 先渲染应用，确保首屏不被 Service Worker 注册阻塞。
+  // 弱网 / WebView 中 SW 注册可能很慢甚至挂起，若在此 await 会令启动画面卡死。
   createRoot(root as HTMLElement).render(
     <StrictMode>
       <App />
@@ -50,6 +33,26 @@ async function startApplication() {
   );
 
   window.setTimeout(dismissSplash, 250);
+
+  if (isDemoModeEnabled(import.meta.env.VITE_DEMO_MODE)) {
+    // 后台启动 MSW：不阻塞首屏。注册慢/失败时 B 端数据由
+    // src/services/api.ts 的本地 mock 回退兜底，不会卡启动画面。
+    void import("./mocks/browser")
+      .then(({ worker }) =>
+        worker.start({
+          onUnhandledRequest: "bypass",
+          serviceWorker: {
+            url: getPublicAssetUrl(
+              import.meta.env.BASE_URL,
+              "mockServiceWorker.js",
+            ),
+          },
+        }),
+      )
+      .catch((error) =>
+        console.warn("[demo] 模拟服务层启动失败，已走本地回退：", error),
+      );
+  }
 }
 
 void startApplication();
