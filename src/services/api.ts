@@ -76,5 +76,19 @@ export async function apiRequest<T>(
     if (mockResponse) return parseResponse<T>(mockResponse);
   }
 
-  return parseResponse<T>(response);
+  try {
+    return await parseResponse<T>(response);
+  } catch (error) {
+    const aborted =
+      init?.signal?.aborted === true ||
+      (error instanceof DOMException && error.name === "AbortError");
+    // 路径 D（响应内容异常兜底）：透明代理/运营商缓存可能对 /api/* 返回
+    // 200 + HTML 等 非 JSON 内容，response.ok 为真、路径 B 不会触发，但
+    // JSON 解析会抛 SyntaxError。此时同样改走本地 mock。
+    if (!aborted && canUseLocalMock(input)) {
+      const mockResponse = await localMockResponse(input, init);
+      if (mockResponse) return parseResponse<T>(mockResponse);
+    }
+    throw error;
+  }
 }
