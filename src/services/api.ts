@@ -11,18 +11,20 @@ export class ApiError extends Error {
   }
 }
 
-function shouldUseMockFallback(input: string): boolean {
+function canUseLocalMock(input: string): boolean {
   if (!input.startsWith("/api/")) return false;
   if (!isDemoModeEnabled(import.meta.env.VITE_DEMO_MODE)) return false;
   // 仅生产构建才启用本地回退；测试/dev 仍由 MSW 或 dev server 接管。
   if (!import.meta.env.PROD) return false;
-  if (typeof window === "undefined") return false;
+  return typeof window !== "undefined";
+}
 
-  const sw = navigator.serviceWorker;
-  // WebView 不支持 SW（如微信 iOS）时 sw 为 undefined；
-  // SW 注册失败或尚未控制页面时 controller 为 null。
-  if (!sw || !sw.controller) return true;
-  return false;
+async function localMockResponse(
+  input: string,
+  init?: RequestInit,
+): Promise<Response | null> {
+  const request = new Request(new URL(input, window.location.href), init);
+  return handleMockRequest(request);
 }
 
 async function parseResponse<T>(response: Response): Promise<T> {
@@ -44,14 +46,20 @@ export async function apiRequest<T>(
   input: string,
   init?: RequestInit,
 ): Promise<T> {
-  if (shouldUseMockFallback(input)) {
-    const request = new Request(new URL(input, window.location.href), init);
-    const mockResponse = await handleMockRequest(request);
-    if (mockResponse) {
-      return parseResponse<T>(mockResponse);
-    }
+  // 路径 A：SW 完全不可用（WebView 不支持 / 注册失败 / 尚未控制页面）→ 直接走本地 mock。
+  if (canUseLocalMock(input) && !navigator.serviceWorker?.controller) {
+    const mockResponse = await localMockResponse(input, init);
+    if (mockResponse) return parseResponse<T>(mockResponse);
   }
 
   const response = await fetch(input, init);
+
+  // 路径 B（启动竞态兜底）：SW 已控制页面但 MSW 尚未就绪（render-first 后台启动）
+  // 时，请求会放行到真实服务器并 404。此时改用本地 mock，保证 B 端数据必定可载入。
+  if (!response.ok && canUseLocalMock(input)) {
+    const mockResponse = await localMockResponse(input, init);
+    if (mockResponse) return parseResponse<T>(mockResponse);
+  }
+
   return parseResponse<T>(response);
 }
